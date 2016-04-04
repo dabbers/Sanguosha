@@ -28,7 +28,7 @@ namespace dab.SGS.Core.PlayingCard
 
         private int distance = 0;
 
-        public override bool Play()
+        public override bool Play(object sender)
         {
             if (this.Distance > 0 && this.Owner.PlayerArea.PlusHorse == null)
             {

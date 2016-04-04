@@ -17,7 +17,7 @@
                 return false;
             }
 
-            return card.Play();
+            return card.Play(sender);
         }
 
         private IsValidCard valid;

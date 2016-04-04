@@ -18,29 +18,57 @@ namespace dab.SGS.Core.Actions
         {
             // When can this happen? Attack card, or Borrowed sword
 
-            if (sender is AttackBasicPlayingCard)
-            {
-                var attack = (AttackBasicPlayingCard)sender;
-
-            }
-
             // How attacking a player works:
-            var card = (PlayingCard.PlayingCard)sender;
-            
-            // An attack cannot be happening already
-            if (context.AttackStageTracker != null)
+            var cards = (SelectedCardsSender)sender;
+
+            switch (context.TurnStage)
             {
-                throw new Exception("An attack is already happening. Is this a bug?");
+                // The attack was first played. Go into target select mode.
+                case TurnStages.Play:
+                    // An attack cannot be happening already
+                    if (context.AttackStageTracker != null)
+                    {
+                        throw new Exception("An attack is already happening. Is this a bug?");
+                    }
+
+
+                    context.AttackStageTracker = new PlayingCardStageTracker()
+                    {
+                        Cards = cards.Cards,
+                        Source = player,
+                        Targets = new List<TargetPlayer>(),
+                        PreviousStages = new Stack<TurnStages>()
+                    };
+
+                    context.AttackStageTracker.PreviousStages.Push(context.TurnStage);
+
+                    context.TurnStage = TurnStages.ChooseTargets;
+                    return false;
+                case TurnStages.ChooseTargets:
+
+                    foreach (var tp in context.AttackStageTracker.Targets)
+                    {
+                        tp.Damage = this.damage;
+                    }
+
+                    //context.TurnStage++;
+                    return false;
+                case TurnStages.Damage:
+                    context.TurnStage = context.AttackStageTracker.PreviousStages.Pop();
+
+                    foreach(var tp in context.AttackStageTracker.Targets)
+                    {
+                        tp.Target.CurrentHealth -= tp.Damage;
+                    }
+
+                    // Clear up the stage tracker for the next turn.
+                    context.AttackStageTracker = null;
+                    break;
+                default:
+                    throw new Exception("Unknown stage reached for attack action: " + context.TurnStage.ToString());
             }
 
-            context.AttackStageTracker = new AttackStageTracker()
-            {
-                Cards = new List<PlayingCard.PlayingCard>() { card },
-                Source = player,
-                Targets = new List<Player>()
-            };
 
-            context.TurnStage = TurnStages.ChooseTargets;
             return true;
         }
 

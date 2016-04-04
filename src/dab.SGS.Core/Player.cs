@@ -27,6 +27,7 @@ namespace dab.SGS.Core
         public int DistanceModifiers { get; set; }
 
         public bool Flipped { get; set; }
+        public bool Chained { get; set; }
 
         public bool IsDying { get { return this.CurrentHealth < 1; } }
 

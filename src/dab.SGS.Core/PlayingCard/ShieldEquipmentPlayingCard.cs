@@ -23,18 +23,18 @@ namespace dab.SGS.Core.PlayingCard
             this.RemoveActions = removeActions;
             this.damageCalc = damageCalculator;
         }
-        public override bool Play()
+        public override bool Play(object sender)
         {
             if (this.Owner.PlayerArea.Shield != null)
             {
-                this.Owner.PlayerArea.Shield.RemoveAction();
+                this.Owner.PlayerArea.Shield.RemoveAction(sender);
             }
 
             this.Context.Deck.Discard.Add(this.Owner.PlayerArea.Shield);
             this.Owner.PlayerArea.Shield = this;
             this.Owner.Hand.Remove(this);
 
-            return this.playAction(this.PlaceActions);
+            return this.playAction(sender, this.PlaceActions);
         }
 
         public bool CanBeAttacked(PlayingCard card, WeaponEquipmentPlayingCard weapon)
@@ -66,9 +66,9 @@ namespace dab.SGS.Core.PlayingCard
             return damage;
         }
 
-        public bool RemoveAction()
+        public bool RemoveAction(object sender)
         {
-            return this.playAction(this.RemoveActions);
+            return this.playAction(sender, this.RemoveActions);
         }
 
         private List<Actions.Action> damageCalc;

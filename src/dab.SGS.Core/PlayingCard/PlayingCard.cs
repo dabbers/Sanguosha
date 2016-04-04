@@ -65,9 +65,9 @@ namespace dab.SGS.Core.PlayingCard
             this.Responses = responses;
         }
 
-        public virtual bool Play()
+        public virtual bool Play(object sender)
         {
-            var res = this.playAction(this.Actions);
+            var res = this.playAction(sender, this.Actions);
 
             if (res)
             {
@@ -83,25 +83,28 @@ namespace dab.SGS.Core.PlayingCard
             this.Context.Deck.Discard.Add(this);
         }
 
-        protected bool playAction(List<Actions.Action> actions)
+        protected bool playAction(object sender, List<Actions.Action> actions)
         {
             if (actions == null) return false;
 
             foreach (var action in actions)
             {
-                action.Perform(this, this.Owner, this.Context); // Why does this return bool? What do I use this for?
+                if (!action.Perform(sender, this.Owner, this.Context)) // Why does this return bool? What do I use this for?
+                {
+                    return false;
+                }
             }
             return true;
         }
 
-        public static PlayingCard GetCardFromJson(dynamic obj, SelectTargetWithinRange selectTarget,
+        public static PlayingCard GetCardFromJson(dynamic obj,
             SelectCard selectCard, IsValidCard validCard)
         {
             string cardType = obj.Type.ToString();
             var type = Type.GetType(String.Format("dab.SGS.Core.PlayingCard.{0}", cardType));
             var fnc = type.GetMethod("GetCardFromJson");
 
-            return (PlayingCard)fnc.Invoke(null, new object[] { obj, selectTarget, selectCard, validCard });
+            return (PlayingCard)fnc.Invoke(null, new object[] { obj, selectCard, validCard });
         }
 
         /// <summary>

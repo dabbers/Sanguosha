@@ -18,7 +18,18 @@ namespace dab.SGS.Core.PlayingCard
             : base(color, suite, display, details, actions, null)
         {
         }
+        public new static PlayingCard GetCardFromJson(dynamic obj,
+            SelectCard selectCard, IsValidCard validCard)
+        {
+            var color = (PlayingCardColor)Enum.Parse(typeof(PlayingCardColor), obj.PlayingCardColor.ToString());
+            var suite = (PlayingCardSuite)Enum.Parse(typeof(PlayingCardSuite), obj.PlayingCardSuite.ToString());
+            var display = obj.Display.ToString();
+            var details = obj.Details.ToString();
 
+            var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
+                selectCard, validCard);
 
+            return new DodgeBasicPlayingCard(color, suite, display, details, actions);
+        }
     }
 }

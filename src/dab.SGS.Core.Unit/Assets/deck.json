@@ -18,6 +18,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -36,6 +50,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -54,6 +82,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -72,6 +114,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -90,6 +146,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -108,6 +178,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -126,6 +210,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -144,6 +242,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -162,6 +274,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -180,6 +306,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -198,6 +338,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -216,6 +370,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -234,6 +402,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -252,6 +434,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -270,6 +466,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -288,6 +498,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -306,6 +530,20 @@
     ]
   },
   {
+    "Type": "DodgeBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
+    "Elemental": "None",
+    "Actions": [
+      {
+        "Display": "Dodge",
+        "Type": "DodgeAction"
+      }
+    ]
+  },
+    {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -324,255 +562,17 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
+    "Display": "Dodge",
+    "Details": "Performs a dodge from an attack",
     "Elemental": "None",
     "Actions": [
       {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
+        "Display": "Dodge",
+        "Type": "DodgeAction"
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
-    ]
-  },
-  {
-    "Type": "AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   }
 ]

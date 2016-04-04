@@ -16,7 +16,7 @@ namespace dab.SGS.Core
 
         public Player Turn { get; set; }
         public TurnStages TurnStage { get; set; }
-        public AttackStageTracker AttackStageTracker { get; set; }
+        public PlayingCardStageTracker AttackStageTracker { get; set; }
 
         public PlayingCard.Deck Deck { get; protected set; }
 
@@ -118,7 +118,7 @@ namespace dab.SGS.Core
             {
                 p.Left = this.players.Last();
                 p.Right = this.players.First();
-                this.players.First().Right = p;
+                this.players.Last().Right = p;
                 this.Players.First().Left = p;
             }
 

@@ -37,18 +37,18 @@ namespace dab.SGS.Core.PlayingCard
             this.range = range;
         }
 
-        public override bool Play()
+        public override bool Play(object sender)
         {
             if (this.Owner.PlayerArea.Weapon != null)
             {
-                this.Owner.PlayerArea.Weapon.RemoveAction();
+                this.Owner.PlayerArea.Weapon.RemoveAction(sender);
             }
 
             this.Context.Deck.Discard.Add(this.Owner.PlayerArea.Weapon);
             this.Owner.PlayerArea.Weapon = this;
             this.Owner.Hand.Remove(this);
 
-            return this.playAction(this.PlaceActions);
+            return this.playAction(sender, this.PlaceActions);
         }
 
         public void AttackOccured(Actions.AttackResult result)
@@ -63,9 +63,9 @@ namespace dab.SGS.Core.PlayingCard
             return;
         }
 
-        public bool RemoveAction()
+        public bool RemoveAction(object sender)
         {
-            return this.playAction(this.RemoveActions);
+            return this.playAction(sender, this.RemoveActions);
         }
 
         private int range = 1;

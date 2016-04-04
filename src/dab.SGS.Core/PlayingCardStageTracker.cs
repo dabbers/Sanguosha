@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace dab.SGS.Core
 {
-    public class AttackStageTracker
+    public class PlayingCardStageTracker
     {
-        public List<Player> Targets { get; set; }
+        public Stack<TurnStages> PreviousStages { get; set; }
+        public List<TargetPlayer> Targets { get; set; }
         public List<PlayingCard.PlayingCard> Cards { get; set; }
         public Player Source { get; set; }
     }

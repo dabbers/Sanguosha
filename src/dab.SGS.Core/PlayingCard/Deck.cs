@@ -54,7 +54,7 @@ namespace dab.SGS.Core.PlayingCard
             return card;
         }
 
-        public static List<PlayingCard> LoadCards(string json, SelectTargetWithinRange selectTarget,
+        public static List<PlayingCard> LoadCards(string json, 
             SelectCard selectCard, IsValidCard validCard)
         {
             dynamic cards = JsonConvert.DeserializeObject(json);
@@ -62,8 +62,7 @@ namespace dab.SGS.Core.PlayingCard
 
             foreach(var card in cards)
             {
-                res.Add(PlayingCard.GetCardFromJson(card, selectTarget,
-                    selectCard, validCard));
+                res.Add(PlayingCard.GetCardFromJson(card, selectCard, validCard));
             }
 
             return res;            

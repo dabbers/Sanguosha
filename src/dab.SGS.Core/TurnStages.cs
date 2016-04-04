@@ -37,6 +37,32 @@ namespace dab.SGS.Core
         /// An action for the player
         /// </summary>
         Play,
+
+        // DIFFERENT SECTIONS OF Turn Stages
+
+        /// <summary>
+        /// Player played a scroll card, have them select a target
+        /// </summary>
+        PlayTargets,
+        /// <summary>
+        /// A scroll was played.
+        /// </summary>
+        PlayPlace,
+
+        /// <summary>
+        /// The notification that a player has died (players should select to peach/revive or not)
+        /// </summary>
+        PlayerDied,
+        /// <summary>
+        /// Player was revived
+        /// </summary>
+        PlayerRevived,
+        /// <summary>
+        /// Player did not get enough peaches.
+        /// </summary>
+        PlayerEliminated,
+
+
         /// <summary>
         /// Before the discard phase
         /// </summary>
@@ -73,23 +99,14 @@ namespace dab.SGS.Core
         /// Activate/validate any shield 
         /// </summary>
         ShieldResponse,
-        /// <summary>
-        /// The target has played a dodge card
-        /// </summary>
-        TargetDodged,
 
         /// <summary>
-        /// A skill allowed the target to doge
+        /// Play a card in response to this attack
         /// </summary>
-        TargetSkillDodged,
+        CardResponse,
 
         /// <summary>
-        /// The shield allowed the target to doge
-        /// </summary>
-        TargetShieldDodged,
-
-        /// <summary>
-        /// Damage is about to occur
+        /// Damage is about to occur (possibly)
         /// </summary>
         BeforeDamage,
 

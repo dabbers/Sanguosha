@@ -111,14 +111,15 @@
     <Compile Include="Actions\AttackAction.cs" />
     <Compile Include="Actions\CardChangeAction.cs" />
     <Compile Include="Actions\DiscardAction.cs" />
+    <Compile Include="Actions\DodgeAction.cs" />
     <Compile Include="Actions\DrawAction.cs" />
     <Compile Include="Actions\EndTurnAction.cs" />
     <Compile Include="Actions\PlayCardAction.cs" />
     <Compile Include="Actions\ReduceHandsizeDiscardAction.cs" />
-    <Compile Include="AttackStageTracker.cs" />
+    <Compile Include="PlayingCardStageTracker.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameContext.cs" />
-    <Compile Include="Actions\Heroes\HeroCard.cs" />
+    <Compile Include="PlayingCard\Heroes\HeroCard.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayingCard\AttackBasicPlayingCard.cs" />
     <Compile Include="PlayingCard\BasicPlayingCard.cs" />
@@ -133,6 +134,7 @@
     <Compile Include="PlayingCard\WeaponEquipmentPlayingCard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SelectedCardsSender.cs" />
+    <Compile Include="TargetPlayer.cs" />
     <Compile Include="TurnStages.cs" />
     <EmbeddedResource Include="Properties\dab.SGS.Core.rd.xml" />
   </ItemGroup>
