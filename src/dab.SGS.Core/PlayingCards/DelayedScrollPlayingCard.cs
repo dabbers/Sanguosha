@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dab.SGS.Core.PlayingCard
+namespace dab.SGS.Core.PlayingCards
 {
     public class DelayedScrollPlayingCard : ScrollPlayingCard
     {

@@ -38,6 +38,29 @@ namespace dab.SGS.Core
         /// </summary>
         Play,
 
+
+        /// <summary>
+        /// Before the discard phase
+        /// </summary>
+        PreDiscard,
+        /// <summary>
+        /// The actual action for discarding
+        /// </summary>
+        Discard,
+        /// <summary>
+        /// After discarding
+        /// </summary>
+        PostDiscard,
+        /// <summary>
+        /// End of a player's turn. Add all extra turn stages before here.
+        /// There is special logic that determines wrap-around for End (among 
+        /// other things).
+        /// </summary>
+        End,
+
+
+
+
         // DIFFERENT SECTIONS OF Turn Stages
 
         /// <summary>
@@ -61,26 +84,6 @@ namespace dab.SGS.Core
         /// Player did not get enough peaches.
         /// </summary>
         PlayerEliminated,
-
-
-        /// <summary>
-        /// Before the discard phase
-        /// </summary>
-        PreDiscard,
-        /// <summary>
-        /// The actual action for discarding
-        /// </summary>
-        Discard,
-        /// <summary>
-        /// After discarding
-        /// </summary>
-        PostDiscard,
-        /// <summary>
-        /// End of a player's turn. Add all extra turn stages before here.
-        /// There is special logic that determines wrap-around for End (among 
-        /// other things).
-        /// </summary>
-        End,
 
 
         // ATTACK STAGES

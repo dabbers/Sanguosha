@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using dab.SGS.Core.PlayingCards;
 
 namespace dab.SGS.Core
 {
@@ -18,14 +19,14 @@ namespace dab.SGS.Core
         public TurnStages TurnStage { get; set; }
         public PlayingCardStageTracker AttackStageTracker { get; set; }
 
-        public PlayingCard.Deck Deck { get; protected set; }
+        public Deck Deck { get; protected set; }
 
         /// <summary>
         /// Create a new game context to hold a game. This context handles the players,
         /// their turns, the turn stages, and attack stages.
         /// </summary>
         /// <param name="discardSelect">The delegate for selcting a card to discard.</param>
-        public GameContext(PlayingCard.Deck deck, Actions.SelectCard discardSelect)
+        public GameContext(Deck deck, Actions.SelectCard discardSelect)
         {
             this.DefaultDraw = new Actions.DrawAction(2);
             this.DefaultDiscard = new Actions.ReduceHandsizeDiscardAction(discardSelect);
@@ -88,7 +89,7 @@ namespace dab.SGS.Core
             }
 
 
-            Actions.Action res = null;
+            Actions.Action res = this.EmptyAction;
 
             this.Turn.TurnStageActions.TryGetValue(this.TurnStage, out res);
 
@@ -124,9 +125,15 @@ namespace dab.SGS.Core
 
             this.players.Add(p);
         }
+
+        public List<Actions.Action> GetValidResponsesForCard(Player sourcePlayer, Player dest, PlayingCard sourceCard)
+        {
+
+        }
         
         private Actions.Action DefaultDraw;
         private Actions.Action DefaultDiscard;
+        private Actions.Action EmptyAction = new Actions.EmptyAction("Empty Action");
         private List<Player> players = new List<Player>();
     }
 }

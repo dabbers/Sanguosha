@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dab.SGS.Core.PlayingCard
+namespace dab.SGS.Core.PlayingCards
 {
     public enum PlayingCardSuite
     {

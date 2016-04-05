@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using dab.SGS.Core;
-using dab.SGS.Core.PlayingCard;
+using dab.SGS.Core.PlayingCards;
 using dab.SGS.Core.Actions;
 using System.Collections.Generic;
 
@@ -10,15 +10,14 @@ namespace dab.SGS.Core.Unit
     [TestClass]
     public class PlayTests
     {
-        public List<PlayingCard.PlayingCard> GetDeck()
+        public List<PlayingCard> GetDeck()
         {
             var deck = Deck.LoadCards(FileIOHelper.ReadFromDefaultFile("ms-appx:///Assets/deck.json"),
                 p => p.Hand[0], p => true);
 
             return deck;
         }
-
-
+        
         [TestMethod]
         public void TestTurnDodge()
         {
@@ -52,7 +51,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(6, ctx.Turn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard.PlayingCard>() { ctx.Turn.Hand[0] }, ctx.Turn.Hand[0]);
+            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.Turn.Hand[0] }, ctx.Turn.Hand[0]);
 
             ctx.Turn.Hand[0].Play(sender);
 
@@ -146,7 +145,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(6, ctx.Turn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard.PlayingCard>() { ctx.Turn.Hand[0] }, ctx.Turn.Hand[0]);
+            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.Turn.Hand[0] }, ctx.Turn.Hand[0]);
 
             ctx.Turn.Hand[0].Play(sender);
 

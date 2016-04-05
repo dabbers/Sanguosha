@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dab.SGS.Core.PlayingCards;
 
 namespace dab.SGS.Core.Actions
 {
-    public class EndTurnAction : Action
+    public class EmptyAction : Action
     {
-        public EndTurnAction() : base("End Turn")
+        public EmptyAction(string display) : base(display)
         {
         }
 
@@ -17,6 +16,5 @@ namespace dab.SGS.Core.Actions
         {
             return true;
         }
-
     }
 }

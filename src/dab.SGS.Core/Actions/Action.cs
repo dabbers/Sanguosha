@@ -1,4 +1,4 @@
-﻿using dab.SGS.Core.PlayingCard;
+﻿using dab.SGS.Core.PlayingCards;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,13 +12,13 @@ namespace dab.SGS.Core.Actions
     /// Have the player select a card
     /// </summary>
     /// <returns></returns>
-    public delegate PlayingCard.PlayingCard SelectCard(Player player);
+    public delegate PlayingCard SelectCard(Player player);
 
     /// <summary>
     /// Have the player select maxCards cards
     /// </summary>
     /// <returns></returns>
-    public delegate PlayingCard.PlayingCard[] SelectCards(Player player, int maxCards);
+    public delegate PlayingCard[] SelectCards(Player player, int maxCards);
 
     /// <summary>
     /// Select a player to target
@@ -32,7 +32,7 @@ namespace dab.SGS.Core.Actions
     /// </summary>
     /// <param name="card"></param>
     /// <returns></returns>
-    public delegate bool IsValidCard(PlayingCard.PlayingCard card);
+    public delegate bool IsValidCard(PlayingCard card);
 
     public delegate Action SelectAction(Player player);
 
@@ -50,9 +50,9 @@ namespace dab.SGS.Core.Actions
     public class AttackResult
     {
         public AttackResults Result { get; private set; }
-        public List<PlayingCard.PlayingCard> AttackingCards { get; private set; }
+        public List<PlayingCard> AttackingCards { get; private set; }
 
-        public AttackResult(AttackResults res, List<PlayingCard.PlayingCard> cards)
+        public AttackResult(AttackResults res, List<PlayingCard> cards)
         {
             this.Result = res;
             this.AttackingCards = cards;
@@ -74,12 +74,12 @@ namespace dab.SGS.Core.Actions
             return false;
         }
 
-        public virtual bool Perform(object sender, Player player, GameContext context, PlayingCard.PlayingCard card, PlayingCard.WeaponEquipmentPlayingCard weapon)
+        public virtual bool Perform(object sender, Player player, GameContext context, PlayingCard card, WeaponEquipmentPlayingCard weapon)
         {
             return true;
         }
 
-        public virtual int Perform(object sender, Player player, PlayingCard.PlayingCard card, PlayingCard.WeaponEquipmentPlayingCard weapon)
+        public virtual int Perform(object sender, Player player, PlayingCard card, WeaponEquipmentPlayingCard weapon)
         {
             return 0;
         }

@@ -10,7 +10,7 @@ namespace dab.SGS.Core
     {
         public Stack<TurnStages> PreviousStages { get; set; }
         public List<TargetPlayer> Targets { get; set; }
-        public List<PlayingCard.PlayingCard> Cards { get; set; }
+        public List<PlayingCards.PlayingCard> Cards { get; set; }
         public Player Source { get; set; }
     }
 }

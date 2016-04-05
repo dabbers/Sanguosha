@@ -8,10 +8,10 @@ namespace dab.SGS.Core
 {
     public class SelectedCardsSender
     {
-        public List<PlayingCard.PlayingCard> Cards { get; private set; }
-        public PlayingCard.PlayingCard Activator { get; set; }
+        public List<PlayingCards.PlayingCard> Cards { get; private set; }
+        public PlayingCards.PlayingCard Activator { get; set; }
 
-        public SelectedCardsSender(List<PlayingCard.PlayingCard> cards, PlayingCard.PlayingCard sender)
+        public SelectedCardsSender(List<PlayingCards.PlayingCard> cards, PlayingCards.PlayingCard sender)
         {
             this.Cards = cards;
             this.Activator = sender;

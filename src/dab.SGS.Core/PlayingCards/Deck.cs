@@ -1,5 +1,5 @@
 ﻿using dab.SGS.Core.Actions;
-using dab.SGS.Core.PlayingCard;
+using dab.SGS.Core.PlayingCards;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dab.SGS.Core.PlayingCard
+namespace dab.SGS.Core.PlayingCards
 {
     public class Deck
     {

@@ -5,31 +5,38 @@ using System.Text;
 using System.Threading.Tasks;
 using dab.SGS.Core.Actions;
 
-namespace dab.SGS.Core.PlayingCard
+namespace dab.SGS.Core.PlayingCards
 {
-    public class DodgeBasicPlayingCard : BasicPlayingCard
+    public enum Elemental
     {
-        public DodgeBasicPlayingCard()
+        None,
+        Fire,
+        Lightning
+    }
+
+    public class AttackBasicPlayingCard : BasicPlayingCard
+    {
+        public Elemental Element { get; private set; }
+        public AttackBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display, 
+            string details, List<Actions.Action> actions, Elemental element, Type[] responses) 
+            : base(color, suite, display, details, actions, responses)
         {
         }
 
-        public DodgeBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, 
-            string display, string details, List<Actions.Action> actions)
-            : base(color, suite, display, details, actions, null)
-        {
-        }
         public new static PlayingCard GetCardFromJson(dynamic obj,
             SelectCard selectCard, IsValidCard validCard)
         {
             var color = (PlayingCardColor)Enum.Parse(typeof(PlayingCardColor), obj.PlayingCardColor.ToString());
             var suite = (PlayingCardSuite)Enum.Parse(typeof(PlayingCardSuite), obj.PlayingCardSuite.ToString());
+            var element = (Elemental)Enum.Parse(typeof(Elemental), obj.Elemental.ToString());
             var display = obj.Display.ToString();
             var details = obj.Details.ToString();
 
             var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
                 selectCard, validCard);
 
-            return new DodgeBasicPlayingCard(color, suite, display, details, actions);
+            return new AttackBasicPlayingCard(color, suite, display, details, actions, element, 
+                PlayingCard.ParseResponsesFromjson(obj.Responses));
         }
     }
 }

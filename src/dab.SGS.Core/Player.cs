@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using dab.SGS.Core.PlayingCard;
+using dab.SGS.Core.PlayingCards;
 
 namespace dab.SGS.Core
 {
@@ -49,7 +49,7 @@ namespace dab.SGS.Core
             }
         }
 
-        public List<PlayingCard.PlayingCard> Hand { get; set; }
+        public List<PlayingCard> Hand { get; set; }
 
         public Dictionary<TurnStages, Actions.Action> TurnStageActions { get; set; }
 
@@ -57,7 +57,7 @@ namespace dab.SGS.Core
         {
             this.Display = name;
             this.PlayerArea = new PlayArea();
-            this.Hand = new List<PlayingCard.PlayingCard>();
+            this.Hand = new List<PlayingCard>();
             this.Heros = new List<Heroes.HeroCard>();
             this.TurnStageActions = new Dictionary<TurnStages, Actions.Action>();
         }
@@ -72,6 +72,10 @@ namespace dab.SGS.Core
             public HorseEquipmentPlayingCard MinusHorse { get; set; }
 
             public List<Object> DelayedScrolls { get; set; }
+
+            public List<PlayingCard> FaceUpPlayingCards { get; set; }
+
+            public List<PlayingCard> FaceDownPlayingCards { get; set; }
         }
 
         public PlayArea PlayerArea { get; private set; }
