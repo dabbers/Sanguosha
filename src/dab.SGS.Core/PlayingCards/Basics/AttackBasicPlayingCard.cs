@@ -40,8 +40,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
 
         public override bool IsPlayable(GameContext ctx)
         {
-
-            return base.IsPlayable(ctx);
+            return (ctx.TurnStage == TurnStages.Play || ctx.TurnStage == TurnStages.PlayPlace);
         }
     }
 }

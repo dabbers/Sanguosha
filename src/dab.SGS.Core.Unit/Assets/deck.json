@@ -1,6 +1,6 @@
 [
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -15,7 +15,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -29,7 +29,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -44,7 +44,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -58,7 +58,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -73,7 +73,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -87,7 +87,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -102,7 +102,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -116,7 +116,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -131,7 +131,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -145,7 +145,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -160,7 +160,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -174,7 +174,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -189,7 +189,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -203,7 +203,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -218,7 +218,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -232,7 +232,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -247,7 +247,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -261,7 +261,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -276,7 +276,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -290,7 +290,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -305,7 +305,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -319,7 +319,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -334,7 +334,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -348,7 +348,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -363,7 +363,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -377,7 +377,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -392,7 +392,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -406,7 +406,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -421,7 +421,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -435,7 +435,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -450,7 +450,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -464,7 +464,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -479,7 +479,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
@@ -493,7 +493,7 @@
     ]
   },
   {
-    "Type": "AttackBasicPlayingCard",
+    "Type": "Basics.AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Attack",
@@ -508,7 +508,7 @@
     ]
   },
   {
-    "Type": "DodgeBasicPlayingCard",
+    "Type": "Basics.DodgeBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
     "Display": "Dodge",

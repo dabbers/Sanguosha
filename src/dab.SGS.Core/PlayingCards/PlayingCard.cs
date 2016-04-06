@@ -103,7 +103,7 @@ namespace dab.SGS.Core.PlayingCards
             SelectCard selectCard, IsValidCard validCard)
         {
             string cardType = obj.Type.ToString();
-            var type = Type.GetType(String.Format("dab.SGS.Core.PlayingCard.{0}", cardType));
+            var type = Type.GetType(String.Format("dab.SGS.Core.PlayingCards.{0}", cardType));
             var fnc = type.GetMethod("GetCardFromJson");
 
             return (PlayingCard)fnc.Invoke(null, new object[] { obj, selectCard, validCard });

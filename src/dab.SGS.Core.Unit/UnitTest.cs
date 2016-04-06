@@ -62,34 +62,29 @@ namespace dab.SGS.Core.Unit
             ctx.Turn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             Assert.AreEqual(TurnStages.SkillResponse, ctx.TurnStage);
 
             // Rotate through our skills for defense, but they shouldn't exist
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             Assert.AreEqual(TurnStages.ShieldResponse, ctx.TurnStage);
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             foreach(var target in ctx.AttackStageTracker.Targets)
             {
                 // Our target must play a dodge or take damage. Poor soul
-                var dodge = target.Target.Hand.Find(p => p.Display == "Dodge");
+                var dodge = target.Target.Hand.Find(p => p.IsPlayable(ctx));
 
                 dodge.Play(dodge);
             }
 
             // Move on from CardResponse to Pre-Damage
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             ctx.Turn.Hand[0].Play(sender);
 
@@ -156,26 +151,21 @@ namespace dab.SGS.Core.Unit
             ctx.Turn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             Assert.AreEqual(TurnStages.SkillResponse, ctx.TurnStage);
 
             // Rotate through our skills for defense, but they shouldn't exist
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             Assert.AreEqual(TurnStages.ShieldResponse, ctx.TurnStage);
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
             
             // Move on from CardResponse to Pre-Damage
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
-            Assert.IsNull(action);
 
             ctx.Turn.Hand[0].Play(sender);
 
