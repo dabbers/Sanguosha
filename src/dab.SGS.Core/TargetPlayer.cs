@@ -13,7 +13,7 @@ namespace dab.SGS.Core
 
         public bool Dodged { get; set; }
 
-        // Negated
+        // Negated?
         public bool Warded { get; set; }
     }
 }

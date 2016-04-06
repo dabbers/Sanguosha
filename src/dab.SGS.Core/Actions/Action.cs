@@ -1,4 +1,5 @@
 ﻿using dab.SGS.Core.PlayingCards;
+using dab.SGS.Core.PlayingCards.Equipments;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace dab.SGS.Core.Actions
     /// Have the player select maxCards cards
     /// </summary>
     /// <returns></returns>
-    public delegate PlayingCard[] SelectCards(Player player, int maxCards);
+    public delegate PlayingCard[] SelectCards(Player player, int minCards, int maxCards);
 
     /// <summary>
     /// Select a player to target
@@ -47,15 +48,39 @@ namespace dab.SGS.Core.Actions
     /// <summary>
     /// The result of an attack
     /// </summary>
-    public class AttackResult
+    public class AttackResultAggregation
     {
         public AttackResults Result { get; private set; }
         public List<PlayingCard> AttackingCards { get; private set; }
 
-        public AttackResult(AttackResults res, List<PlayingCard> cards)
+        public AttackResultAggregation(AttackResults res, List<PlayingCard> cards)
         {
             this.Result = res;
             this.AttackingCards = cards;
+        }
+
+        public int WinesPlayed()
+        {
+            return this.countNumOfCardsType(typeof(PlayingCards.Basics.WineBasicPlayingCard));
+        }
+
+
+        public int AttacksPlayed()
+        {
+            return this.countNumOfCardsType(typeof(PlayingCards.Basics.AttackBasicPlayingCard));
+        }
+
+        private int countNumOfCardsType(Type type)
+        {
+            int wineCount = 0;
+
+            foreach (var card in this.AttackingCards)
+            {
+                if (card.GetType() == type || card.BeingUsedAs == type)
+                    wineCount++;
+            }
+
+            return wineCount;
         }
     }
 
@@ -69,7 +94,8 @@ namespace dab.SGS.Core.Actions
         }
 
         public abstract bool Perform(object sender, Player player, GameContext context);
-        public virtual bool Perform(object sender, Player player, GameContext context, AttackResult result)
+
+        public virtual bool Perform(object sender, Player player, GameContext context, AttackResultAggregation result)
         {
             return false;
         }

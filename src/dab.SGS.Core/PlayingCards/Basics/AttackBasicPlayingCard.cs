@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using dab.SGS.Core.Actions;
 
-namespace dab.SGS.Core.PlayingCards
+namespace dab.SGS.Core.PlayingCards.Basics
 {
     public enum Elemental
     {
@@ -18,8 +18,8 @@ namespace dab.SGS.Core.PlayingCards
     {
         public Elemental Element { get; private set; }
         public AttackBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display, 
-            string details, List<Actions.Action> actions, Elemental element, Type[] responses) 
-            : base(color, suite, display, details, actions, responses)
+            string details, List<Actions.Action> actions, Elemental element) 
+            : base(color, suite, display, details, actions)
         {
         }
 
@@ -35,8 +35,13 @@ namespace dab.SGS.Core.PlayingCards
             var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
                 selectCard, validCard);
 
-            return new AttackBasicPlayingCard(color, suite, display, details, actions, element, 
-                PlayingCard.ParseResponsesFromjson(obj.Responses));
+            return new AttackBasicPlayingCard(color, suite, display, details, actions, element);
+        }
+
+        public override bool IsPlayable(GameContext ctx)
+        {
+
+            return base.IsPlayable(ctx);
         }
     }
 }

@@ -4,10 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dab.SGS.Core.PlayingCards
+namespace dab.SGS.Core.PlayingCards.Equipments
 {
-
-
     public class WeaponEquipmentPlayingCard : EquipmentPlayingCard
     {
         public int Range { get { return this.range; } }
@@ -51,7 +49,7 @@ namespace dab.SGS.Core.PlayingCards
             return this.playAction(sender, this.PlaceActions);
         }
 
-        public void AttackOccured(Actions.AttackResult result)
+        public void AttackOccured(Actions.AttackResultAggregation result)
         {
             if (this.Actions == null) return;
 

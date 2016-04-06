@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dab.SGS.Core.PlayingCards;
+using System.Reflection;
 
 namespace dab.SGS.Core
 {
@@ -11,6 +12,8 @@ namespace dab.SGS.Core
 
     public class GameContext
     {
+        public static int DEFAULT_MAX_ATTACKS = 1;
+
         public Player[] Players { get { return this.players.ToArray(); } }
 
         public List<Roles> Roles { get; set; }
@@ -20,6 +23,24 @@ namespace dab.SGS.Core
         public PlayingCardStageTracker AttackStageTracker { get; set; }
 
         public Deck Deck { get; protected set; }
+
+        public class GenericHoldingArea
+        {
+            public enum HoldingAreaVisibility
+            {
+                All,
+                Player
+            }
+
+            public HoldingAreaVisibility Visibilty { get; set; }
+
+            public List<PlayingCard> Cards { get; set; }
+        }
+
+        /// <summary>
+        /// The generic holding area for events like peach garden, or special abilities where a player draws n cards and picks m.
+        /// </summary>
+        public GenericHoldingArea HoldingArea { get; set; }
 
         /// <summary>
         /// Create a new game context to hold a game. This context handles the players,
@@ -91,7 +112,10 @@ namespace dab.SGS.Core
 
             Actions.Action res = this.EmptyAction;
 
-            this.Turn.TurnStageActions.TryGetValue(this.TurnStage, out res);
+            if (!this.Turn.TurnStageActions.TryGetValue(this.TurnStage, out res))
+            { // Is this needed? Not sure if it will overwrite with null...
+                res = this.EmptyAction;
+            }
 
             return res;
         }
@@ -125,12 +149,7 @@ namespace dab.SGS.Core
 
             this.players.Add(p);
         }
-
-        public List<Actions.Action> GetValidResponsesForCard(Player sourcePlayer, Player dest, PlayingCard sourceCard)
-        {
-
-        }
-        
+                
         private Actions.Action DefaultDraw;
         private Actions.Action DefaultDiscard;
         private Actions.Action EmptyAction = new Actions.EmptyAction("Empty Action");

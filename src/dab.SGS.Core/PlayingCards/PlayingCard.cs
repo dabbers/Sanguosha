@@ -24,13 +24,16 @@ namespace dab.SGS.Core.PlayingCards
 
     public abstract class PlayingCard
     {
-        public PlayingCardSuite Suite { get { return this.suite; } } 
+        public PlayingCardSuite Suite { get { return this.suite; } }
         public PlayingCardColor Color { get { return this.color; } }
 
         public string Display { get { return this.display; } }
         public string Details { get { return this.details; } }
 
-        public Type[] Responses { get; protected set; }
+        /// <summary>
+        /// If this card isn't being used as what it is, what IS it being used as?
+        /// </summary>
+        public Type BeingUsedAs { get; set; }
 
         /// <summary>
         /// The current player who holds this card (either in their hand or on their playarea)
@@ -58,12 +61,6 @@ namespace dab.SGS.Core.PlayingCards
             this.details = details;
             this.Actions = actions;
         }
-        public PlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display,
-            string details, List<Actions.Action> actions, Type[] responses)
-            : this(color, suite, display, details, actions)
-        {
-            this.Responses = responses;
-        }
 
         public virtual bool Play(object sender)
         {
@@ -75,6 +72,11 @@ namespace dab.SGS.Core.PlayingCards
             }
             
             return res;
+        }
+
+        public virtual bool IsPlayable(GameContext ctx)
+        {
+            return true;
         }
 
         public void Discard()
@@ -106,23 +108,7 @@ namespace dab.SGS.Core.PlayingCards
 
             return (PlayingCard)fnc.Invoke(null, new object[] { obj, selectCard, validCard });
         }
-
-        /// <summary>
-        /// Pass in an array
-        /// </summary>
-        /// <param name="cardTypes"></param>
-        /// <returns></returns>
-        public static Type[] ParseResponsesFromjson(dynamic cardTypes)
-        {
-            var l = new List<Type>();
-            foreach(var cardType in cardTypes)
-            {
-                l.Add(Type.GetType(String.Format("dab.SGS.Core.PlayingCard.{0}", cardType)));
-            }
-
-            return l.ToArray();
-        }
-
+        
 
         private string display = String.Empty;
         private string details = String.Empty;

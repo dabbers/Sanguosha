@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using dab.SGS.Core.Actions;
 
-namespace dab.SGS.Core.PlayingCards
+namespace dab.SGS.Core.PlayingCards.Basics
 {
     public class DodgeBasicPlayingCard : BasicPlayingCard
     {
@@ -15,7 +15,7 @@ namespace dab.SGS.Core.PlayingCards
 
         public DodgeBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, 
             string display, string details, List<Actions.Action> actions)
-            : base(color, suite, display, details, actions, null)
+            : base(color, suite, display, details, actions)
         {
         }
         public new static PlayingCard GetCardFromJson(dynamic obj,
@@ -30,6 +30,11 @@ namespace dab.SGS.Core.PlayingCards
                 selectCard, validCard);
 
             return new DodgeBasicPlayingCard(color, suite, display, details, actions);
+        }
+
+        public override bool IsPlayable(GameContext ctx)
+        {
+            return (ctx.TurnStage == TurnStages.CardResponse || ctx.TurnStage == TurnStages.Discard);
         }
     }
 }

@@ -37,8 +37,7 @@ namespace dab.SGS.Core
         /// An action for the player
         /// </summary>
         Play,
-
-
+        
         /// <summary>
         /// Before the discard phase
         /// </summary>
@@ -84,6 +83,11 @@ namespace dab.SGS.Core
         /// Player did not get enough peaches.
         /// </summary>
         PlayerEliminated,
+
+        /// <summary>
+        /// We are prompting a player currently.
+        /// </summary>
+        Prompt,
 
 
         // ATTACK STAGES

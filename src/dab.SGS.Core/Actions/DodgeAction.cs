@@ -20,6 +20,8 @@ namespace dab.SGS.Core.Actions
                     var target = context.AttackStageTracker.Targets.Find(p => p.Target.Display == player.Display);
                     target.Damage = 0;
                     break;
+                default: // We cannot use this card here.
+                    return false;
             }
 
 

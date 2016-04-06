@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using dab.SGS.Core.PlayingCards;
+using dab.SGS.Core.PlayingCards.Equipments;
 
 namespace dab.SGS.Core
 {
@@ -32,6 +33,7 @@ namespace dab.SGS.Core
         public bool IsDying { get { return this.CurrentHealth < 1; } }
 
         public Roles Role { get; set; }
+        public int AttacksLeft { get; set; }
 
         public List<Heroes.HeroCard> Heros { get; set; }
 
@@ -115,6 +117,11 @@ namespace dab.SGS.Core
         public int GetDistanceTotal()
         {
             return (this.PlayerArea.PlusHorse?.Distance ?? 0) + this.DistanceModifiers;
+        }
+
+        public override string ToString()
+        {
+            return this.Display;
         }
 
         private Heroes.HeroCard activeHero;

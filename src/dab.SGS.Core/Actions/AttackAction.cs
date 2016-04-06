@@ -34,7 +34,7 @@ namespace dab.SGS.Core.Actions
 
                     context.AttackStageTracker = new PlayingCardStageTracker()
                     {
-                        Cards = cards.Cards,
+                        Cards = cards,
                         Source = player,
                         Targets = new List<TargetPlayer>(),
                         PreviousStages = new Stack<TurnStages>()
@@ -63,6 +63,9 @@ namespace dab.SGS.Core.Actions
 
                     // Clear up the stage tracker for the next turn.
                     context.AttackStageTracker = null;
+                    break;
+                case TurnStages.PlayPlace:
+                    // Todo: A duel was played
                     break;
                 default:
                     throw new Exception("Unknown stage reached for attack action: " + context.TurnStage.ToString());

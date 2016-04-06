@@ -12,9 +12,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -31,7 +28,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -44,9 +41,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -63,7 +57,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -76,9 +70,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -95,7 +86,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -108,9 +99,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -127,7 +115,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -140,9 +128,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -159,7 +144,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -172,9 +157,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -191,7 +173,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -204,9 +186,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -223,7 +202,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -236,9 +215,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -255,7 +231,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -268,9 +244,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -287,7 +260,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -300,9 +273,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -319,7 +289,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -332,9 +302,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -351,7 +318,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -364,9 +331,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -383,7 +347,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -396,9 +360,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -415,7 +376,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -428,9 +389,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -447,7 +405,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -460,9 +418,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -479,7 +434,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -492,9 +447,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -511,7 +463,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -524,9 +476,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
@@ -543,7 +492,7 @@
       }
     ]
   },
-    {
+  {
     "Type": "AttackBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
@@ -556,9 +505,6 @@
         "Type": "AttackAction",
         "Damage": 1
       }
-    ],
-    "Responses": [
-      "DodgeBasicPlayingCard"
     ]
   },
   {
