@@ -19,34 +19,34 @@ namespace dab.SGS.Core.Actions
             // When can this happen? Attack card, or Borrowed sword
 
             // How attacking a player works:
-            var cards = (SelectedCardsSender)sender;
+            var results = (SelectedCardsSender)sender;
 
             switch (context.TurnStage)
             {
                 // The attack was first played. Go into target select mode.
                 case TurnStages.Play:
                     // An attack cannot be happening already
-                    if (context.AttackStageTracker != null)
+                    if (context.PlayStageTracker != null)
                     {
                         throw new Exception("An attack is already happening. Is this a bug?");
                     }
 
 
-                    context.AttackStageTracker = new PlayingCardStageTracker()
+                    context.PlayStageTracker = new PlayingCardStageTracker()
                     {
-                        Cards = cards,
+                        Cards = results,
                         Source = player,
                         Targets = new List<TargetPlayer>(),
                         PreviousStages = new Stack<TurnStages>()
                     };
 
-                    context.AttackStageTracker.PreviousStages.Push(context.TurnStage);
+                    context.PlayStageTracker.PreviousStages.Push(context.TurnStage);
 
                     context.TurnStage = TurnStages.ChooseTargets;
                     return false;
                 case TurnStages.ChooseTargets:
 
-                    foreach (var tp in context.AttackStageTracker.Targets)
+                    foreach (var tp in context.PlayStageTracker.Targets)
                     {
                         tp.Damage = this.damage;
                     }
@@ -54,17 +54,17 @@ namespace dab.SGS.Core.Actions
                     //context.TurnStage++;
                     return false;
                 case TurnStages.Damage:
-                    context.TurnStage = context.AttackStageTracker.PreviousStages.Pop();
+                    context.TurnStage = context.PlayStageTracker.PreviousStages.Pop();
 
-                    foreach(var tp in context.AttackStageTracker.Targets)
+                    foreach(var tp in context.PlayStageTracker.Targets)
                     {
                         tp.Target.CurrentHealth -= tp.Damage;
                     }
 
                     // Clear up the stage tracker for the next turn.
-                    context.AttackStageTracker = null;
+                    context.PlayStageTracker = null;
                     break;
-                case TurnStages.PlayPlace:
+                case TurnStages.PlayScrollPlace:
                     // Todo: A duel was played
                     break;
                 default:

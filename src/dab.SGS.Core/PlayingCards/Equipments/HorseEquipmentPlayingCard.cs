@@ -9,24 +9,15 @@ namespace dab.SGS.Core.PlayingCards.Equipments
     public class HorseEquipmentPlayingCard : EquipmentPlayingCard
     {
         public int Distance { get { return this.distance; } }
-
-        public HorseEquipmentPlayingCard(PlayingCardColor color) : base(color)
-        {
-        }
-
-        public HorseEquipmentPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display, 
-            string details, List<Actions.Action> actions) : base(color, suite, display, details, actions)
-        {
-        }
-
+        
         public HorseEquipmentPlayingCard(int distance, PlayingCardColor color, PlayingCardSuite suite, 
-            string display, string details, List<Actions.Action> actions) : base(color, suite, display, details, actions)
+            string display, string details) : base(color, suite, display, details, null)
         {
             this.distance = distance;
         }
 
 
-        private int distance = 0;
+        private int distance = 1;
 
         public override bool Play(object sender)
         {

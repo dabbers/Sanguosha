@@ -65,11 +65,11 @@ namespace dab.SGS.Core
         /// <summary>
         /// Player played a scroll card, have them select a target
         /// </summary>
-        PlayTargets,
+        PlayScrollTargets,
         /// <summary>
         /// A scroll was played.
         /// </summary>
-        PlayPlace,
+        PlayScrollPlace,
 
         /// <summary>
         /// The notification that a player has died (players should select to peach/revive or not)

@@ -17,7 +17,7 @@ namespace dab.SGS.Core.Actions
             switch (context.TurnStage)
             {
                 case TurnStages.CardResponse:
-                    var target = context.AttackStageTracker.Targets.Find(p => p.Target.Display == player.Display);
+                    var target = context.PlayStageTracker.Targets.Find(p => p.Target.Display == player.Display);
                     target.Damage = 0;
                     break;
                 default: // We cannot use this card here.

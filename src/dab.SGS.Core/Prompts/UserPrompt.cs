@@ -8,6 +8,22 @@ namespace dab.SGS.Core.Prompts
 {
     public enum UserPromptType
     {
+        // Standard turn stuff: 
+        //
+
+        /// <summary>
+        /// Select a skill(s) to use
+        /// </summary>
+        Skills,
+
+        /// <summary>
+        /// Select a skill or card to use
+        /// </summary>
+        SkillsOrCards,
+        
+        //
+        // End of standard skill stuff
+
         /// <summary>
         /// Yes or No Prompt
         /// </summary>

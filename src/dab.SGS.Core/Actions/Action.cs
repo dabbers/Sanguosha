@@ -38,51 +38,6 @@ namespace dab.SGS.Core.Actions
     public delegate Action SelectAction(Player player);
 
 
-    public enum AttackResults
-    {
-        Hit,
-        Dodged,
-        None
-    }
-
-    /// <summary>
-    /// The result of an attack
-    /// </summary>
-    public class AttackResultAggregation
-    {
-        public AttackResults Result { get; private set; }
-        public List<PlayingCard> AttackingCards { get; private set; }
-
-        public AttackResultAggregation(AttackResults res, List<PlayingCard> cards)
-        {
-            this.Result = res;
-            this.AttackingCards = cards;
-        }
-
-        public int WinesPlayed()
-        {
-            return this.countNumOfCardsType(typeof(PlayingCards.Basics.WineBasicPlayingCard));
-        }
-
-
-        public int AttacksPlayed()
-        {
-            return this.countNumOfCardsType(typeof(PlayingCards.Basics.AttackBasicPlayingCard));
-        }
-
-        private int countNumOfCardsType(Type type)
-        {
-            int wineCount = 0;
-
-            foreach (var card in this.AttackingCards)
-            {
-                if (card.GetType() == type || card.BeingUsedAs == type)
-                    wineCount++;
-            }
-
-            return wineCount;
-        }
-    }
 
     public abstract class Action
     {
@@ -95,17 +50,17 @@ namespace dab.SGS.Core.Actions
 
         public abstract bool Perform(object sender, Player player, GameContext context);
 
-        public virtual bool Perform(object sender, Player player, GameContext context, AttackResultAggregation result)
+        public virtual bool Perform(object sender, Player player, GameContext context, PlayingCardStageTracker result)
         {
             return false;
         }
 
-        public virtual bool Perform(object sender, Player player, GameContext context, PlayingCard card, WeaponEquipmentPlayingCard weapon)
+        public virtual bool Perform(object sender, Player player, GameContext context, PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)
         {
             return true;
         }
 
-        public virtual int Perform(object sender, Player player, PlayingCard card, WeaponEquipmentPlayingCard weapon)
+        public virtual int Perform(object sender, Player player, PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)
         {
             return 0;
         }

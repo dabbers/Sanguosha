@@ -13,7 +13,8 @@ namespace dab.SGS.Core
         King,
         Minister,
         Rebel,
-        TurnCoat
+        TurnCoat,
+        Random
     }
 
     public class Player
@@ -122,6 +123,34 @@ namespace dab.SGS.Core
         public override string ToString()
         {
             return this.Display;
+        }
+
+        public static Roles[] GetRoles(int players)
+        {
+            switch(players)
+            {
+                case 2:
+                    return new Roles[] { Roles.King, Roles.Rebel };
+                case 3:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Minister };
+                case 4:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Minister };
+                case 5:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.TurnCoat };
+                case 6:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.TurnCoat };
+                case 7:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.Minister, Roles.TurnCoat };
+                case 8:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.Minister, Roles.TurnCoat };
+                case 9:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.Minister, Roles.Minister, Roles.TurnCoat };
+                case 10:
+                    return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.Minister, Roles.Minister, Roles.TurnCoat };
+                default:
+                    throw new Exception("Invalid player number for roles");
+
+            }
         }
 
         private Heroes.HeroCard activeHero;

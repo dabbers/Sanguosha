@@ -20,7 +20,7 @@ namespace dab.SGS.Core
 
         public Player Turn { get; set; }
         public TurnStages TurnStage { get; set; }
-        public PlayingCardStageTracker AttackStageTracker { get; set; }
+        public PlayingCardStageTracker PlayStageTracker { get; set; }
 
         public Deck Deck { get; protected set; }
 
@@ -62,14 +62,55 @@ namespace dab.SGS.Core
             this.Deck = deck;
         }
 
-        public Actions.Action SetupGame()
+        public Actions.Action SetupGame(bool dealCards = true)
         {
             if (this.Players.Count() < 3) throw new Exception("Not enough players");
 
             this.dealCardsToPlayers();
             this.Turn = this.Players.First().Left;
 
-            return this.RoateTurnStage();
+            var roles = Player.GetRoles(this.Players.Count());
+            var computedRoles = this.Players.Select(p => p.Role).ToArray();
+
+            Array.Sort(computedRoles);
+            Array.Sort(roles);
+
+            var rolesList = new List<Roles>(roles);
+
+            for (var i = 0; i < computedRoles.Length; i++)
+            {
+                if (computedRoles[i] != Core.Roles.Random && computedRoles[i] != roles[i])
+                {
+                    throw new Exception("Invalid roles assigned!");
+                }
+            }
+
+            if (computedRoles.Contains(Core.Roles.Random))
+            {
+                var newRoles = this.Players.Where(p =>
+                {
+                    if (rolesList.Contains(p.Role))
+                    {
+                        rolesList.Remove(p.Role);
+                        return false;
+                    }
+
+                    return true;
+                }).ToArray();
+
+                if (rolesList.Count > 1)
+                    rolesList.Shuffle(new Random());
+
+                for(var i = 0; i < rolesList.Count; i++)
+                {
+                    newRoles[i].Role = rolesList[i];
+                }
+            }
+
+            if (dealCards)
+                return this.RoateTurnStage();
+            else
+                return this.EmptyAction;
         }
 
         private void dealCardsToPlayers()
@@ -149,7 +190,13 @@ namespace dab.SGS.Core
 
             this.players.Add(p);
         }
-                
+
+        public void AddPlayer(string display, Heroes.HeroCard hero)
+        {
+            this.AddPlayer(display, hero, Core.Roles.Random);
+        }
+
+
         private Actions.Action DefaultDraw;
         private Actions.Action DefaultDiscard;
         private Actions.Action EmptyAction = new Actions.EmptyAction("Empty Action");

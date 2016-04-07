@@ -11,15 +11,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
         public int Range { get { return this.range; } }
         public List<Actions.Action> PlaceActions { get; private set; }
         public List<Actions.Action> RemoveActions { get; private set; }
-
-        public WeaponEquipmentPlayingCard(PlayingCardColor color) : base(color)
-        {
-        }
-
-        public WeaponEquipmentPlayingCard(PlayingCardColor color, int range) : base(color)
-        {
-            this.range = range;
-        }
+        
 
         public WeaponEquipmentPlayingCard(int range, PlayingCardColor color, PlayingCardSuite suite, string display,
             string details, List<Actions.Action> placeActions, List<Actions.Action> attackActions, List<Actions.Action> removeActions)
@@ -29,12 +21,6 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             this.RemoveActions = removeActions;
         }
 
-        public WeaponEquipmentPlayingCard(int range):
-            this(PlayingCardColor.None)
-        {
-            this.range = range;
-        }
-
         public override bool Play(object sender)
         {
             if (this.Owner.PlayerArea.Weapon != null)
@@ -42,14 +28,14 @@ namespace dab.SGS.Core.PlayingCards.Equipments
                 this.Owner.PlayerArea.Weapon.RemoveAction(sender);
             }
 
-            this.Context.Deck.Discard.Add(this.Owner.PlayerArea.Weapon);
+            this.Context.Deck.DiscardPile.Add(this.Owner.PlayerArea.Weapon);
             this.Owner.PlayerArea.Weapon = this;
             this.Owner.Hand.Remove(this);
 
             return this.playAction(sender, this.PlaceActions);
         }
 
-        public void AttackOccured(Actions.AttackResultAggregation result)
+        public void AttackOccured(PlayingCardStageTracker result)
         {
             if (this.Actions == null) return;
 

@@ -115,8 +115,12 @@
     <Compile Include="Actions\DrawAction.cs" />
     <Compile Include="Actions\EmptyAction.cs" />
     <Compile Include="Actions\EndTurnAction.cs" />
+    <Compile Include="Actions\IgnoreBlackAttackAction.cs" />
+    <Compile Include="Actions\IncreaseHealthToTargetAction.cs" />
     <Compile Include="Actions\ReduceHandsizeDiscardAction.cs" />
     <Compile Include="Actions\ResetAttackCounterAction.cs" />
+    <Compile Include="Actions\WardAction.cs" />
+    <Compile Include="AttackResultAggregation.cs" />
     <Compile Include="PlayingCardStageTracker.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameContext.cs" />
@@ -135,6 +139,7 @@
     <Compile Include="PlayingCards\Scrolls\ScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\ShieldEquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\WeaponEquipmentPlayingCard.cs" />
+    <Compile Include="PlayingCards\Scrolls\WardScrollPlayingCard.cs" />
     <Compile Include="Prompts\CardUserPrompt.cs" />
     <Compile Include="Prompts\OptionsUserPrompt.cs" />
     <Compile Include="Prompts\TargetUserPrompt.cs" />

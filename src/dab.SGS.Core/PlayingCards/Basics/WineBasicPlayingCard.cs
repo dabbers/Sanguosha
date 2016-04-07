@@ -9,8 +9,13 @@ namespace dab.SGS.Core.PlayingCards.Basics
 {
     public class WineBasicPlayingCard : BasicPlayingCard
     {
-        public WineBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display, string details, 
-            List<Actions.Action> actions) : base(color, suite, display, details, actions)
+        public WineBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details) 
+            : base(color, suite, "Wine", details, new List<Core.Actions.Action>() { new IncreaseHealthToTargetAction(1, 1) })
+        {
+        }
+
+        public WineBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details, 
+            List<Actions.Action> actions) : base(color, suite, "Wine", details, actions)
         {
         }
 

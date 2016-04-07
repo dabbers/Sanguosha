@@ -13,17 +13,17 @@ namespace dab.SGS.Core.PlayingCards
     {
         public List<PlayingCard> AllCards { get; private set; }
 
-        public List<PlayingCard> Discard { get; private set; }
+        public List<PlayingCard> DiscardPile { get; private set; }
 
         public List<PlayingCard> DrawPile { get; private set; }
 
         public Deck(List<PlayingCard> deck)
         {
             this.AllCards = deck;
-            this.Discard = new List<PlayingCard>(deck);
+            this.DiscardPile = new List<PlayingCard>(deck);
 #if DEBUG
             this.DrawPile = new List<PlayingCard>(deck);
-            this.Discard.Clear();
+            this.DiscardPile.Clear();
 #else
             this.shuffle();
 #endif
@@ -36,10 +36,10 @@ namespace dab.SGS.Core.PlayingCards
         {
             if ((this.DrawPile?.Count ?? 0) > 0) return;
 
-            this.DrawPile = this.Discard;
+            this.DrawPile = this.DiscardPile;
             this.DrawPile.Shuffle(new Random());
 
-            this.Discard = new List<PlayingCard>();
+            this.DiscardPile = new List<PlayingCard>();
         }
         public PlayingCard Draw()
         {
@@ -52,6 +52,17 @@ namespace dab.SGS.Core.PlayingCards
             this.DrawPile.RemoveAt(0);
 
             return card;
+        }
+
+        /// <summary>
+        /// Adds this card to the discard pile. It also removes owner, and other temporary (current life span) attributes.
+        /// </summary>
+        /// <param name="card"></param>
+        public void Discard(PlayingCard card)
+        {
+            card.Owner = null;
+            card.BeingUsedAs = null;
+            this.DiscardPile.Add(card);
         }
 
         public static List<PlayingCard> LoadCards(string json, 

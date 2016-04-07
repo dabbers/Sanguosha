@@ -4,6 +4,7 @@ using dab.SGS.Core;
 using dab.SGS.Core.PlayingCards;
 using dab.SGS.Core.Actions;
 using System.Collections.Generic;
+using dab.SGS.Core.PlayingCards.Basics;
 
 namespace dab.SGS.Core.Unit
 {
@@ -16,6 +17,19 @@ namespace dab.SGS.Core.Unit
                 p => p.Hand[0], p => true);
 
             return deck;
+        }
+
+        public List<PlayingCard> GetAttackDodgeAlternateDeck(int count)
+        {
+            var d = new List<PlayingCard>();
+
+            for (var i = 0; i < count; i += 2)
+            {
+                d.Add(new PlayingCards.Basics.AttackBasicPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "", new List<Actions.Action>() { new AttackAction("Attack", 1) }, PlayingCards.Basics.Elemental.None));
+                d.Add(new PlayingCards.Basics.DodgeBasicPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "", new List<Actions.Action>() { new DodgeAction() }));
+            }
+
+            return d;
         }
         
         [TestMethod]
@@ -58,7 +72,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(TurnStages.ChooseTargets, ctx.TurnStage);
 
             // Choose a target (REUSE SENDER)
-            ctx.AttackStageTracker.Targets.Add(new TargetPlayer() { Target = ctx.Turn.Right });
+            ctx.PlayStageTracker.Targets.Add(new TargetPlayer() { Target = ctx.Turn.Right });
             ctx.Turn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
@@ -72,7 +86,7 @@ namespace dab.SGS.Core.Unit
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
 
-            foreach(var target in ctx.AttackStageTracker.Targets)
+            foreach(var target in ctx.PlayStageTracker.Targets)
             {
                 // Our target must play a dodge or take damage. Poor soul
                 var dodge = target.Target.Hand.Find(p => p.IsPlayable(ctx));
@@ -147,7 +161,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(TurnStages.ChooseTargets, ctx.TurnStage);
 
             // Choose a target (REUSE SENDER)
-            ctx.AttackStageTracker.Targets.Add(new TargetPlayer() { Target = ctx.Turn.Right });
+            ctx.PlayStageTracker.Targets.Add(new TargetPlayer() { Target = ctx.Turn.Right });
             ctx.Turn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
@@ -185,6 +199,51 @@ namespace dab.SGS.Core.Unit
             ctx.RoateTurnStage();
 
             Assert.AreEqual("P2", ctx.Turn.Display);
+        }
+
+
+        [TestMethod]
+        public void TestRoleAssignment()
+        {
+            var ctx = new GameContext(new Deck(this.GetAttackDodgeAlternateDeck(22)), p => p.Hand[0]);
+
+            ctx.AddPlayer("P1", null, Roles.King);
+            ctx.AddPlayer("P2", null);
+            ctx.AddPlayer("P3", null);
+            ctx.AddPlayer("P4", null);
+            ctx.AddPlayer("P5", null);
+
+            ctx.SetupGame();
+
+            Assert.AreEqual(Roles.King, ctx.Players[0].Role);
+
+            var roles = new List<Roles>(Player.GetRoles(ctx.Players.Length));
+
+            foreach (var player in ctx.Players)
+            {
+                roles.Remove(player.Role);
+            }
+
+            Assert.AreEqual(0, roles.Count);
+
+        }
+
+        [TestMethod]
+        public void TestValidCards()
+        {
+            var wine = new WineBasicPlayingCard(PlayingCardColor.Red, PlayingCardSuite.Club, "", null);
+            var peach = new PeachBasicPlayingCard(PlayingCardColor.Red, PlayingCardSuite.Club, "", null);
+
+            var dodge = new DodgeBasicPlayingCard(PlayingCardColor.Red, PlayingCardSuite.Club, "", null);
+
+            var attack = new AttackBasicPlayingCard(PlayingCardColor.Red, PlayingCardSuite.Club, "", null, Elemental.None);
+            var lightningAttack = new AttackBasicPlayingCard(PlayingCardColor.Red, PlayingCardSuite.Club, "", null, Elemental.Lightning);
+            var fireAttack = new AttackBasicPlayingCard(PlayingCardColor.Red, PlayingCardSuite.Club, "", null, Elemental.Fire);
+
+            var ctx = new GameContext(null, null);
+
+
+
         }
     }
 }

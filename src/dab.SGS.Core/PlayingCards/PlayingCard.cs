@@ -46,20 +46,15 @@ namespace dab.SGS.Core.PlayingCards
         public List<Actions.Action> Actions { get; private set; }
 
         public GameContext Context { get; set; }
-
-        public PlayingCard(PlayingCardColor color)
-        {
-            this.color = color;
-        }
-
+        
         public PlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display,
             string details, List<Actions.Action> actions)
-            : this(color)
         {
             this.suite = suite;
             this.display = display;
             this.details = details;
             this.Actions = actions;
+            this.color = color;
         }
 
         public virtual bool Play(object sender)
@@ -82,8 +77,35 @@ namespace dab.SGS.Core.PlayingCards
         public void Discard()
         {
             this.Owner.Hand.Remove(this);
-            this.Context.Deck.Discard.Add(this);
+            this.Context.Deck.Discard(this);
         }
+
+        public bool IsPlayedAsType(Type type)
+        {
+            return this.GetType() == type || this.BeingUsedAs == type;
+        }
+
+        public bool IsPlayedAsAttack()
+        {
+            return this.IsPlayedAsType(typeof(Basics.AttackBasicPlayingCard));
+        }
+        public bool IsPlayedAsDodge()
+        {
+            return this.IsPlayedAsType(typeof(Basics.DodgeBasicPlayingCard));
+        }
+        public bool IsPlayedAsPeach()
+        {
+            return this.IsPlayedAsType(typeof(Basics.PeachBasicPlayingCard));
+        }
+        public bool IsPlayedAsWine()
+        {
+            return this.IsPlayedAsType(typeof(Basics.WineBasicPlayingCard));
+        }
+        public bool IsPlayedAsWard()
+        {
+            return this.IsPlayedAsType(typeof(Scrolls.WardScrollPlayingCard));
+        }
+
 
         protected bool playAction(object sender, List<Actions.Action> actions)
         {

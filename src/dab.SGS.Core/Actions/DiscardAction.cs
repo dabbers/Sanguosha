@@ -20,7 +20,7 @@ namespace dab.SGS.Core.Actions
             for(var i = 0; i < this.NumberOfCards;i++)
             {
                 var card = select(player);
-                context.Deck.Discard.Add(card);
+                context.Deck.DiscardPile.Add(card);
             }
 
             return true;

@@ -10,11 +10,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
     {
         public List<Actions.Action> PlaceActions { get; private set; }
         public List<Actions.Action> RemoveActions { get; private set; }
-
-        public ShieldEquipmentPlayingCard(PlayingCardColor color) : base(color)
-        {
-        }
-
+        
         public ShieldEquipmentPlayingCard(int range, PlayingCardColor color, PlayingCardSuite suite, string display,
             string details, List<Actions.Action> placeActions, List<Actions.Action> defendActions, List<Actions.Action> removeActions,
             List<Actions.Action> damageCalculator) : base(color, suite, display, details, defendActions)
@@ -30,20 +26,20 @@ namespace dab.SGS.Core.PlayingCards.Equipments
                 this.Owner.PlayerArea.Shield.RemoveAction(sender);
             }
 
-            this.Context.Deck.Discard.Add(this.Owner.PlayerArea.Shield);
+            this.Context.Deck.Discard(this.Owner.PlayerArea.Shield);
             this.Owner.PlayerArea.Shield = this;
             this.Owner.Hand.Remove(this);
 
             return this.playAction(sender, this.PlaceActions);
         }
 
-        public bool CanBeAttacked(PlayingCard card, WeaponEquipmentPlayingCard weapon)
+        public bool CanBeAttacked(PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)
         {
             if (this.Actions == null) return true;
 
             foreach (var action in this.Actions)
             {
-                if (!action.Perform(this, this.Owner, this.Context, card, weapon)) // Why does this return bool? What do I use this for?
+                if (!action.Perform(this, this.Owner, this.Context, result, weapon)) // Why does this return bool? What do I use this for?
                 {
                     return false;
                 }
@@ -52,7 +48,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             return true;
         }
 
-        public int GetDamage(PlayingCard card, WeaponEquipmentPlayingCard weapon)
+        public int GetDamage(PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)
         {
             int damage = 1;
 
@@ -60,7 +56,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
 
             foreach (var action in this.damageCalc)
             {
-                 damage += action.Perform(this, this.Owner, card, weapon);
+                 damage += action.Perform(this, this.Owner, result, weapon);
             }
 
             return damage;
