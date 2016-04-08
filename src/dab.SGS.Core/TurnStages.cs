@@ -18,9 +18,9 @@ namespace dab.SGS.Core
         /// </summary>
         PreJudgement,
         /// <summary>
-        /// Happens after a judgement. Good/bad luck.
+        /// Perform the judgement
         /// </summary>
-        PostJudgement,
+        Judgement,
         /// <summary>
         /// Before drawing
         /// </summary>

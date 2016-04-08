@@ -111,7 +111,22 @@ namespace dab.SGS.Core.PlayingCards
         {
             return this.IsPlayedAsType(typeof(Scrolls.WardScrollPlayingCard));
         }
-
+        public bool IsPlayedAsLightning()
+        {
+            return this.IsPlayedAsType(typeof(Scrolls.LightningDelayedScrollPlayingCard));
+        }
+        public bool IsPlayedAsContentment()
+        {
+            return this.IsPlayedAsType(typeof(Scrolls.ContentmentDelayedScrollPlayingCard));
+        }
+        public bool IsPlayedAsStarvation()
+        {
+            return this.IsPlayedAsType(typeof(Scrolls.StarvationDelayedScrollPlayingCard));
+        }
+        public bool IsPlayedAsDelayScroll()
+        {
+            return this.IsPlayedAsLightning() || this.IsPlayedAsStarvation() || this.IsPlayedAsContentment();
+        }
 
         protected bool playAction(object sender, List<Actions.Action> actions)
         {
