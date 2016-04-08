@@ -15,19 +15,28 @@ namespace dab.SGS.Core.PlayingCards.Equipments
         {
             this.distance = distance;
         }
-
-
+        
         private int distance = 1;
 
         public override bool Play(object sender)
         {
-            if (this.Distance > 0 && this.Owner.PlayerArea.PlusHorse == null)
+            if (this.Distance > 0)
             {
+                if (this.Owner.PlayerArea.PlusHorse != null)
+                {
+                    this.Owner.PlayerArea.PlusHorse.Discard();
+                }
+
                 this.Owner.PlayerArea.PlusHorse = this;
                 return true;
             }
-            else if (this.Distance < 0 && this.Owner.PlayerArea.MinusHorse == null)
+            else if (this.Distance < 0)
             {
+                if (this.Owner.PlayerArea.MinusHorse != null)
+                {
+                    this.Owner.PlayerArea.MinusHorse.Discard();
+                }
+
                 this.Owner.PlayerArea.MinusHorse = this;
                 return true;
             }

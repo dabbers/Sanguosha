@@ -110,9 +110,11 @@
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\AttackAction.cs" />
     <Compile Include="Actions\CardChangeAction.cs" />
+    <Compile Include="Actions\ChainedActions.cs" />
     <Compile Include="Actions\DiscardAction.cs" />
     <Compile Include="Actions\DodgeAction.cs" />
     <Compile Include="Actions\DrawAction.cs" />
+    <Compile Include="Actions\DuelAction.cs" />
     <Compile Include="Actions\EmptyAction.cs" />
     <Compile Include="Actions\EndTurnAction.cs" />
     <Compile Include="Actions\IgnoreBlackAttackAction.cs" />
@@ -136,6 +138,7 @@
     <Compile Include="PlayingCards\Equipments\EquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\HorseEquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\PlayingCard.cs" />
+    <Compile Include="PlayingCards\Scrolls\DuelScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\ScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\ShieldEquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\WeaponEquipmentPlayingCard.cs" />
@@ -147,6 +150,7 @@
     <Compile Include="Prompts\YesNoUserPrompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TargetPlayer.cs" />
+    <Compile Include="TurnStageDictionary.cs" />
     <Compile Include="TurnStages.cs" />
     <EmbeddedResource Include="Properties\dab.SGS.Core.rd.xml" />
   </ItemGroup>

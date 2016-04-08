@@ -8,15 +8,23 @@ namespace dab.SGS.Core.Actions
 {
     public class ResetAttackCounterAction : Action
     {
-        public ResetAttackCounterAction() : base("Reset Attack Counter")
+        public ResetAttackCounterAction() : 
+            this(GameContext.DEFAULT_MAX_ATTACKS)
         {
+        }
+
+        public ResetAttackCounterAction(int max) : base("Reset Attack Counter")
+        {
+            this.maxAttacks = max;
         }
 
         public override bool Perform(object sender, Player player, GameContext context)
         {
-            player.AttacksLeft = GameContext.DEFAULT_MAX_ATTACKS;
+            player.AttacksLeft = this.maxAttacks;
 
             return true;
         }
+
+        private int maxAttacks = 0;
     }
 }

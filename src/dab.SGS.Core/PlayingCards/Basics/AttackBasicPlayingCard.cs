@@ -42,9 +42,15 @@ namespace dab.SGS.Core.PlayingCards.Basics
             return new AttackBasicPlayingCard(color, suite, details, actions, element);
         }
 
-        public override bool IsPlayable(GameContext ctx)
+        public override bool IsPlayable()
         {
-            return (ctx.TurnStage == TurnStages.Play || ctx.TurnStage == TurnStages.PlayScrollPlace);
+            return ( (this.Context.TurnStage == TurnStages.Play && this.Owner.AttacksLeft > 0) || 
+                (
+                    this.Context.TurnStage == TurnStages.PlayScrollPlace &&
+
+                    ( this.Context.PlayStageTracker.Cards.Activator.IsPlayedAsDuel() || false ) // Todo: Add barabarians check here
+                )
+            );
         }
     }
 }

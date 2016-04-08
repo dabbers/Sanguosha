@@ -30,9 +30,9 @@ namespace dab.SGS.Core.PlayingCards.Basics
             return new DodgeBasicPlayingCard(color, suite, details, actions);
         }
 
-        public override bool IsPlayable(GameContext ctx)
+        public override bool IsPlayable()
         {
-            return (ctx.TurnStage == TurnStages.CardResponse || ctx.TurnStage == TurnStages.Discard);
+            return (this.Context.TurnStage == TurnStages.CardResponse || this.Context.TurnStage == TurnStages.Discard);
         }
     }
 }

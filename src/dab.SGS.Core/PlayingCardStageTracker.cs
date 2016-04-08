@@ -11,7 +11,9 @@ namespace dab.SGS.Core
     {
         public Stack<TurnStages> PreviousStages { get; set; }
         public List<TargetPlayer> Targets { get; set; }
+        public TargetPlayer ExpectingIputFrom { get; set; }
         public SelectedCardsSender Cards { get; set; }
-        public Player Source { get; set; }
+        public TargetPlayer Source { get; set; }
+
     }
 }

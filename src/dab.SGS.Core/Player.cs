@@ -54,7 +54,7 @@ namespace dab.SGS.Core
 
         public List<PlayingCard> Hand { get; set; }
 
-        public Dictionary<TurnStages, Actions.Action> TurnStageActions { get; set; }
+        public TurnStageDictionary TurnStageActions { get; set; }
 
         public Player(string name)
         {
@@ -62,7 +62,7 @@ namespace dab.SGS.Core
             this.PlayerArea = new PlayArea();
             this.Hand = new List<PlayingCard>();
             this.Heros = new List<Heroes.HeroCard>();
-            this.TurnStageActions = new Dictionary<TurnStages, Actions.Action>();
+            this.TurnStageActions = new TurnStageDictionary();
         }
 
         public class PlayArea

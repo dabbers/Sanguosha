@@ -21,5 +21,10 @@ namespace dab.SGS.Core
         public Player Target { get; set; }
         public TargetResult Result { get; set; }
         public int Damage { get; set; }
+
+        public TargetPlayer(Player player)
+        {
+            this.Target = player;
+        }
     }
 }

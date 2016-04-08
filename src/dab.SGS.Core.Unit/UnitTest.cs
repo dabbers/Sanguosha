@@ -72,7 +72,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(TurnStages.ChooseTargets, ctx.TurnStage);
 
             // Choose a target (REUSE SENDER)
-            ctx.PlayStageTracker.Targets.Add(new TargetPlayer() { Target = ctx.Turn.Right });
+            ctx.PlayStageTracker.Targets.Add(new TargetPlayer(ctx.Turn.Right));
             ctx.Turn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
@@ -89,7 +89,7 @@ namespace dab.SGS.Core.Unit
             foreach(var target in ctx.PlayStageTracker.Targets)
             {
                 // Our target must play a dodge or take damage. Poor soul
-                var dodge = target.Target.Hand.Find(p => p.IsPlayable(ctx));
+                var dodge = target.Target.Hand.Find(p => p.IsPlayable());
 
                 dodge.Play(dodge);
             }
@@ -161,7 +161,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(TurnStages.ChooseTargets, ctx.TurnStage);
 
             // Choose a target (REUSE SENDER)
-            ctx.PlayStageTracker.Targets.Add(new TargetPlayer() { Target = ctx.Turn.Right });
+            ctx.PlayStageTracker.Targets.Add(new TargetPlayer(ctx.Turn.Right));
             ctx.Turn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();

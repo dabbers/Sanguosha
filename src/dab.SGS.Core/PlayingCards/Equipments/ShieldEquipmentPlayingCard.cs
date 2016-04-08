@@ -48,9 +48,15 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             return true;
         }
 
-        public int GetDamage(PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)
+        /// <summary>
+        /// Gets the extra damage an attack would cause with this weapon and this shield.
+        /// </summary>
+        /// <param name="result"></param>
+        /// <param name="weapon"></param>
+        /// <returns></returns>
+        public int GetExtraDamage(PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)
         {
-            int damage = 1;
+            int damage = 0;
 
             if (this.Actions == null) return damage;
 

@@ -172,6 +172,8 @@ namespace dab.SGS.Core
 
             p.TurnStageActions.Add(TurnStages.Draw, this.DefaultDraw);
             p.TurnStageActions.Add(TurnStages.Discard, this.DefaultDiscard);
+            p.TurnStageActions.Add(TurnStages.End, new Actions.ResetAttackCounterAction());
+            
             
             // TODO: Load Hero modifications. Do it AFTER assigning defaults, so our skills 
             //      can chain our draws if they want.

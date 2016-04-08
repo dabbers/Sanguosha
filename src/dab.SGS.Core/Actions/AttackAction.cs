@@ -35,7 +35,7 @@ namespace dab.SGS.Core.Actions
                     context.PlayStageTracker = new PlayingCardStageTracker()
                     {
                         Cards = results,
-                        Source = player,
+                        Source = new TargetPlayer(player),
                         Targets = new List<TargetPlayer>(),
                         PreviousStages = new Stack<TurnStages>()
                     };
@@ -58,6 +58,9 @@ namespace dab.SGS.Core.Actions
 
                     foreach(var tp in context.PlayStageTracker.Targets)
                     {
+                        // adjust for shield damage
+                        tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.PlayStageTracker, context.PlayStageTracker.Source.Target.PlayerArea.Weapon);
+
                         tp.Target.CurrentHealth -= tp.Damage;
                     }
 
@@ -65,8 +68,21 @@ namespace dab.SGS.Core.Actions
                     context.PlayStageTracker = null;
                     break;
                 case TurnStages.PlayScrollPlace:
-                    // Todo: A duel was played
-                    break;
+                    // Duel:
+                    if (context.PlayStageTracker.Cards.Activator.IsPlayedAsDuel())
+                    {
+                        if (context.PlayStageTracker.Source.Target != results.Activator.Owner)
+                        {
+                            context.PlayStageTracker.ExpectingIputFrom = context.PlayStageTracker.Source;
+                        }
+                        else
+                        {
+                            context.PlayStageTracker.ExpectingIputFrom = context.PlayStageTracker.Targets.First();
+                        }
+                        break;
+                    }
+
+                    throw new Exception("Attack was somehow activated for PlayScrollPlace. " + context.PlayStageTracker.Cards.Activator.ToString());
                 default:
                     throw new Exception("Unknown stage reached for attack action: " + context.TurnStage.ToString());
             }

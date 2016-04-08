@@ -29,7 +29,7 @@ namespace dab.SGS.Core.PlayingCards
 
         public string Display { get { return this.display; } }
         public string Details { get { return this.details; } }
-
+        
         /// <summary>
         /// If this card isn't being used as what it is, what IS it being used as?
         /// </summary>
@@ -69,14 +69,16 @@ namespace dab.SGS.Core.PlayingCards
             return res;
         }
 
-        public virtual bool IsPlayable(GameContext ctx)
+        public virtual bool IsPlayable()
         {
             return true;
         }
 
-        public void Discard()
+        public virtual void Discard()
         {
-            this.Owner.Hand.Remove(this);
+            if (this.Owner.Hand.Contains(this))
+                this.Owner.Hand.Remove(this);
+
             this.Context.Deck.Discard(this);
         }
 
@@ -102,6 +104,10 @@ namespace dab.SGS.Core.PlayingCards
             return this.IsPlayedAsType(typeof(Basics.WineBasicPlayingCard));
         }
         public bool IsPlayedAsWard()
+        {
+            return this.IsPlayedAsType(typeof(Scrolls.WardScrollPlayingCard));
+        }
+        public bool IsPlayedAsDuel()
         {
             return this.IsPlayedAsType(typeof(Scrolls.WardScrollPlayingCard));
         }

@@ -26,14 +26,19 @@ namespace dab.SGS.Core.PlayingCards.Basics
         /// <returns></returns>
         public override bool Play(object sender)
         {
-            if (this.Owner.CurrentHealth < 1) return base.Play(sender);
+            if (this.Owner.CurrentHealth < 1)
+            {
+                this.Context.PlayStageTracker.Targets.Add(new TargetPlayer(this.Owner));
+
+                return base.Play(sender);
+            }
 
             return false;
         }
 
-        public override bool IsPlayable(GameContext ctx)
+        public override bool IsPlayable()
         {
-            return (ctx.Turn == this.Owner && ctx.TurnStage == TurnStages.PlayerDied || ctx.TurnStage == TurnStages.Play);
+            return (this.Context.Turn == this.Owner && this.Context.TurnStage == TurnStages.PlayerDied || this.Context.TurnStage == TurnStages.Play);
         }
     }
 }

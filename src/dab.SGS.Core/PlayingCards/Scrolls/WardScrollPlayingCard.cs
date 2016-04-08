@@ -19,9 +19,9 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         {
         }
 
-        public override bool IsPlayable(GameContext ctx)
+        public override bool IsPlayable()
         {
-            return ctx.TurnStage == TurnStages.PlayScrollPlace || ctx.TurnStage == TurnStages.PreJudgement;
+            return this.Context.TurnStage == TurnStages.PlayScrollPlace || this.Context.TurnStage == TurnStages.PreJudgement;
         }
     }
 }

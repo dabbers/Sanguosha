@@ -13,6 +13,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
             : base(color, suite, "Peach", details, new List<Core.Actions.Action>() { new IncreaseHealthToTargetAction(1, 1) })
         {
         }
+
         public PeachBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details,
             List<Actions.Action> actions) : base(color, suite, "Peach", details, actions)
         {
@@ -23,9 +24,10 @@ namespace dab.SGS.Core.PlayingCards.Basics
             return base.Play(sender);
         }
 
-        public override bool IsPlayable(GameContext ctx)
+        public override bool IsPlayable()
         {
-            if (ctx.TurnStage == TurnStages.PlayerDied || this.Owner.CurrentHealth < this.Owner.MaxHealth)
+            // Any player has died, or the owner's health is less than our own.
+            if (this.Context.TurnStage == TurnStages.PlayerDied || this.Owner.CurrentHealth < this.Owner.MaxHealth)
             {
                 return true;
             }
