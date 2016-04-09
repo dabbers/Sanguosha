@@ -51,11 +51,11 @@ namespace dab.SGS.Core
             {
                 if (chain)
                 {
-                    this.Add(stage, new ChainedActions("Chained Actions for " + stage.ToString(), new List<Actions.Action>() { action }));
+                    base.Add(stage, new ChainedActions("Chained Actions for " + stage.ToString(), new List<Actions.Action>() { action }));
                 }
                 else
                 {
-                    this.Add(stage, action);
+                    base.Add(stage, action);
                 }
             }
         }

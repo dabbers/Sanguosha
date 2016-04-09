@@ -17,10 +17,7 @@ namespace dab.SGS.Core.Actions
         public override bool Perform(object sender, Player player, GameContext context)
         {
             // When can this happen? Attack card, or Borrowed sword
-
-            // How attacking a player works:
-            var results = (SelectedCardsSender)sender;
-
+            
             switch (context.CurrentPlayStage.Stage)
             {
                 // The attack was first played. Go into target select mode.
@@ -33,6 +30,9 @@ namespace dab.SGS.Core.Actions
 
                     context.PreviousStages.Push(context.CurrentPlayStage);
 
+                    // How attacking a player works:
+                    var results = (SelectedCardsSender)sender;
+
                     context.CurrentPlayStage = new PlayingCardStageTracker()
                     {
                         Cards = results,
@@ -40,6 +40,7 @@ namespace dab.SGS.Core.Actions
                         Targets = new List<TargetPlayer>(),
                         Stage = TurnStages.AttackPreStage
                     };
+
                     context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
                     
                     return false;
@@ -52,13 +53,13 @@ namespace dab.SGS.Core.Actions
 
                     //context.CurrentPlayStage.Stage++;
                     return false;
-                case TurnStages.Damage:
+                case TurnStages.AttackDamage:
                     var tmpStage = context.PreviousStages.Pop();
 
                     foreach(var tp in context.CurrentPlayStage.Targets)
                     {
                         // adjust for shield damage
-                        tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon);
+                        tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield?.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon) ?? 0;
 
                         tp.Target.CurrentHealth -= tp.Damage;
                     }
@@ -70,7 +71,7 @@ namespace dab.SGS.Core.Actions
                     // Duel:
                     if (context.CurrentPlayStage.Cards.Activator.IsPlayedAsDuel())
                     {
-                        if (context.CurrentPlayStage.Source.Target != results.Activator.Owner)
+                        if (context.CurrentPlayStage.Source.Target != context.CurrentPlayStage.Cards.Activator.Owner)
                         {
                             context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
                         }

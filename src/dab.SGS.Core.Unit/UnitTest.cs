@@ -56,8 +56,7 @@ namespace dab.SGS.Core.Unit
             while (ctx.CurrentTurnStage != TurnStages.Play)
             {
                 action = ctx.RoateTurnStage();
-                if (action != null)
-                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
             }
 
 
@@ -66,10 +65,16 @@ namespace dab.SGS.Core.Unit
 
             // Play an attack.
             var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
+            
+            // Play first playable card in the select cards (only 1 of the any should be playable).
+            foreach (var card in sender) if (card.IsPlayable()) card.Play(sender);
 
-            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
+            Assert.AreEqual(TurnStages.AttackPreStage, ctx.CurrentTurnStage);
+
+            action = ctx.RoateTurnStage();
 
             Assert.AreEqual(TurnStages.AttackChooseTargets, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.Play, ctx.PreviousStages.Peek().Stage);
 
             // Choose a target (REUSE SENDER)
             ctx.CurrentPlayStage.Targets.Add(new TargetPlayer(ctx.CurrentPlayerTurn.Right));
@@ -77,12 +82,12 @@ namespace dab.SGS.Core.Unit
 
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.SkillResponse, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.AttackSkillResponse, ctx.CurrentTurnStage);
 
             // Rotate through our skills for defense, but they shouldn't exist
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.ShieldResponse, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.AttackShieldResponse, ctx.CurrentTurnStage);
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
 
@@ -99,8 +104,10 @@ namespace dab.SGS.Core.Unit
 
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
+            // calls the .Play of the card again, which should pop the previous state (also discards the cards)
+            action.Perform(ctx, ctx.CurrentPlayerTurn, ctx); 
 
-            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
+            //ctx.CurrentPlayerTurn.Hand[0].Play(sender);
 
             Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
             Assert.AreEqual(4, ctx.CurrentPlayerTurn.Right.CurrentHealth);
@@ -156,9 +163,13 @@ namespace dab.SGS.Core.Unit
             // Play an attack.
             var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
 
-            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
+            // Play first playable card in the select cards (only 1 of the any should be playable).
+            foreach (var card in sender) if (card.IsPlayable()) card.Play(sender);
 
-            Assert.AreEqual(TurnStages.AttackChooseTargets, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.AttackPreStage, ctx.CurrentTurnStage);
+
+            action = ctx.RoateTurnStage();
+
 
             // Choose a target (REUSE SENDER)
             ctx.CurrentPlayStage.Targets.Add(new TargetPlayer(ctx.CurrentPlayerTurn.Right));
@@ -166,12 +177,12 @@ namespace dab.SGS.Core.Unit
 
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.SkillResponse, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.AttackSkillResponse, ctx.CurrentTurnStage);
 
             // Rotate through our skills for defense, but they shouldn't exist
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.ShieldResponse, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.AttackShieldResponse, ctx.CurrentTurnStage);
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
             
@@ -180,8 +191,8 @@ namespace dab.SGS.Core.Unit
 
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
-
-            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
+            // calls the .Play of the card again, which should pop the previous state (also discards the cards)
+            action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
 
             Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
             Assert.AreEqual(3, ctx.CurrentPlayerTurn.Right.CurrentHealth);

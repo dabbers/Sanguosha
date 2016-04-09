@@ -82,6 +82,7 @@ namespace dab.SGS.Core.PlayingCards
             this.Context.Deck.Discard(this);
         }
 
+        #region IsPlayedAsType methods
         public bool IsPlayedAsType(Type type)
         {
             return this.GetType() == type || this.BeingUsedAs == type;
@@ -127,9 +128,11 @@ namespace dab.SGS.Core.PlayingCards
         {
             return this.IsPlayedAsLightning() || this.IsPlayedAsStarvation() || this.IsPlayedAsContentment();
         }
+        #endregion
 
         protected bool playAction(object sender, List<Actions.Action> actions)
         {
+
             if (actions == null) return false;
 
             foreach (var action in actions)

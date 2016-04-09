@@ -63,6 +63,7 @@ namespace dab.SGS.Core
             this.Hand = new List<PlayingCard>();
             this.Heros = new List<Heroes.HeroCard>();
             this.TurnStageActions = new TurnStageDictionary();
+            this.AttacksLeft = 1;
         }
 
         public class PlayArea

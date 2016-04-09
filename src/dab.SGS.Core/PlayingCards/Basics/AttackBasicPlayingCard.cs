@@ -28,6 +28,14 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
         }
 
+        public override bool Play(object sender)
+        {
+            // Devnote: is there a scenario where we don't want this?
+            this.Context.CurrentPlayStage.Cards.Activator = this;
+
+            return base.Play(sender);
+        }
+
         public new static PlayingCard GetCardFromJson(dynamic obj,
             SelectCard selectCard, IsValidCard validCard)
         {
@@ -44,9 +52,9 @@ namespace dab.SGS.Core.PlayingCards.Basics
 
         public override bool IsPlayable()
         {
-            return ( (this.Context.CurrentPlayStage.Stage == TurnStages.Play && this.Owner.AttacksLeft > 0) || 
+            return ( (this.Context.CurrentTurnStage == TurnStages.Play && this.Owner.AttacksLeft > 0) || 
                 (
-                    this.Context.CurrentPlayStage.Stage == TurnStages.PlayScrollPlace &&
+                    this.Context.CurrentTurnStage == TurnStages.PlayScrollPlace &&
 
                     ( this.Context.CurrentPlayStage.Cards.Activator.IsPlayedAsDuel() || false ) // Todo: Add barabarians check here
                 )

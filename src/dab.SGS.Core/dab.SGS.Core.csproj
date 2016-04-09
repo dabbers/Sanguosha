@@ -120,6 +120,7 @@
     <Compile Include="Actions\EndTurnAction.cs" />
     <Compile Include="Actions\IgnoreBlackAttackAction.cs" />
     <Compile Include="Actions\IncreaseHealthToTargetAction.cs" />
+    <Compile Include="Actions\PerformCardAction.cs" />
     <Compile Include="Actions\ReduceHandsizeDiscardAction.cs" />
     <Compile Include="Actions\ResetAttackCounterAction.cs" />
     <Compile Include="Actions\WardAction.cs" />

@@ -59,6 +59,7 @@ namespace dab.SGS.Core
                 Targets = new List<TargetPlayer>(),
                 Stage = TurnStages.End
             };
+            this.PreviousStages = new Stack<PlayingCardStageTracker>();
 
             foreach (var card in deck.AllCards)
             {
@@ -180,7 +181,8 @@ namespace dab.SGS.Core
             p.TurnStageActions.Add(TurnStages.Draw, this.DefaultDraw);
             p.TurnStageActions.Add(TurnStages.Discard, this.DefaultDiscard);
             p.TurnStageActions.Add(TurnStages.End, new Actions.ResetAttackCounterAction());
-            
+            // Perform the card so we can finish up its special damage stuff
+            p.TurnStageActions.Add(TurnStages.AttackDamage, new Actions.PerformCardAction(() => this.CurrentPlayStage.Cards.Activator));
             
             // TODO: Load Hero modifications. Do it AFTER assigning defaults, so our skills 
             //      can chain our draws if they want.
@@ -208,6 +210,7 @@ namespace dab.SGS.Core
 
         private Actions.Action DefaultDraw;
         private Actions.Action DefaultDiscard;
+        private Actions.Action DefaultDamage;
         private Actions.Action EmptyAction = new Actions.EmptyAction("Empty Action");
         private List<Player> players = new List<Player>();
     }

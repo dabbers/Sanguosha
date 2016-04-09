@@ -111,27 +111,27 @@ namespace dab.SGS.Core
         /// <summary>
         /// The target's skill might have an anti-attack response
         /// </summary>
-        SkillResponse,
+        AttackSkillResponse,
 
         /// <summary>
         /// Activate/validate any shield 
         /// </summary>
-        ShieldResponse,
+        AttackShieldResponse,
 
         /// <summary>
         /// Play a card in response to this attack
         /// </summary>
-        CardResponse,
+        AttackCardResponse,
 
         /// <summary>
         /// Damage is about to occur (possibly)
         /// </summary>
-        BeforeDamage,
+        AttackBeforeDamage,
 
         /// <summary>
         /// Damage has occured (target's health has been lowered)
         /// </summary>
-        Damage,
+        AttackDamage,
 
         /// <summary>
         /// The attack has finished
