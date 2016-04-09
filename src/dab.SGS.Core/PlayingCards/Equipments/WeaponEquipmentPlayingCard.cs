@@ -35,6 +35,11 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             return this.playAction(sender, this.PlaceActions);
         }
 
+        public override bool IsPlayable()
+        {
+            return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
+
         public void AttackOccured(PlayingCardStageTracker result)
         {
             if (this.Actions == null) return;

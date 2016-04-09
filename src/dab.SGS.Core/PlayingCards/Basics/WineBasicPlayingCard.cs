@@ -38,7 +38,8 @@ namespace dab.SGS.Core.PlayingCards.Basics
 
         public override bool IsPlayable()
         {
-            return (this.Context.CurrentPlayStage.Source.Target == this.Owner && this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied || this.Context.CurrentPlayStage.Stage == TurnStages.Play);
+            return (this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied && this.Context.CurrentPlayStage.Source.Target == this.Owner
+                || this.Context.CurrentPlayStage.Stage == TurnStages.Play);
         }
     }
 }

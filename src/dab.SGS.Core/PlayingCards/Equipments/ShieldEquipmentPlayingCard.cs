@@ -11,7 +11,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
         public List<Actions.Action> PlaceActions { get; private set; }
         public List<Actions.Action> RemoveActions { get; private set; }
         
-        public ShieldEquipmentPlayingCard(int range, PlayingCardColor color, PlayingCardSuite suite, string display,
+        public ShieldEquipmentPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display,
             string details, List<Actions.Action> placeActions, List<Actions.Action> defendActions, List<Actions.Action> removeActions,
             List<Actions.Action> damageCalculator) : base(color, suite, display, details, defendActions)
         {
@@ -31,6 +31,11 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             this.Owner.Hand.Remove(this);
 
             return this.playAction(sender, this.PlaceActions);
+        }
+
+        public override bool IsPlayable()
+        {
+            return this.Context.CurrentTurnStage == TurnStages.Play;
         }
 
         public bool CanBeAttacked(PlayingCardStageTracker result, WeaponEquipmentPlayingCard weapon)

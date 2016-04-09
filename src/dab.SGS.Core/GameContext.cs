@@ -61,9 +61,12 @@ namespace dab.SGS.Core
             };
             this.PreviousStages = new Stack<PlayingCardStageTracker>();
 
-            foreach (var card in deck.AllCards)
+            if (null != deck)
             {
-                card.Context = this;
+                foreach (var card in deck.AllCards)
+                {
+                    card.Context = this;
+                }
             }
 
             this.Deck = deck;

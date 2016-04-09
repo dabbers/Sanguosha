@@ -14,5 +14,10 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         public LightningDelayedScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details, List<Core.Actions.Action> actions) : base(color, suite, "Lightning", details, actions)
         {
         }
+
+        public override bool IsPlayable()
+        {
+            return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
     }
 }

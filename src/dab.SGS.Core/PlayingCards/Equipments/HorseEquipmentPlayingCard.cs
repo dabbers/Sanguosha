@@ -43,5 +43,10 @@ namespace dab.SGS.Core.PlayingCards.Equipments
 
             return false;
         }
+
+        public override bool IsPlayable()
+        {
+            return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
     }
 }

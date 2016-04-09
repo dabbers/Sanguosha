@@ -14,5 +14,9 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         public StarvationDelayedScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details, List<Actions.Action> actions) : base(color, suite, "Starvation", details, actions)
         {
         }
+        public override bool IsPlayable()
+        {
+            return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
     }
 }
