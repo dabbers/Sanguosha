@@ -28,7 +28,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
             if (this.Owner.CurrentHealth < 1)
             {
-                this.Context.PlayStageTracker.Targets.Add(new TargetPlayer(this.Owner));
+                this.Context.CurrentPlayStage.Targets.Add(new TargetPlayer(this.Owner));
 
                 return base.Play(sender);
             }
@@ -38,7 +38,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
 
         public override bool IsPlayable()
         {
-            return (this.Context.Turn == this.Owner && this.Context.TurnStage == TurnStages.PlayerDied || this.Context.TurnStage == TurnStages.Play);
+            return (this.Context.CurrentPlayStage.Source.Target == this.Owner && this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied || this.Context.CurrentPlayStage.Stage == TurnStages.Play);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         public override bool IsPlayable()
         {
             // Any player has died, or the owner's health is less than our own.
-            if (this.Context.TurnStage == TurnStages.PlayerDied || this.Owner.CurrentHealth < this.Owner.MaxHealth)
+            if (this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied || this.Owner.CurrentHealth < this.Owner.MaxHealth)
             {
                 return true;
             }

@@ -22,8 +22,8 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         public override bool IsPlayable()
         {
             // can't use ward on delayed scrolls immediately. Only on prejudgement
-            return (((this.Context.TurnStage == TurnStages.PlayScrollPlace) && (!(this.Context.PlayStageTracker?.Cards.Activator.IsPlayedAsDelayScroll() ?? true)))
-                || this.Context.TurnStage == TurnStages.PreJudgement);
+            return (((this.Context.CurrentPlayStage.Stage == TurnStages.PlayScrollPlace) && (!(this.Context.CurrentPlayStage?.Cards.Activator.IsPlayedAsDelayScroll() ?? true)))
+                || this.Context.CurrentPlayStage.Stage == TurnStages.PreJudgement);
         }
     }
 }

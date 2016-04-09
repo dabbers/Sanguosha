@@ -111,6 +111,7 @@
     <Compile Include="Actions\AttackAction.cs" />
     <Compile Include="Actions\CardChangeAction.cs" />
     <Compile Include="Actions\ChainedActions.cs" />
+    <Compile Include="Actions\DelayedScrollAction.cs" />
     <Compile Include="Actions\DiscardAction.cs" />
     <Compile Include="Actions\DodgeAction.cs" />
     <Compile Include="Actions\DrawAction.cs" />
@@ -133,15 +134,18 @@
     <Compile Include="PlayingCards\Basics\PeachBasicPlayingCard.cs" />
     <Compile Include="PlayingCards\Basics\WineBasicPlayingCard.cs" />
     <Compile Include="PlayingCards\Deck.cs" />
+    <Compile Include="PlayingCards\Scrolls\ContentmentDelayedScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\DelayedScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Basics\DodgeBasicPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\EquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\HorseEquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\PlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\DuelScrollPlayingCard.cs" />
+    <Compile Include="PlayingCards\Scrolls\LightningDelayedScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\ScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\ShieldEquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\Equipments\WeaponEquipmentPlayingCard.cs" />
+    <Compile Include="PlayingCards\Scrolls\StarvationDelayedScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\WardScrollPlayingCard.cs" />
     <Compile Include="Prompts\CardUserPrompt.cs" />
     <Compile Include="Prompts\OptionsUserPrompt.cs" />

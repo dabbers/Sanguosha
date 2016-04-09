@@ -62,6 +62,8 @@ namespace dab.SGS.Core
 
         // DIFFERENT SECTIONS OF Turn Stages
 
+        // DO NOT ADD ANY ACTIONS TO PlayScrollPreStage. IT WON'T EXECUTE. This is to keep logic consistent between stage jumps
+        PlayScrollPreStage,
         /// <summary>
         /// Player played a scroll card, have them select a target
         /// </summary>
@@ -71,6 +73,10 @@ namespace dab.SGS.Core
         /// </summary>
         PlayScrollPlace,
 
+
+
+        // DO NOT ADD ANY ACTIONS TO PlayerDiedPreStage. IT WON'T EXECUTE. This is to keep logic consistent between stage jumps
+        PlayerDiedPreStage,
         /// <summary>
         /// The notification that a player has died (players should select to peach/revive or not)
         /// </summary>
@@ -84,6 +90,8 @@ namespace dab.SGS.Core
         /// </summary>
         PlayerEliminated,
 
+        // DO NOT ADD ANY ACTIONS TO PromptPreStage. IT WON'T EXECUTE. This is to keep logic consistent between stage jumps
+        PromptPreStage,
         /// <summary>
         /// We are prompting a player currently.
         /// </summary>
@@ -91,11 +99,14 @@ namespace dab.SGS.Core
 
 
         // ATTACK STAGES
+
+        // DO NOT ADD ANY ACTIONS TO AttackPreStage. IT WON'T EXECUTE. This is to keep logic consistent between stage jumps
+        AttackPreStage,
         // Do not add any Turn stages below here.
         /// <summary>
         /// Select the target(s) to attack. Some skills or weapons allow multiple targets
         /// </summary>
-        ChooseTargets,
+        AttackChooseTargets,
 
         /// <summary>
         /// The target's skill might have an anti-attack response

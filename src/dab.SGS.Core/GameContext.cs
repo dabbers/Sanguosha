@@ -18,9 +18,10 @@ namespace dab.SGS.Core
 
         public List<Roles> Roles { get; set; }
 
-        public Player Turn { get; set; }
-        public TurnStages TurnStage { get; set; }
-        public PlayingCardStageTracker PlayStageTracker { get; set; }
+        public Player CurrentPlayerTurn { get { return this.CurrentPlayStage.Source.Target; } set { this.CurrentPlayStage.Source = new TargetPlayer(value); } }
+        public TurnStages CurrentTurnStage { get { return this.CurrentPlayStage.Stage; } set { this.CurrentPlayStage.Stage = value; } }
+        public PlayingCardStageTracker CurrentPlayStage { get; set; }
+        public Stack<PlayingCardStageTracker> PreviousStages { get; set; }
 
         public Deck Deck { get; protected set; }
 
@@ -52,7 +53,12 @@ namespace dab.SGS.Core
             this.DefaultDraw = new Actions.DrawAction(2);
             this.DefaultDiscard = new Actions.ReduceHandsizeDiscardAction(discardSelect);
             this.Roles = new List<Core.Roles>();
-            this.TurnStage = TurnStages.End;
+            this.CurrentPlayStage = new PlayingCardStageTracker()
+            {
+                Cards = new SelectedCardsSender(),
+                Targets = new List<TargetPlayer>(),
+                Stage = TurnStages.End
+            };
 
             foreach (var card in deck.AllCards)
             {
@@ -67,7 +73,7 @@ namespace dab.SGS.Core
             if (this.Players.Count() < 3) throw new Exception("Not enough players");
 
             this.dealCardsToPlayers();
-            this.Turn = this.Players.First().Left;
+            this.CurrentPlayStage.Source = new TargetPlayer(this.Players.First().Left);
 
             var roles = Player.GetRoles(this.Players.Count());
             var computedRoles = this.Players.Select(p => p.Role).ToArray();
@@ -130,30 +136,31 @@ namespace dab.SGS.Core
         /// Proceed to the next turn stage. If it is the end of a player's turn, auto switch to the next player
         /// and beghin his turn.
         /// 
-        /// Will return the action you must perform for the player. 
+        /// Will return the action you must perform for the player. It will not do any pop/push of the stage tracker stack
+        /// That is only done by the actions that perform new "mini turns"
         /// </summary>
         /// <returns></returns>
         public Actions.Action RoateTurnStage()
         {
-            if (this.TurnStage != TurnStages.End && this.TurnStage != TurnStages.AttackEnd)
+            if (this.CurrentPlayStage.Stage != TurnStages.End && this.CurrentPlayStage.Stage != TurnStages.AttackEnd)
             {
-                this.TurnStage++;
+                this.CurrentPlayStage.Stage++;
             }
-            else if (this.TurnStage == TurnStages.End)
+            else if (this.CurrentPlayStage.Stage == TurnStages.End)
             {
-                this.TurnStage = TurnStages.Start;
-                this.Turn = this.Turn.Right;
+                this.CurrentPlayStage.Stage = TurnStages.Start;
+                this.CurrentPlayStage.Source = new TargetPlayer(this.CurrentPlayStage.Source.Target.Right);
             }
-            else if (this.TurnStage == TurnStages.AttackEnd)
+            else if (this.CurrentPlayStage.Stage == TurnStages.AttackEnd)
             {
                 // Resume turn
-                this.TurnStage = TurnStages.Play;
+                this.CurrentPlayStage.Stage = TurnStages.Play;
             }
 
 
             Actions.Action res = this.EmptyAction;
 
-            if (!this.Turn.TurnStageActions.TryGetValue(this.TurnStage, out res))
+            if (!this.CurrentPlayStage.Source.Target.TurnStageActions.TryGetValue(this.CurrentPlayStage.Stage, out res))
             { // Is this needed? Not sure if it will overwrite with null...
                 res = this.EmptyAction;
             }

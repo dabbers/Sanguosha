@@ -8,7 +8,10 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
 {
     public class LightningDelayedScrollPlayingCard : DelayedScrollPlayingCard
     {
-        public LightningDelayedScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details) : base(color, suite, "Lightning", details)
+        public LightningDelayedScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details) : base(color, suite, "Lightning", details, new List<Core.Actions.Action>())
+        {
+        }
+        public LightningDelayedScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details, List<Core.Actions.Action> actions) : base(color, suite, "Lightning", details, actions)
         {
         }
     }

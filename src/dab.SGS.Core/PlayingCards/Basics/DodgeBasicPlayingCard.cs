@@ -32,7 +32,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
 
         public override bool IsPlayable()
         {
-            return (this.Context.TurnStage == TurnStages.CardResponse || this.Context.TurnStage == TurnStages.Discard);
+            return (this.Context.CurrentPlayStage.Stage == TurnStages.CardResponse || this.Context.CurrentPlayStage.Stage == TurnStages.Discard);
         }
     }
 }

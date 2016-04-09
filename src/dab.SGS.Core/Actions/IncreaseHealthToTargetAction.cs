@@ -16,7 +16,7 @@ namespace dab.SGS.Core.Actions
 
         public override bool Perform(object sender, Player player, GameContext context)
         {
-            var targets = context.PlayStageTracker.Targets;
+            var targets = context.CurrentPlayStage.Targets;
             var maxTargets = Math.Min(targets.Count, this.maxTargets);
 
             for (var i = 0; i < maxTargets; i++)

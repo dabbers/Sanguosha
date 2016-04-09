@@ -14,7 +14,7 @@ namespace dab.SGS.Core.Actions
 
         public override bool Perform(object sender, Player player, GameContext context)
         {
-            switch (context.TurnStage)
+            switch (context.CurrentPlayStage.Stage)
             {
                 case TurnStages.Play:
 

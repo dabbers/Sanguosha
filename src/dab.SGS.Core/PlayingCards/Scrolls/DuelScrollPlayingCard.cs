@@ -13,6 +13,10 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
             : base(color, suite, display, details, actions)
         {
         }
+        public DuelScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display, string details)
+            : base(color, suite, display, details, new List<Core.Actions.Action>() { new DuelAction("Duel Action") })
+        {
+        }
 
         public override bool Play(object sender)
         {
@@ -22,7 +26,7 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         public override bool IsPlayable()
         {
             // Can only play Duels on 
-            return this.Context.TurnStage == TurnStages.Play;
+            return this.Context.CurrentPlayStage.Stage == TurnStages.Play;
         }
     }
 }

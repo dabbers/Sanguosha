@@ -44,11 +44,11 @@ namespace dab.SGS.Core.PlayingCards.Basics
 
         public override bool IsPlayable()
         {
-            return ( (this.Context.TurnStage == TurnStages.Play && this.Owner.AttacksLeft > 0) || 
+            return ( (this.Context.CurrentPlayStage.Stage == TurnStages.Play && this.Owner.AttacksLeft > 0) || 
                 (
-                    this.Context.TurnStage == TurnStages.PlayScrollPlace &&
+                    this.Context.CurrentPlayStage.Stage == TurnStages.PlayScrollPlace &&
 
-                    ( this.Context.PlayStageTracker.Cards.Activator.IsPlayedAsDuel() || false ) // Todo: Add barabarians check here
+                    ( this.Context.CurrentPlayStage.Cards.Activator.IsPlayedAsDuel() || false ) // Todo: Add barabarians check here
                 )
             );
         }

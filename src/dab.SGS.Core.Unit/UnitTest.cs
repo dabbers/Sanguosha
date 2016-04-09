@@ -48,45 +48,45 @@ namespace dab.SGS.Core.Unit
             
             ctx.SetupGame();
 
-            Assert.AreEqual(Roles.King, ctx.Turn.Role);
-            Assert.AreEqual(4, ctx.Turn.Hand.Count);
-            Assert.AreEqual(ctx.Turn, ctx.Turn.Hand[0].Owner);
+            Assert.AreEqual(Roles.King, ctx.CurrentPlayerTurn.Role);
+            Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
+            Assert.AreEqual(ctx.CurrentPlayerTurn, ctx.CurrentPlayerTurn.Hand[0].Owner);
 
             // Skip to the next stage in our turn
-            while (ctx.TurnStage != TurnStages.Play)
+            while (ctx.CurrentTurnStage != TurnStages.Play)
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.Turn, ctx);
+                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
             }
 
 
-            Assert.AreEqual(TurnStages.Play, ctx.TurnStage);
-            Assert.AreEqual(6, ctx.Turn.Hand.Count);
+            Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
+            Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.Turn.Hand[0] }, ctx.Turn.Hand[0]);
+            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
 
-            ctx.Turn.Hand[0].Play(sender);
+            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
 
-            Assert.AreEqual(TurnStages.ChooseTargets, ctx.TurnStage);
+            Assert.AreEqual(TurnStages.AttackChooseTargets, ctx.CurrentTurnStage);
 
             // Choose a target (REUSE SENDER)
-            ctx.PlayStageTracker.Targets.Add(new TargetPlayer(ctx.Turn.Right));
-            ctx.Turn.Hand[0].Play(sender); // Update target in attack
+            ctx.CurrentPlayStage.Targets.Add(new TargetPlayer(ctx.CurrentPlayerTurn.Right));
+            ctx.CurrentPlayerTurn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.SkillResponse, ctx.TurnStage);
+            Assert.AreEqual(TurnStages.SkillResponse, ctx.CurrentTurnStage);
 
             // Rotate through our skills for defense, but they shouldn't exist
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.ShieldResponse, ctx.TurnStage);
+            Assert.AreEqual(TurnStages.ShieldResponse, ctx.CurrentTurnStage);
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
 
-            foreach(var target in ctx.PlayStageTracker.Targets)
+            foreach(var target in ctx.CurrentPlayStage.Targets)
             {
                 // Our target must play a dodge or take damage. Poor soul
                 var dodge = target.Target.Hand.Find(p => p.IsPlayable());
@@ -100,24 +100,24 @@ namespace dab.SGS.Core.Unit
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
 
-            ctx.Turn.Hand[0].Play(sender);
+            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
 
-            Assert.AreEqual(TurnStages.Play, ctx.TurnStage);
-            Assert.AreEqual(4, ctx.Turn.Right.CurrentHealth);
+            Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
+            Assert.AreEqual(4, ctx.CurrentPlayerTurn.Right.CurrentHealth);
 
             // SKip to the end stage of our turn
-            while (ctx.TurnStage != TurnStages.End)
+            while (ctx.CurrentTurnStage != TurnStages.End)
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.Turn, ctx);
+                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
             }
 
-            Assert.AreEqual(5, ctx.Turn.Hand.Count);
+            Assert.AreEqual(5, ctx.CurrentPlayerTurn.Hand.Count);
 
             ctx.RoateTurnStage();
 
-            Assert.AreEqual("P2", ctx.Turn.Display);
+            Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);
         }
 
 
@@ -137,41 +137,41 @@ namespace dab.SGS.Core.Unit
 
             ctx.SetupGame();
 
-            Assert.AreEqual(Roles.King, ctx.Turn.Role);
-            Assert.AreEqual(4, ctx.Turn.Hand.Count);
-            Assert.AreEqual(ctx.Turn, ctx.Turn.Hand[0].Owner);
+            Assert.AreEqual(Roles.King, ctx.CurrentPlayerTurn.Role);
+            Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
+            Assert.AreEqual(ctx.CurrentPlayerTurn, ctx.CurrentPlayerTurn.Hand[0].Owner);
 
             // Skip to the next stage in our turn
-            while (ctx.TurnStage != TurnStages.Play)
+            while (ctx.CurrentTurnStage != TurnStages.Play)
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.Turn, ctx);
+                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
             }
 
 
-            Assert.AreEqual(TurnStages.Play, ctx.TurnStage);
-            Assert.AreEqual(6, ctx.Turn.Hand.Count);
+            Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
+            Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.Turn.Hand[0] }, ctx.Turn.Hand[0]);
+            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
 
-            ctx.Turn.Hand[0].Play(sender);
+            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
 
-            Assert.AreEqual(TurnStages.ChooseTargets, ctx.TurnStage);
+            Assert.AreEqual(TurnStages.AttackChooseTargets, ctx.CurrentTurnStage);
 
             // Choose a target (REUSE SENDER)
-            ctx.PlayStageTracker.Targets.Add(new TargetPlayer(ctx.Turn.Right));
-            ctx.Turn.Hand[0].Play(sender); // Update target in attack
+            ctx.CurrentPlayStage.Targets.Add(new TargetPlayer(ctx.CurrentPlayerTurn.Right));
+            ctx.CurrentPlayerTurn.Hand[0].Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.SkillResponse, ctx.TurnStage);
+            Assert.AreEqual(TurnStages.SkillResponse, ctx.CurrentTurnStage);
 
             // Rotate through our skills for defense, but they shouldn't exist
             action = ctx.RoateTurnStage();
 
-            Assert.AreEqual(TurnStages.ShieldResponse, ctx.TurnStage);
+            Assert.AreEqual(TurnStages.ShieldResponse, ctx.CurrentTurnStage);
             // Attempt to execute our shield response, if it exists, but it shouldn't
             action = ctx.RoateTurnStage();
             
@@ -181,24 +181,24 @@ namespace dab.SGS.Core.Unit
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
 
-            ctx.Turn.Hand[0].Play(sender);
+            ctx.CurrentPlayerTurn.Hand[0].Play(sender);
 
-            Assert.AreEqual(TurnStages.Play, ctx.TurnStage);
-            Assert.AreEqual(3, ctx.Turn.Right.CurrentHealth);
+            Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
+            Assert.AreEqual(3, ctx.CurrentPlayerTurn.Right.CurrentHealth);
 
             // SKip to the end stage of our turn
-            while (ctx.TurnStage != TurnStages.End)
+            while (ctx.CurrentTurnStage != TurnStages.End)
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.Turn, ctx);
+                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
             }
 
-            Assert.AreEqual(5, ctx.Turn.Hand.Count);
+            Assert.AreEqual(5, ctx.CurrentPlayerTurn.Hand.Count);
 
             ctx.RoateTurnStage();
 
-            Assert.AreEqual("P2", ctx.Turn.Display);
+            Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);
         }
 
 

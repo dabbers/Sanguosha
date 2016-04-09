@@ -16,42 +16,41 @@ namespace dab.SGS.Core.Actions
         {
             var results = (SelectedCardsSender)sender;
 
-            switch(context.TurnStage)
+            switch (context.CurrentPlayStage.Stage)
             {
-                // Just played this card
+                // The attack was first played. Go into target select mode.
                 case TurnStages.Play:
-
                     // An attack cannot be happening already
-                    if (context.PlayStageTracker != null)
+                    if (context.PreviousStages.Count != 0)
                     {
-                        throw new Exception("Something is already happening. Is this a bug?");
+                        throw new Exception("There are other turnstages in the stack. Are we expecting this? (Previous turnstage:" + context.PreviousStages.Peek().ToString());
                     }
-                    
-                    context.PlayStageTracker = new PlayingCardStageTracker()
+
+                    context.PreviousStages.Push(context.CurrentPlayStage);
+
+                    context.CurrentPlayStage = new PlayingCardStageTracker()
                     {
                         Cards = results,
                         Source = new TargetPlayer(player),
                         Targets = new List<TargetPlayer>(),
-                        PreviousStages = new Stack<TurnStages>()
+                        Stage = TurnStages.PlayScrollPreStage
                     };
 
-                    context.PlayStageTracker.PreviousStages.Push(context.TurnStage);
-
-                    context.TurnStage = TurnStages.PlayScrollTargets;
+                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
                     return false;
                 case TurnStages.PlayScrollTargets:
 
-                    foreach (var tp in context.PlayStageTracker.Targets)
+                    foreach (var tp in context.CurrentPlayStage.Targets)
                     {
                         tp.Damage = 1;
                     }
                     return false;
                 case TurnStages.PlayScrollPlace:
 
-                    context.TurnStage = context.PlayStageTracker.PreviousStages.Pop();
+                    var tmpStage = context.PreviousStages.Pop();
 
                     // Todo: Does duel take shield into consideation?
-                    foreach (var tp in context.PlayStageTracker.Targets)
+                    foreach (var tp in context.CurrentPlayStage.Targets)
                     {
                         // adjust for shield damage
                         //tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.PlayStageTracker, context.PlayStageTracker.Source.Target.PlayerArea.Weapon);
@@ -60,11 +59,11 @@ namespace dab.SGS.Core.Actions
                     }
 
                     // Clear up the stage tracker for the next turn.
-                    context.PlayStageTracker = null;
+                    context.CurrentPlayStage = tmpStage;
 
                     return false;
                 default:
-                    throw new Exception("Invalid turn stage for duel: " + context.TurnStage.ToString());
+                    throw new Exception("Invalid turn stage for duel: " + context.CurrentPlayStage.Stage.ToString());
             }
         }
     }

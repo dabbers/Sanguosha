@@ -14,10 +14,10 @@ namespace dab.SGS.Core.Actions
 
         public override bool Perform(object sender, Player player, GameContext context)
         {
-            switch (context.TurnStage)
+            switch (context.CurrentPlayStage.Stage)
             {
                 case TurnStages.CardResponse:
-                    var target = context.PlayStageTracker.Targets.Find(p => p.Target.Display == player.Display);
+                    var target = context.CurrentPlayStage.Targets.Find(p => p.Target.Display == player.Display);
                     target.Damage = 0;
                     break;
                 default: // We cannot use this card here.
