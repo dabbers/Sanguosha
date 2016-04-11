@@ -99,6 +99,9 @@ namespace dab.SGS.Core.PlayingCards
             else if (this.Context.HoldingArea.Cards.Contains(this))
                 this.Context.HoldingArea.Cards.Remove(this);
 
+            this.Owner = null;
+            this.BeingUsedAs = null;
+
             this.Context.Deck.Discard(this);
         }
 
@@ -130,7 +133,7 @@ namespace dab.SGS.Core.PlayingCards
         }
         public bool IsPlayedAsDuel()
         {
-            return this.IsPlayedAsType(typeof(Scrolls.WardScrollPlayingCard));
+            return this.IsPlayedAsType(typeof(Scrolls.DuelScrollPlayingCard));
         }
         public bool IsPlayedAsLightning()
         {

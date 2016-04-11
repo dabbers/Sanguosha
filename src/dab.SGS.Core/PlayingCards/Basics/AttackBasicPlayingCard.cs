@@ -31,7 +31,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         public override bool Play(object sender)
         {
             // Devnote: is there a scenario where we don't want this?
-            this.Context.CurrentPlayStage.Cards.Activator = this;
+            //this.Context.CurrentPlayStage.Cards.Activator = this;
 
             return base.Play(sender);
         }

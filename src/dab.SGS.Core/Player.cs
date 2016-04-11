@@ -24,8 +24,8 @@ namespace dab.SGS.Core
         public Player Right { get; set; }
         public int MaxHealth { get; set; }
         public int CurrentHealth { get; set; }
-        public int MaxHandSize { get; set; }
-
+        public int MaxHandSize { get { return this.CurrentHealth + this.HandSizeModifies; } }
+        public int HandSizeModifies { get; set; }
         public int DistanceModifiers { get; set; }
 
         public bool Flipped { get; set; }
@@ -56,7 +56,7 @@ namespace dab.SGS.Core
 
         public TurnStageDictionary TurnStageActions { get; set; }
 
-        public Player(string name)
+        public Player(string name, int maxhealth, Roles role)
         {
             this.Display = name;
             this.PlayerArea = new PlayArea();
@@ -64,6 +64,9 @@ namespace dab.SGS.Core
             this.Heros = new List<Heroes.HeroCard>();
             this.TurnStageActions = new TurnStageDictionary();
             this.AttacksLeft = 1;
+            this.Role = role;
+            this.CurrentHealth = this.MaxHealth = maxhealth + (this.Role == Roles.King ? 1 : 0);
+
         }
 
         public class PlayArea

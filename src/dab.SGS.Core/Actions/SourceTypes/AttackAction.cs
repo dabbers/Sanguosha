@@ -59,10 +59,14 @@ namespace dab.SGS.Core.Actions
 
                     foreach(var tp in context.CurrentPlayStage.Targets)
                     {
-                        // adjust for shield damage
-                        tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield?.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon) ?? 0;
+                        if (tp.Result == TargetResult.Success || tp.Result == TargetResult.None)
+                        {
+                            // adjust for shield damage
+                            tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield?.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon) ?? 0;
 
-                        tp.Target.CurrentHealth -= tp.Damage;
+                            tp.Target.CurrentHealth -= tp.Damage;
+                        }
+
                     }
 
                     // Clear up the stage tracker for the next turn.

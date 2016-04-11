@@ -17,7 +17,7 @@ namespace dab.SGS.Core.Actions
 
         public override bool Perform(object sender, Player player, GameContext context)
         {
-            this.numberCards = player.Hand.Count - player.CurrentHealth;
+            this.numberCards = player.Hand.Count - player.MaxHandSize;
 
             if (this.NumberOfCards < 0) return true;
 

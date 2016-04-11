@@ -37,7 +37,7 @@ namespace dab.SGS.Core.Actions
                         Cards = results,
                         Source = new TargetPlayer(player),
                         Targets = new List<TargetPlayer>(),
-                        Stage = TurnStages.PlayScrollPreStage
+                        Stage = TurnStages.PlayScrollTargets
                     };
 
                     context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
@@ -48,6 +48,12 @@ namespace dab.SGS.Core.Actions
                     {
                         tp.Damage = 1;
                     }
+
+                    context.CurrentPlayStage.ExpectingIputFrom = null;
+
+                    // Add the ability for the activator card to be applied automatically. This way, when we move to the next stage, we can automatically get the player input.
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlace, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
+
                     return false;
                 case TurnStages.PlayScrollPlace:
 
@@ -56,14 +62,27 @@ namespace dab.SGS.Core.Actions
                     // Todo: Does duel take shield into consideation?
                     foreach (var tp in context.CurrentPlayStage.Targets)
                     {
-                        // adjust for shield damage
-                        //tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.PlayStageTracker, context.PlayStageTracker.Source.Target.PlayerArea.Weapon);
+                        if (tp.Result == TargetResult.None || tp.Result == TargetResult.Success)
+                        {
+                            // adjust for shield damage
+                            //tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.PlayStageTracker, context.PlayStageTracker.Source.Target.PlayerArea.Weapon);
 
-                        tp.Target.CurrentHealth -= tp.Damage;
+                            tp.Target.CurrentHealth -= tp.Damage;
+                        }
+                        
                     }
 
                     // Clear up the stage tracker for the next turn.
                     context.CurrentPlayStage = tmpStage;
+
+                    var action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollPlace];
+
+                    // Remove our action from the chain so we don't get this called again for the next scroll (unless a duel is played, but
+                    // let us re-add it later).
+                    if (action.GetType() == typeof(ChainedActions))
+                    {
+                        ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
+                    }
 
                     return false;
                 default:

@@ -15,10 +15,13 @@ namespace dab.SGS.Core.Actions
 
         public override bool Perform(object sender, Player player, GameContext context)
         {
+            // Player hasn't had a chance to select a card yet. We will tell the game context 
+            // that we are now expecting input from a player.
             if (context.CurrentPlayStage.ExpectingIputFrom == null)
             {
                 context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
                 context.CurrentPlayStage.PeristedEnumerator = new int[this.NumberOfCards].GetEnumerator();
+                return false;
             }
             else
             {
@@ -34,14 +37,12 @@ namespace dab.SGS.Core.Actions
                     enumer.Current.Discard();
                 }
 
-                if (context.CurrentPlayStage.PeristedEnumerator.MoveNext()) return true;
+                if (context.CurrentPlayStage.PeristedEnumerator.MoveNext()) return false;
 
                 context.CurrentPlayStage.ExpectingIputFrom = null;
             }
 
             return true;
         }
-        
-        private SelectCard select;
     }
 }

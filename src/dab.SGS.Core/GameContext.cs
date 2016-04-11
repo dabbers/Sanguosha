@@ -178,12 +178,9 @@ namespace dab.SGS.Core
 
         public void AddPlayer(string display, Heroes.HeroCard hero, Roles role)
         {
-            var p = new Player(display);
-            p.CurrentHealth = 4;
+            var p = new Player(display, 4, role);
             p.DistanceModifiers = 0;
-            p.MaxHealth = 4 + (role == Core.Roles.King ? 1 : 0);
-            p.MaxHandSize = p.MaxHealth;
-            p.Role = role;
+            p.HandSizeModifies = 0;
 
             p.TurnStageActions.Add(TurnStages.Draw, this.DefaultDraw);
             p.TurnStageActions.Add(TurnStages.Discard, this.DefaultDiscard);
@@ -217,7 +214,7 @@ namespace dab.SGS.Core
 
         private Actions.Action DefaultDraw;
         private Actions.Action DefaultDiscard;
-        private TargetPlayer anyPlayer = new TargetPlayer(new Player("Any Player"));
+        private TargetPlayer anyPlayer = new TargetPlayer(new Player("Any Player", 0, Core.Roles.Random));
         private Actions.Action EmptyAction = new Actions.EmptyAction("Empty Action");
         private List<Player> players = new List<Player>();
     }
