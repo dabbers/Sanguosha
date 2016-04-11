@@ -9,6 +9,8 @@ namespace dab.SGS.Core.Actions
 {
     public class ReduceHandsizeDiscardAction : DiscardAction
     {
+        public ReduceHandsizeDiscardAction()
+            : base(0)
         {
 
         }
