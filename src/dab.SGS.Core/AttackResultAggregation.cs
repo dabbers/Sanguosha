@@ -1,5 +1,6 @@
 ﻿using dab.SGS.Core.PlayingCards;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +13,8 @@ namespace dab.SGS.Core
     {
         //public List<PlayingCards.PlayingCard> Cards { get; private set; }
         public PlayingCards.PlayingCard Activator { get; set; }
+
+        public IEnumerator PersistentEnumerator { get; set; }
         
         public SelectedCardsSender()
         {
@@ -49,5 +52,7 @@ namespace dab.SGS.Core
 
             return wineCount;
         }
+
+        private IEnumerator enumerator;
     }
 }

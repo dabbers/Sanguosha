@@ -71,7 +71,15 @@ namespace dab.SGS.Core.Actions
             var type = Type.GetType(String.Format("dab.SGS.Core.Actions.{0}", cardType));
             var fnc = type.GetMethod("ActionFromJson");
 
-            return (Action)fnc.Invoke(null, new object[] { obj, selectCard, validCard });
+            // If no static ActionFromJson method is created, we can use the "defaul" constructor.
+            if (fnc == null)
+            {
+                return (Action)Activator.CreateInstance(type);
+            }
+            else
+            {
+                return (Action)fnc.Invoke(null, new object[] { obj, selectCard, validCard });
+            }
         }
 
         internal static List<Action> ActionsFromJson(dynamic actions, SelectCard selectCard, IsValidCard validCard)

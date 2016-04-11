@@ -60,5 +60,11 @@ namespace dab.SGS.Core.PlayingCards.Basics
                 )
             );
         }
+
+        public override string ToString()
+        {
+
+            return (this.Element != Elemental.None ? this.Element.ToString() + " " : "") + base.ToString();
+        }
     }
 }

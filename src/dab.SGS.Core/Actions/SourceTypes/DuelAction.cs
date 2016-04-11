@@ -12,6 +12,10 @@ namespace dab.SGS.Core.Actions
         {
         }
 
+        public DuelAction() : base("Duel Action")
+        {
+        }
+
         public override bool Perform(object sender, Player player, GameContext context)
         {
             var results = (SelectedCardsSender)sender;

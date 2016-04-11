@@ -25,5 +25,17 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
             return (((this.Context.CurrentPlayStage.Stage == TurnStages.PlayScrollPlace) && (!(this.Context.CurrentPlayStage?.Cards.Activator.IsPlayedAsDelayScroll() ?? true)))
                 || this.Context.CurrentPlayStage.Stage == TurnStages.PreJudgement);
         }
+        public new static PlayingCard GetCardFromJson(dynamic obj,
+            SelectCard selectCard, IsValidCard validCard)
+        {
+            var color = (PlayingCardColor)Enum.Parse(typeof(PlayingCardColor), obj.PlayingCardColor.ToString());
+            var suite = (PlayingCardSuite)Enum.Parse(typeof(PlayingCardSuite), obj.PlayingCardSuite.ToString());
+            var details = obj.Details.ToString();
+
+            var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
+                selectCard, validCard);
+
+            return new WardScrollPlayingCard(color, suite, details, actions);
+        }
     }
 }

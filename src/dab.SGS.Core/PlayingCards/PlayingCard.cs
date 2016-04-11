@@ -71,13 +71,33 @@ namespace dab.SGS.Core.PlayingCards
 
         public virtual bool IsPlayable()
         {
-            return true;
+            // By default, only allow cards to be played during the play phase
+            return this.Context.CurrentTurnStage == TurnStages.Play;
         }
 
+        /// <summary>
+        /// Will remove any references it might have, and place itself in the discard pile.
+        /// </summary>
         public virtual void Discard()
         {
             if (this.Owner.Hand.Contains(this))
                 this.Owner.Hand.Remove(this);
+            else if (this.Owner.PlayerArea.DelayedScrolls.Contains(this))
+                this.Owner.PlayerArea.DelayedScrolls.Remove(this);
+            else if (this.Owner.PlayerArea.PlusHorse == this)
+                this.Owner.PlayerArea.PlusHorse = null;
+            else if (this.Owner.PlayerArea.MinusHorse == this)
+                this.Owner.PlayerArea.MinusHorse = null;
+            else if (this.Owner.PlayerArea.Weapon == this)
+                this.Owner.PlayerArea.Weapon = null;
+            else if (this.Owner.PlayerArea.Shield == this)
+                this.Owner.PlayerArea.Shield = null;
+            else if (this.Owner.PlayerArea.FaceDownPlayingCards.Contains(this))
+                this.Owner.PlayerArea.FaceDownPlayingCards.Remove(this);
+            else if (this.Owner.PlayerArea.FaceUpPlayingCards.Contains(this))
+                this.Owner.PlayerArea.FaceUpPlayingCards.Remove(this);
+            else if (this.Context.HoldingArea.Cards.Contains(this))
+                this.Context.HoldingArea.Cards.Remove(this);
 
             this.Context.Deck.Discard(this);
         }
@@ -143,6 +163,14 @@ namespace dab.SGS.Core.PlayingCards
                 }
             }
             return true;
+        }
+
+        public override string ToString()
+        {
+            var color = this.color != PlayingCardColor.None ? this.color.ToString() : "No colored ";
+            var suite = this.Suite.ToString();
+
+            return color + " " + suite + this.display;
         }
 
         public static PlayingCard GetCardFromJson(dynamic obj,

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dab.SGS.Core.Actions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,18 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         public override bool IsPlayable()
         {
             return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
+        public new static PlayingCard GetCardFromJson(dynamic obj,
+            SelectCard selectCard, IsValidCard validCard)
+        {
+            var color = (PlayingCardColor)Enum.Parse(typeof(PlayingCardColor), obj.PlayingCardColor.ToString());
+            var suite = (PlayingCardSuite)Enum.Parse(typeof(PlayingCardSuite), obj.PlayingCardSuite.ToString());
+            var details = obj.Details.ToString();
+
+            var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
+                selectCard, validCard);
+
+            return new StarvationDelayedScrollPlayingCard(color, suite, details, actions);
         }
     }
 }

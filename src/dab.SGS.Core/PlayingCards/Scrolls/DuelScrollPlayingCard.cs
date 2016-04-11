@@ -28,5 +28,18 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
             // Can only play Duels on 
             return this.Context.CurrentPlayStage.Stage == TurnStages.Play;
         }
+        public new static PlayingCard GetCardFromJson(dynamic obj,
+            SelectCard selectCard, IsValidCard validCard)
+        {
+            var color = (PlayingCardColor)Enum.Parse(typeof(PlayingCardColor), obj.PlayingCardColor.ToString());
+            var suite = (PlayingCardSuite)Enum.Parse(typeof(PlayingCardSuite), obj.PlayingCardSuite.ToString());
+            var details = obj.Details.ToString();
+            var display = obj.Display.ToString();
+
+            var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
+                selectCard, validCard);
+
+            return new DuelScrollPlayingCard(color, suite, display, details, actions);
+        }
     }
 }

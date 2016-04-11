@@ -41,5 +41,17 @@ namespace dab.SGS.Core.PlayingCards.Basics
             return (this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied && this.Context.CurrentPlayStage.Source.Target == this.Owner
                 || this.Context.CurrentPlayStage.Stage == TurnStages.Play);
         }
+        public new static PlayingCard GetCardFromJson(dynamic obj,
+            SelectCard selectCard, IsValidCard validCard)
+        {
+            var color = (PlayingCardColor)Enum.Parse(typeof(PlayingCardColor), obj.PlayingCardColor.ToString());
+            var suite = (PlayingCardSuite)Enum.Parse(typeof(PlayingCardSuite), obj.PlayingCardSuite.ToString());
+            var details = obj.Details.ToString();
+
+            var actions = Core.Actions.Action.ActionsFromJson(obj.Actions,
+                selectCard, validCard);
+
+            return new WineBasicPlayingCard(color, suite, details, actions);
+        }
     }
 }

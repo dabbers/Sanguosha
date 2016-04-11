@@ -9,8 +9,6 @@ namespace dab.SGS.Core.Actions
 {
     public class ReduceHandsizeDiscardAction : DiscardAction
     {
-        public ReduceHandsizeDiscardAction(SelectCard select)
-            : base(0, select)
         {
 
         }

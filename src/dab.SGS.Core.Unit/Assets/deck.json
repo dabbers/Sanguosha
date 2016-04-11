@@ -20,11 +20,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -49,11 +84,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -78,11 +148,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -107,11 +212,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -136,11 +276,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -165,11 +340,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -194,11 +404,46 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
         "Type": "DodgeAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.DuelScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
+    "Actions": [
+      {
+        "Type": "DuelAction"
+      }
+    ]
+  },
+  {
+    "Type": "Scrolls.WardScrollPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
+    "Actions": [
+      {
+        "Type": "WardAction"
+      }
+    ]
+  },
+  {
+    "Type": "Basics.WineBasicPlayingCard",
+    "PlayingCardColor": "Red",
+    "PlayingCardSuite": "Club",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
+    "Actions": [
+      {
+        "Type": "WardAction"
       }
     ]
   },
@@ -223,7 +468,6 @@
     "PlayingCardSuite": "Club",
     "Display": "Dodge",
     "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
     "Actions": [
       {
         "Display": "Dodge",
@@ -232,292 +476,38 @@
     ]
   },
   {
-    "Type": "Basics.AttackBasicPlayingCard",
+    "Type": "Scrolls.DuelScrollPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
+    "Display": "Duel",
+    "Details": "Player chooses a target and that target must play an attack. The player plays an attack. This repeats until someone is unable to play an attack. That person takes a damage.",
     "Actions": [
       {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
+        "Type": "DuelAction"
       }
     ]
   },
   {
-    "Type": "Basics.DodgeBasicPlayingCard",
+    "Type": "Scrolls.WardScrollPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
+    "Display": "Ward",
+    "Details": "Negates a scroll card or judgement",
     "Actions": [
       {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
+        "Type": "WardAction"
       }
     ]
   },
   {
-    "Type": "Basics.AttackBasicPlayingCard",
+    "Type": "Basics.WineBasicPlayingCard",
     "PlayingCardColor": "Red",
     "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
+    "Display": "Wine",
+    "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
-      }
-    ]
-  },
-  {
-    "Type": "Basics.AttackBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Attack",
-    "Details": "Performs an attack on a target",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Attack",
-        "Type": "AttackAction",
-        "Damage": 1
-      }
-    ]
-  },
-  {
-    "Type": "Basics.DodgeBasicPlayingCard",
-    "PlayingCardColor": "Red",
-    "PlayingCardSuite": "Club",
-    "Display": "Dodge",
-    "Details": "Performs a dodge from an attack",
-    "Elemental": "None",
-    "Actions": [
-      {
-        "Display": "Dodge",
-        "Type": "DodgeAction"
+        "Type": "WardAction"
       }
     ]
   }

@@ -8,13 +8,13 @@ using System.Reflection;
 
 namespace dab.SGS.Core
 {
-    
-
     public class GameContext
     {
         public static int DEFAULT_MAX_ATTACKS = 1;
 
         public Player[] Players { get { return this.players.ToArray(); } }
+
+        public TargetPlayer AnyPlayer { get { return this.anyPlayer; } }
 
         public List<Roles> Roles { get; set; }
 
@@ -48,10 +48,10 @@ namespace dab.SGS.Core
         /// their turns, the turn stages, and attack stages.
         /// </summary>
         /// <param name="discardSelect">The delegate for selcting a card to discard.</param>
-        public GameContext(Deck deck, Actions.SelectCard discardSelect)
+        public GameContext(Deck deck)
         {
             this.DefaultDraw = new Actions.DrawAction(2);
-            this.DefaultDiscard = new Actions.ReduceHandsizeDiscardAction(discardSelect);
+            this.DefaultDiscard = new Actions.ReduceHandsizeDiscardAction();
             this.Roles = new List<Core.Roles>();
             this.CurrentPlayStage = new PlayingCardStageTracker()
             {
@@ -142,11 +142,15 @@ namespace dab.SGS.Core
         /// 
         /// Will return the action you must perform for the player. It will not do any pop/push of the stage tracker stack
         /// That is only done by the actions that perform new "mini turns"
+        /// 
+        /// This method won't proceed to the next stage if we are still expecting input from players. Set expectinginputfrom to null
+        /// to proceed to the next stage.
         /// </summary>
         /// <returns></returns>
         public Actions.Action RoateTurnStage()
         {
-            if (this.CurrentPlayStage.Stage != TurnStages.End && this.CurrentPlayStage.Stage != TurnStages.AttackEnd)
+            if (this.CurrentPlayStage.Stage != TurnStages.End && this.CurrentPlayStage.Stage != TurnStages.AttackEnd &&
+                this.CurrentPlayStage.ExpectingIputFrom == null)
             {
                 this.CurrentPlayStage.Stage++;
             }
@@ -213,7 +217,7 @@ namespace dab.SGS.Core
 
         private Actions.Action DefaultDraw;
         private Actions.Action DefaultDiscard;
-        private Actions.Action DefaultDamage;
+        private TargetPlayer anyPlayer = new TargetPlayer(new Player("Any Player"));
         private Actions.Action EmptyAction = new Actions.EmptyAction("Empty Action");
         private List<Player> players = new List<Player>();
     }
