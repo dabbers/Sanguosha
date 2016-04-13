@@ -17,13 +17,21 @@ namespace dab.SGS.Core.Actions
 
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
-            foreach(var action in this.Actions)
+            try
             {
-                if (!action.Perform(sender, player, context))
+                foreach (var action in this.Actions)
                 {
-                    return false;
+                    if (!action.Perform(sender, player, context))
+                    {
+                        return false;
+                    }
                 }
             }
+            catch(InvalidOperationException)
+            {
+
+            }
+
 
             return true;
         }

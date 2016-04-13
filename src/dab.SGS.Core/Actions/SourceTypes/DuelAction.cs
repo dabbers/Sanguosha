@@ -56,6 +56,7 @@ namespace dab.SGS.Core.Actions
                     // Add the ability for the activator card to be applied automatically. This way, when we move to the next stage, we can automatically get the player input.
                     context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaced, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
                     context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaceResponse, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollEnd, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
 
                     return false;
                 case TurnStages.PlayScrollPlaced:
@@ -90,7 +91,6 @@ namespace dab.SGS.Core.Actions
                         // this lets the turnstage progress, and tells the game engine
                         // we aren't expecting any new player input.
                         context.CurrentPlayStage.ExpectingIputFrom = null;
-                        context.CurrentTurnStage = TurnStages.PlayScrollEnd;
                     }
 
                     return false;
@@ -129,6 +129,14 @@ namespace dab.SGS.Core.Actions
                         ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
                     }
 
+                    action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollEnd];
+
+                    // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
+                    if (action.GetType() == typeof(ChainedActions))
+                    {
+                        ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
+                    }
+                    sender.DiscardAll();
                     return true;
                 default:
                     throw new Exception("Invalid turn stage for duel: " + context.CurrentPlayStage.Stage.ToString());

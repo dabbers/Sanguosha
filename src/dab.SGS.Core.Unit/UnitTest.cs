@@ -434,7 +434,7 @@ namespace dab.SGS.Core.Unit
             var ctx = new GameContext(null);
             var p = new Player("dab", 3, Roles.Minister);
 
-            ctx.CurrentTurnStage = TurnStages.PlayScrollPlaced;
+            ctx.CurrentTurnStage = TurnStages.PlayScrollPlaceResponse;
             var duel = new DuelScrollPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "Duel", "Play duel bro");
 
             Assert.IsTrue(duel.IsPlayedAsDuel());
@@ -510,7 +510,7 @@ namespace dab.SGS.Core.Unit
             //action = ctx.RoateTurnStage();
             //action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse)
+            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom != null)
             {
 
                 // Our target must play a dodge or take damage. Poor soul
@@ -526,7 +526,11 @@ namespace dab.SGS.Core.Unit
                 action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
-            Assert.AreEqual(TurnStages.PlayScrollEnd, ctx.CurrentTurnStage);
+            Assert.AreEqual(TurnStages.PlayScrollPlaceResponse, ctx.CurrentTurnStage);
+            action = ctx.RoateTurnStage();
+            action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
+
+            Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
 
             // SKip to the end stage of our turn
             while (ctx.CurrentTurnStage != TurnStages.Discard)
@@ -537,7 +541,7 @@ namespace dab.SGS.Core.Unit
 
             while (!action.Perform(new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, null), ctx.CurrentPlayStage.Source.Target, ctx)) ;
 
-            Assert.AreEqual(5, ctx.CurrentPlayerTurn.Hand.Count);
+            Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
             ctx.RoateTurnStage();
 
             Assert.AreEqual(TurnStages.PostDiscard, ctx.CurrentTurnStage);
@@ -548,6 +552,7 @@ namespace dab.SGS.Core.Unit
 
 
             Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);
+            Assert.AreEqual(3, ctx.CurrentPlayerTurn.CurrentHealth);
         }
 
     }
