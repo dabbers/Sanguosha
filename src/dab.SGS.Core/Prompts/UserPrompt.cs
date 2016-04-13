@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace dab.SGS.Core.Prompts
 {
+    [Flags]
     public enum UserPromptType
     {
         // Standard turn stuff: 
@@ -14,93 +15,73 @@ namespace dab.SGS.Core.Prompts
         /// <summary>
         /// Select a skill(s) to use
         /// </summary>
-        Skills,
-
-        /// <summary>
-        /// Select a skill or card to use
-        /// </summary>
-        SkillsOrCards,
+        Skills = 1 << 0,
         
         //
         // End of standard skill stuff
 
         /// <summary>
-        /// Yes or No Prompt
-        /// </summary>
-        YesNo,
-
-        /// <summary>
         /// Choose a card from the player's hand
         /// </summary>
-        CardsPlayerHand,
+        CardsPlayerHand = 1 << 1,
 
         /// <summary>
         /// Choose a card from the player's play area
         /// </summary>
-        CardsPlayerPlayArea,
-
-        /// <summary>
-        /// Choose any card of the player's
-        /// </summary>
-        CardsPlayerAll,
+        CardsPlayerPlayArea = 1 << 2,
 
         /// <summary>
         /// Choose a card from the taget's hand
         /// </summary>
-        CardsTargetHand,
+        CardsTargetHand = 1 << 3,
 
         /// <summary>
         /// Choose a card from the target's play area
         /// </summary>
-        CardsTargetPlayArea,
-
-        /// <summary>
-        /// Choose any card from the target
-        /// </summary>
-        CardsTargetAll,
-
-
+        CardsTargetPlayArea = 1 << 4,
+        
         /// <summary>
         /// Choose any card in the game (not deck or discard)
         /// </summary>
-        AllCards,
-        
+        AllCards = 1 << 5,
+
         /// <summary>
         /// The cards in the "holding area"
         /// </summary>
-        HoldingArea,
-
-        /// <summary>
-        /// Choose a target within a range
-        /// </summary>
-        TargetAttackRange,
-
-        /// <summary>
-        /// Choose a target with configurable range n
-        /// </summary>
-        TargetRangeN,
+        HoldingArea = 1 << 6,
 
         /// <summary>
         /// Choose a target with configurable range M to N (min max)
         /// </summary>
-        TargetRangeMN,
-
-        /// <summary>
-        /// Choose any target
-        /// </summary>
-        TargettAny,
+        TargetRangeMN = 1 << 7,
 
         /// <summary>
         /// Select from a list of options
         /// </summary>
-        Options,
+        Options = 1 << 8,
+
+        /// <summary>
+        /// Yes or No Prompt
+        /// </summary>
+        YesNo = 1 << 9,
 
     }
 
 
-    public abstract class UserPrompt
+    public class UserPrompt
     {
+        public List<Player> Players { get; set; }
+        public List<PlayingCards.PlayingCard> Cards { get; set; }
+        public int MinTargets { get; set; }
+        public int MaxTargets { get; set; }
+        public int MinRange { get; set; }
+        public int MaxRange { get; set; }
+        public int MinCards { get; set; }
+        public int MaxCards { get; set; }
+
         public UserPromptType Type { get; protected set; }
+        
+
         public UserPrompt(UserPromptType type)
         {
             this.Type = type;

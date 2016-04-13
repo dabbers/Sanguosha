@@ -13,11 +13,11 @@ namespace dab.SGS.Core.Actions
         {
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             switch(context.CurrentTurnStage)
             {
-                case TurnStages.PlayScrollPlace:
+                case TurnStages.PlayScrollPlaced:
                     {
                         // Can't ward delay scrolls until their judgment phase
                         if (context.CurrentPlayStage.Cards.Activator.IsPlayedAsDelayScroll()) return false;
@@ -34,7 +34,7 @@ namespace dab.SGS.Core.Actions
                     {
                         context.CurrentPlayStage.ExpectingIputFrom.Result = TargetResult.Warded;
                         context.CurrentPlayStage.ExpectingIputFrom = context.AnyPlayer;
-                        var results = (SelectedCardsSender)sender;
+                        var results = sender;
 
                         //((DelayedScrollPlayingCard)context.CurrentPlayStage.Cards.Activator).Warded(player, results);
                         return true;

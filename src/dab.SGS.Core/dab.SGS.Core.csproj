@@ -125,6 +125,7 @@
     <Compile Include="Actions\System Types\ResetAttackCounterAction.cs" />
     <Compile Include="Actions\Response Types\WardAction.cs" />
     <Compile Include="AttackResultAggregation.cs" />
+    <Compile Include="PeekAbleEnumerator.cs" />
     <Compile Include="PlayingCardStageTracker.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="GameContext.cs" />
@@ -148,9 +149,7 @@
     <Compile Include="PlayingCards\Equipments\WeaponEquipmentPlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\StarvationDelayedScrollPlayingCard.cs" />
     <Compile Include="PlayingCards\Scrolls\WardScrollPlayingCard.cs" />
-    <Compile Include="Prompts\CardUserPrompt.cs" />
     <Compile Include="Prompts\OptionsUserPrompt.cs" />
-    <Compile Include="Prompts\TargetUserPrompt.cs" />
     <Compile Include="Prompts\UserPrompt.cs" />
     <Compile Include="Prompts\YesNoUserPrompt.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

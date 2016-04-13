@@ -14,10 +14,8 @@ namespace dab.SGS.Core.Actions
             this.damage = damage;
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
-            // When can this happen? Attack card, or Borrowed sword
-            
             switch (context.CurrentPlayStage.Stage)
             {
                 // The attack was first played. Go into target select mode.
@@ -29,9 +27,8 @@ namespace dab.SGS.Core.Actions
                     }
 
                     context.PreviousStages.Push(context.CurrentPlayStage);
+                    var results = sender;
 
-                    // How attacking a player works:
-                    var results = (SelectedCardsSender)sender;
 
                     context.CurrentPlayStage = new PlayingCardStageTracker()
                     {
@@ -72,27 +69,25 @@ namespace dab.SGS.Core.Actions
                     // Clear up the stage tracker for the next turn.
                     context.CurrentPlayStage = tmpStage;
                     break;
-                case TurnStages.PlayScrollPlace:
+                case TurnStages.PlayScrollPlaceResponse:
+                case TurnStages.PlayScrollPlaced:
                     // Duel:
                     if (context.CurrentPlayStage.Cards.Activator.IsPlayedAsDuel())
                     {
-                        if (context.CurrentPlayStage.Source.Target != context.CurrentPlayStage.Cards.Activator.Owner)
-                        {
-                            context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
-                        }
-                        else
-                        {
-                            context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Targets.First();
-                        }
+                        context.CurrentTurnStage = TurnStages.PlayScrollPlaceResponse;
+
+                        // Reset the next player so they can play their card.
+                        context.CurrentPlayStage.ExpectingIputFrom.Result = TargetResult.Failed;
+                        context.CurrentPlayStage.PeristedTargetEnumerator.PeekRotate.Result = TargetResult.None;
                         break;
                     }
 
-                    throw new Exception("Attack was somehow activated for PlayScrollPlace. " + context.CurrentPlayStage.Cards.Activator.ToString());
+                    throw new Exception("Attack was somehow activated for PlayScrollPlace(Response). But activator wasn't played as duel." + context.CurrentPlayStage.Cards.Activator.ToString());
                 default:
                     throw new Exception("Unknown stage reached for attack action: " + context.CurrentPlayStage.Stage.ToString());
             }
 
-
+            sender?.DiscardAll();
             return true;
         }
 

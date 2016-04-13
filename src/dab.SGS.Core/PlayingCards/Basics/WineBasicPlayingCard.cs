@@ -24,7 +24,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         /// </summary>
         /// <param name="sender"></param>
         /// <returns></returns>
-        public override bool Play(object sender)
+        public override bool Play(SelectedCardsSender sender)
         {
             if (this.Owner.CurrentHealth < 1)
             {

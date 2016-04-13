@@ -18,7 +18,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
         
         private int distance = 1;
 
-        public override bool Play(object sender)
+        public override bool Play(SelectedCardsSender sender)
         {
             if (this.Distance > 0)
             {

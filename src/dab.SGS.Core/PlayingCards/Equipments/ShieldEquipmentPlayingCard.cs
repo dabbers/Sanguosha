@@ -19,7 +19,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             this.RemoveActions = removeActions;
             this.damageCalc = damageCalculator;
         }
-        public override bool Play(object sender)
+        public override bool Play(SelectedCardsSender sender)
         {
             if (this.Owner.PlayerArea.Shield != null)
             {
@@ -73,7 +73,7 @@ namespace dab.SGS.Core.PlayingCards.Equipments
             return damage;
         }
 
-        public bool RemoveAction(object sender)
+        public bool RemoveAction(SelectedCardsSender sender)
         {
             return this.playAction(sender, this.RemoveActions);
         }

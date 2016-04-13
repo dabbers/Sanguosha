@@ -15,7 +15,7 @@ namespace dab.SGS.Core.Actions
             this.Actions = actions;
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             foreach(var action in this.Actions)
             {

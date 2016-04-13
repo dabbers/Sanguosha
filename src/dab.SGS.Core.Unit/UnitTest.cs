@@ -55,11 +55,13 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
             Assert.AreEqual(ctx.CurrentPlayerTurn, ctx.CurrentPlayerTurn.Hand[0].Owner);
 
+            SelectedCardsSender sender = null;
+
             // Skip to the next stage in our turn
             while (ctx.CurrentTurnStage != TurnStages.Play)
             {
                 action = ctx.RoateTurnStage();
-                action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
 
@@ -67,7 +69,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
+            sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
             
             // Play first playable card in the select cards (only 1 of the any should be playable).
             foreach (var card in sender) if (card.IsPlayable()) card.Play(sender);
@@ -109,7 +111,7 @@ namespace dab.SGS.Core.Unit
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
             // calls the .Play of the card again, which should pop the previous state (also discards the cards)
-            action.Perform(ctx, ctx.CurrentPlayerTurn, ctx); 
+            action.Perform(sender, ctx.CurrentPlayerTurn, ctx); 
 
             //ctx.CurrentPlayerTurn.Hand[0].Play(sender);
 
@@ -121,7 +123,7 @@ namespace dab.SGS.Core.Unit
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                    action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
             while (!action.Perform(new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, null), ctx.CurrentPlayStage.Source.Target, ctx)) ;
@@ -131,9 +133,9 @@ namespace dab.SGS.Core.Unit
 
             Assert.AreEqual(TurnStages.PostDiscard, ctx.CurrentTurnStage);
 
-            ctx.RoateTurnStage().Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            ctx.RoateTurnStage().Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            ctx.RoateTurnStage().Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            ctx.RoateTurnStage().Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
 
             Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);
@@ -160,12 +162,13 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
             Assert.AreEqual(ctx.CurrentPlayerTurn, ctx.CurrentPlayerTurn.Hand[0].Owner);
 
+            SelectedCardsSender sender = null;
             // Skip to the next stage in our turn
             while (ctx.CurrentTurnStage != TurnStages.Play)
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                    action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
 
@@ -173,7 +176,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
+            sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, ctx.CurrentPlayerTurn.Hand[0]);
 
             // Play first playable card in the select cards (only 1 of the any should be playable).
             foreach (var card in sender) if (card.IsPlayable()) card.Play(sender);
@@ -206,7 +209,7 @@ namespace dab.SGS.Core.Unit
             // Move on from Pre-Damage to Damage
             action = ctx.RoateTurnStage();
             // calls the .Play of the card again, which should pop the previous state (also discards the cards)
-            action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
             Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
             Assert.AreEqual(3, ctx.CurrentPlayerTurn.Right.CurrentHealth);
@@ -215,8 +218,7 @@ namespace dab.SGS.Core.Unit
             while (ctx.CurrentTurnStage != TurnStages.Discard)
             {
                 action = ctx.RoateTurnStage();
-                if (action != null)
-                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
             while (!action.Perform(new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, null), ctx.CurrentPlayStage.Source.Target, ctx)) ;
@@ -226,9 +228,9 @@ namespace dab.SGS.Core.Unit
 
             Assert.AreEqual(TurnStages.PostDiscard, ctx.CurrentTurnStage);
 
-            ctx.RoateTurnStage().Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            ctx.RoateTurnStage().Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            ctx.RoateTurnStage().Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            ctx.RoateTurnStage().Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
 
             Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);
@@ -432,7 +434,7 @@ namespace dab.SGS.Core.Unit
             var ctx = new GameContext(null);
             var p = new Player("dab", 3, Roles.Minister);
 
-            ctx.CurrentTurnStage = TurnStages.PlayScrollPlace;
+            ctx.CurrentTurnStage = TurnStages.PlayScrollPlaced;
             var duel = new DuelScrollPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "Duel", "Play duel bro");
 
             Assert.IsTrue(duel.IsPlayedAsDuel());
@@ -465,6 +467,8 @@ namespace dab.SGS.Core.Unit
 
             ctx.SetupGame();
 
+            SelectedCardsSender sender = null;
+
             Assert.AreEqual(Roles.King, ctx.CurrentPlayerTurn.Role);
             Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
             Assert.AreEqual(ctx.CurrentPlayerTurn, ctx.CurrentPlayerTurn.Hand[0].Owner);
@@ -474,7 +478,7 @@ namespace dab.SGS.Core.Unit
             {
                 action = ctx.RoateTurnStage();
                 if (action != null)
-                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                    action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
 
@@ -482,7 +486,7 @@ namespace dab.SGS.Core.Unit
             Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
 
             // Play an attack.
-            var sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsDuel()) }, ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsDuel()));
+            sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsDuel()) }, ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsDuel()));
 
             // Play first playable card in the select cards (only 1 of the any should be playable).
             foreach (var card in sender) if (card.IsPlayable()) card.Play(sender);
@@ -499,38 +503,36 @@ namespace dab.SGS.Core.Unit
             sender.Activator.Play(sender); // Update target in attack
 
             action = ctx.RoateTurnStage();
-
-            Assert.AreEqual(TurnStages.PlayScrollPlace, ctx.CurrentTurnStage);
-
-            foreach (var target in ctx.CurrentPlayStage.Targets)
-            {
-                // Our target must play a dodge or take damage. Poor soul
-                var attack = target.Target.Hand.Find(p => p.IsPlayable() && p.GetType() == typeof(AttackBasicPlayingCard));
-
-                var senderResp = new SelectedCardsSender(new List<PlayingCard>() { attack }, attack);
-                attack.Play(senderResp);
-            }
-
-            // Move on from CardResponse to Pre-Damage
-            action = ctx.RoateTurnStage();
-
-            Assert.AreEqual(TurnStages.PlayScrollPlace, ctx.CurrentTurnStage);
-            Assert.AreEqual(ctx.Players[0], ctx.CurrentPlayStage.ExpectingIputFrom);
-
-            // Move on from Pre-Damage to Damage
-            action = ctx.RoateTurnStage();
-            // calls the .Play of the card again, which should pop the previous state (also discards the cards)
             action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
-            Assert.AreEqual(3, ctx.CurrentPlayerTurn.Right.CurrentHealth);
+            Assert.AreEqual(TurnStages.PlayScrollPlaceResponse, ctx.CurrentTurnStage);
+
+            //action = ctx.RoateTurnStage();
+            //action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
+
+            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse)
+            {
+
+                // Our target must play a dodge or take damage. Poor soul
+                var attack = ctx.CurrentPlayStage.ExpectingIputFrom.Target.Hand.Find(p => p.IsPlayable() && p.GetType() == typeof(AttackBasicPlayingCard));
+
+                if (attack != null)
+                {
+                    var senderResp = new SelectedCardsSender(new List<PlayingCard>() { attack }, attack);
+                    attack.Play(senderResp);
+                }
+
+                action = ctx.RoateTurnStage();
+                action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
+            }
+
+            Assert.AreEqual(TurnStages.PlayScrollEnd, ctx.CurrentTurnStage);
 
             // SKip to the end stage of our turn
             while (ctx.CurrentTurnStage != TurnStages.Discard)
             {
                 action = ctx.RoateTurnStage();
-                if (action != null)
-                    action.Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+                action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
             while (!action.Perform(new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, null), ctx.CurrentPlayStage.Source.Target, ctx)) ;
@@ -540,9 +542,9 @@ namespace dab.SGS.Core.Unit
 
             Assert.AreEqual(TurnStages.PostDiscard, ctx.CurrentTurnStage);
 
-            ctx.RoateTurnStage().Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            ctx.RoateTurnStage().Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            ctx.RoateTurnStage().Perform(ctx, ctx.CurrentPlayerTurn, ctx);
+            ctx.RoateTurnStage().Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
 
             Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);

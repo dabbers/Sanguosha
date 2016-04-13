@@ -57,14 +57,14 @@ namespace dab.SGS.Core.PlayingCards
             this.color = color;
         }
 
-        public virtual bool Play(object sender)
+        public virtual bool Play(SelectedCardsSender sender)
         {
             var res = this.playAction(sender, this.Actions);
 
-            if (res)
-            {
-                this.Discard();
-            }
+            //if (res)
+            //{
+            //    this.Discard();
+            //}
             
             return res;
         }
@@ -153,7 +153,7 @@ namespace dab.SGS.Core.PlayingCards
         }
         #endregion
 
-        protected bool playAction(object sender, List<Actions.Action> actions)
+        protected bool playAction(SelectedCardsSender sender, List<Actions.Action> actions)
         {
 
             if (actions == null) return false;

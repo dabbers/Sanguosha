@@ -14,7 +14,7 @@ namespace dab.SGS.Core
         //public List<PlayingCards.PlayingCard> Cards { get; private set; }
         public PlayingCards.PlayingCard Activator { get; set; }
 
-        public IEnumerator PersistentEnumerator { get; set; }
+        public PeekEnumerator<PlayingCard> PersistentEnumerator { get; set; }
         
         public SelectedCardsSender()
         {
@@ -51,6 +51,14 @@ namespace dab.SGS.Core
             }
 
             return wineCount;
+        }
+
+        public void DiscardAll()
+        {
+            foreach(var card in this)
+            {
+                card.Discard();
+            }
         }
 
         private IEnumerator enumerator;

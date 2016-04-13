@@ -71,7 +71,15 @@ namespace dab.SGS.Core
         /// <summary>
         /// A scroll was played.
         /// </summary>
-        PlayScrollPlace,
+        PlayScrollPlaced,
+        /// <summary>
+        /// Target(s) made a response
+        /// </summary>
+        PlayScrollPlaceResponse,
+        /// <summary>
+        /// The scroll play has ended
+        /// </summary>
+        PlayScrollEnd,
 
 
 
@@ -96,6 +104,10 @@ namespace dab.SGS.Core
         /// We are prompting a player currently.
         /// </summary>
         Prompt,
+        /// <summary>
+        /// A response to the prompt has occured
+        /// </summary>
+        PromptEnd,
 
 
         // ATTACK STAGES

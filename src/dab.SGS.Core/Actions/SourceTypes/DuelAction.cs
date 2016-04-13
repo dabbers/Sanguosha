@@ -16,9 +16,9 @@ namespace dab.SGS.Core.Actions
         {
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
-            var results = (SelectedCardsSender)sender;
+            var results = sender;
 
             switch (context.CurrentPlayStage.Stage)
             {
@@ -44,6 +44,8 @@ namespace dab.SGS.Core.Actions
                     return false;
                 case TurnStages.PlayScrollTargets:
 
+                    context.CurrentPlayStage.Targets.Add(context.CurrentPlayStage.Source);
+
                     foreach (var tp in context.CurrentPlayStage.Targets)
                     {
                         tp.Damage = 1;
@@ -52,10 +54,47 @@ namespace dab.SGS.Core.Actions
                     context.CurrentPlayStage.ExpectingIputFrom = null;
 
                     // Add the ability for the activator card to be applied automatically. This way, when we move to the next stage, we can automatically get the player input.
-                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlace, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaced, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaceResponse, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
 
                     return false;
-                case TurnStages.PlayScrollPlace:
+                case TurnStages.PlayScrollPlaced:
+                    context.CurrentPlayStage.PeristedTargetEnumerator = new PeekEnumerator<TargetPlayer>(context.CurrentPlayStage.Targets.GetEnumerator());
+                    context.CurrentPlayStage.PeristedTargetEnumerator.MoveNext();
+
+                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+
+                    context.CurrentPlayStage.Stage = TurnStages.PlayScrollPlaceResponse;
+
+                    return false;
+                case TurnStages.PlayScrollPlaceResponse:
+
+                    // Loop through our target list (intentionally doing this)
+                    context.CurrentPlayStage.PeristedTargetEnumerator.MoveNextReset();
+
+                    var previous = context.CurrentPlayStage.ExpectingIputFrom;
+
+                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+
+                    // If the targetresult is not none, it wasn't reset because the previous player didn't play an attack.
+                    // If this is the case, the previous player should recieve damage.
+                    if (context.CurrentPlayStage.ExpectingIputFrom.Result != TargetResult.None || previous.Result == TargetResult.None)
+                    {
+                        previous.Result = TargetResult.Success;
+
+                        foreach(var target in context.CurrentPlayStage.Targets)
+                        {
+                            if (target != previous) target.Result = TargetResult.Failed;
+                        }
+
+                        // this lets the turnstage progress, and tells the game engine
+                        // we aren't expecting any new player input.
+                        context.CurrentPlayStage.ExpectingIputFrom = null;
+                        context.CurrentTurnStage = TurnStages.PlayScrollEnd;
+                    }
+
+                    return false;
+                case TurnStages.PlayScrollEnd:
 
                     var tmpStage = context.PreviousStages.Pop();
 
@@ -69,22 +108,28 @@ namespace dab.SGS.Core.Actions
 
                             tp.Target.CurrentHealth -= tp.Damage;
                         }
-                        
                     }
 
                     // Clear up the stage tracker for the next turn.
                     context.CurrentPlayStage = tmpStage;
 
-                    var action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollPlace];
+                    var action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollPlaced];
 
-                    // Remove our action from the chain so we don't get this called again for the next scroll (unless a duel is played, but
-                    // let us re-add it later).
+                    // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
                     if (action.GetType() == typeof(ChainedActions))
                     {
                         ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
                     }
 
-                    return false;
+                    action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollPlaceResponse];
+
+                    // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
+                    if (action.GetType() == typeof(ChainedActions))
+                    {
+                        ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
+                    }
+
+                    return true;
                 default:
                     throw new Exception("Invalid turn stage for duel: " + context.CurrentPlayStage.Stage.ToString());
             }

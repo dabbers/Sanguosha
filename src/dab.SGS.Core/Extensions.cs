@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,26 @@ namespace dab.SGS.Core
             var temp = list[i];
             list[i] = list[j];
             list[j] = temp;
+        }
+
+        /// <summary>
+        /// Returns true if the move was reset. False if we moved without resetting.
+        /// Counter intuitive to how the MoveNext works.
+        /// </summary>
+        /// <param name="en"></param>
+        /// <returns></returns>
+        public static bool MoveNextReset(this IEnumerator en)
+        {
+            var reset = false;
+
+            if (!en.MoveNext())
+            {
+                en.Reset();
+                reset = true;
+                en.MoveNext();
+            }
+
+            return reset;
         }
     }
 }

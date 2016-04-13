@@ -12,7 +12,7 @@ namespace dab.SGS.Core.Actions
         {
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             switch (context.CurrentPlayStage.Stage)
             {
@@ -25,9 +25,11 @@ namespace dab.SGS.Core.Actions
                     return false;
             }
 
+            sender.DiscardAll();
 
             return true;
         }
+
         public static new Action ActionFromJson(dynamic obj,
             SelectCard selectCard, IsValidCard validCard)
         {

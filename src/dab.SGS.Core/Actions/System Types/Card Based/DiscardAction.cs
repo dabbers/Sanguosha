@@ -13,20 +13,22 @@ namespace dab.SGS.Core.Actions
             if (numberCards < 0) throw new Exception("Invalid number of cards, must be positive!");
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             // Player hasn't had a chance to select a card yet. We will tell the game context 
             // that we are now expecting input from a player.
             if (context.CurrentPlayStage.ExpectingIputFrom == null)
             {
+                var t = (new object[this.NumberOfCards]).ToList().GetEnumerator();
+
                 context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
-                context.CurrentPlayStage.PeristedEnumerator = new int[this.NumberOfCards].GetEnumerator();
+                context.CurrentPlayStage.PeristedEnumerator = new PeekEnumerator<object>(t);
                 return false;
             }
             else
             {
                 // How attacking a player works:
-                var results = (SelectedCardsSender)sender;
+                var results = sender;
 
                 var enumer = results.GetEnumerator();
 

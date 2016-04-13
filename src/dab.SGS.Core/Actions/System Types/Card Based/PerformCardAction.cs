@@ -16,7 +16,7 @@ namespace dab.SGS.Core.Actions
         }
 
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             // Pass the sender
             return this.CardChoice().Play(sender);

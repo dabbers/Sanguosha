@@ -20,11 +20,11 @@ namespace dab.SGS.Core
         /// <summary>
         /// Can be used for whatever purposes an action needs.
         /// </summary>
-        public IEnumerator PeristedEnumerator { get; set; }
+        public PeekEnumerator<object> PeristedEnumerator { get; set; }
 
         /// <summary>
         /// Used to track the enumeration of targets.
         /// </summary>
-        public IEnumerator PeristedTargetEnumerator { get; set; }
+        public PeekEnumerator<TargetPlayer> PeristedTargetEnumerator { get; set; }
     }
 }

@@ -48,7 +48,7 @@ namespace dab.SGS.Core.Actions
             this.display = display;
         }
 
-        public abstract bool Perform(object sender, Player player, GameContext context);
+        public abstract bool Perform(SelectedCardsSender sender, Player player, GameContext context);
 
         public virtual bool Perform(object sender, Player player, GameContext context, PlayingCardStageTracker result)
         {

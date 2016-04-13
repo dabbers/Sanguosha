@@ -19,7 +19,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
         }
 
-        public override bool Play(object sender)
+        public override bool Play(SelectedCardsSender sender)
         {
             return base.Play(sender);
         }

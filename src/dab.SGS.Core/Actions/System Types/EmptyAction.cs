@@ -12,7 +12,7 @@ namespace dab.SGS.Core.Actions
         {
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             return true;
         }

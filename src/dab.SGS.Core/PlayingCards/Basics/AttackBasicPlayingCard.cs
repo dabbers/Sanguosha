@@ -28,7 +28,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
         }
 
-        public override bool Play(object sender)
+        public override bool Play(SelectedCardsSender sender)
         {
             // Devnote: is there a scenario where we don't want this?
             //this.Context.CurrentPlayStage.Cards.Activator = this;
@@ -54,7 +54,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
             return ( (this.Context.CurrentTurnStage == TurnStages.Play && this.Owner.AttacksLeft > 0) || 
                 (
-                    this.Context.CurrentTurnStage == TurnStages.PlayScrollPlace &&
+                    this.Context.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse &&
 
                     ( this.Context.CurrentPlayStage.Cards.Activator.IsPlayedAsDuel() || false ) // Todo: Add barabarians check here
                 )

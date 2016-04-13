@@ -14,7 +14,7 @@ namespace dab.SGS.Core.Actions
             this.incHealthBy = incHealthBy;
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             var targets = context.CurrentPlayStage.Targets;
             var maxTargets = Math.Min(targets.Count, this.maxTargets);

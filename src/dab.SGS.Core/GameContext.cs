@@ -150,7 +150,7 @@ namespace dab.SGS.Core
         public Actions.Action RoateTurnStage()
         {
             if (this.CurrentPlayStage.Stage != TurnStages.End && this.CurrentPlayStage.Stage != TurnStages.AttackEnd &&
-                this.CurrentPlayStage.ExpectingIputFrom == null)
+                this.CurrentPlayStage.Stage != TurnStages.PlayScrollEnd && this.CurrentPlayStage.ExpectingIputFrom == null)
             {
                 this.CurrentPlayStage.Stage++;
             }
@@ -159,7 +159,7 @@ namespace dab.SGS.Core
                 this.CurrentPlayStage.Stage = TurnStages.Start;
                 this.CurrentPlayStage.Source = new TargetPlayer(this.CurrentPlayStage.Source.Target.Right);
             }
-            else if (this.CurrentPlayStage.Stage == TurnStages.AttackEnd)
+            else if (this.CurrentPlayStage.Stage == TurnStages.AttackEnd || this.CurrentPlayStage.Stage == TurnStages.PlayScrollEnd)
             {
                 // Resume turn
                 this.CurrentPlayStage.Stage = TurnStages.Play;

@@ -13,7 +13,7 @@ namespace dab.SGS.Core.Actions
             if (numberCards < 0) throw new Exception("Invalid number of cards, must be positive!");
         }
 
-        public override bool Perform(object sender, Player player, GameContext context)
+        public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             for (var i = 0; i < this.NumberOfCards; i++)
             {
