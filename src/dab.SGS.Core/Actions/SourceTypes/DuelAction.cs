@@ -60,30 +60,57 @@ namespace dab.SGS.Core.Actions
 
                     return false;
                 case TurnStages.PlayScrollPlaced:
-                    context.CurrentPlayStage.PeristedTargetEnumerator = new PeekEnumerator<TargetPlayer>(context.CurrentPlayStage.Targets.GetEnumerator());
-                    context.CurrentPlayStage.PeristedTargetEnumerator.MoveNext();
+                    for(var i = context.CurrentPlayStage.Targets.Count - 1; i >= 0 ; i--)
+                    {
+                        var target = context.CurrentPlayStage.Targets[i];
 
-                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+                        if (target.Result == TargetResult.Warded)
+                        {
+                            context.CurrentPlayStage.Targets.Remove(target);
+                        }
 
+                        if (target.Target == context.CurrentPlayStage.Source.Target)
+                        {
+                            target.Result = TargetResult.Failed;
+                        }
+                    }
+
+                    if (context.CurrentPlayStage.Targets.Count > 1)
+                    {
+                        context.CurrentPlayStage.PeristedTargetEnumerator = new PeekEnumerator<TargetPlayer>(context.CurrentPlayStage.Targets.GetEnumerator());
+                        context.CurrentPlayStage.PeristedTargetEnumerator.MoveNext();
+
+                        context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+
+                        context.CurrentPlayStage.Stage = TurnStages.PlayScrollPlaceResponse;
+                    }
+                    else
+                    {
+                        context.CurrentPlayStage.ExpectingIputFrom = null;
+                    }
                     context.CurrentPlayStage.Stage = TurnStages.PlayScrollPlaceResponse;
 
                     return false;
                 case TurnStages.PlayScrollPlaceResponse:
 
                     // Loop through our target list (intentionally doing this)
-                    context.CurrentPlayStage.PeristedTargetEnumerator.MoveNextReset();
-
                     var previous = context.CurrentPlayStage.ExpectingIputFrom;
 
+                    context.CurrentPlayStage.PeristedTargetEnumerator.MoveNextReset();
+                    
                     context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
 
                     // If the targetresult is not none, it wasn't reset because the previous player didn't play an attack.
                     // If this is the case, the previous player should recieve damage.
-                    if (context.CurrentPlayStage.ExpectingIputFrom.Result != TargetResult.None || previous.Result == TargetResult.None)
+                    if (context.CurrentPlayStage.ExpectingIputFrom.Result != TargetResult.None || (previous?.Result ?? TargetResult.Failed) == TargetResult.None)
                     {
-                        previous.Result = TargetResult.Success;
+                        if (previous != null && previous.Result != TargetResult.Warded)
+                        {
+                            previous.Result = TargetResult.Success;
 
-                        foreach(var target in context.CurrentPlayStage.Targets)
+                        }
+
+                        foreach (var target in context.CurrentPlayStage.Targets)
                         {
                             if (target != previous) target.Result = TargetResult.Failed;
                         }

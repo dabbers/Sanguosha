@@ -144,13 +144,14 @@ namespace dab.SGS.Core
         /// That is only done by the actions that perform new "mini turns"
         /// 
         /// This method won't proceed to the next stage if we are still expecting input from players. Set expectinginputfrom to null
-        /// to proceed to the next stage.
+        /// or AnyPlayer to proceed to the next stage.
         /// </summary>
         /// <returns></returns>
         public Actions.Action RoateTurnStage()
         {
             if (this.CurrentPlayStage.Stage != TurnStages.End && this.CurrentPlayStage.Stage != TurnStages.AttackEnd &&
-                this.CurrentPlayStage.Stage != TurnStages.PlayScrollEnd && this.CurrentPlayStage.ExpectingIputFrom == null)
+                this.CurrentPlayStage.Stage != TurnStages.PlayScrollEnd && 
+                (this.CurrentPlayStage.ExpectingIputFrom == null || this.CurrentPlayStage.ExpectingIputFrom == this.AnyPlayer))
             {
                 this.CurrentPlayStage.Stage++;
             }

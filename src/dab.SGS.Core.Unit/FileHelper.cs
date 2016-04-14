@@ -29,7 +29,7 @@ namespace dab.SGS.Core.Unit
                 StorageFile anjFile = StorageFile.GetFileFromApplicationUriAsync(appUri).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
                 resp = FileIO.ReadTextAsync(anjFile).AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
             }
-            catch (Exception exp)
+            catch (Exception)
             {
             }
 

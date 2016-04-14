@@ -17,14 +17,14 @@ namespace dab.SGS.Core.Actions
         {
             switch(context.CurrentTurnStage)
             {
-                case TurnStages.PlayScrollPlaced:
+                case TurnStages.PlayScrollTargets:
                     {
                         // Can't ward delay scrolls until their judgment phase
                         if (context.CurrentPlayStage.Cards.Activator.IsPlayedAsDelayScroll()) return false;
 
                         var results = (SelectedCardsSender)sender;
 
-                        context.CurrentPlayStage.ExpectingIputFrom.Result = TargetResult.Warded;
+                        context.CurrentPlayStage.Targets.Find(p => p.Target == player).Result = TargetResult.Warded;
 
                         context.CurrentPlayStage.ExpectingIputFrom = context.AnyPlayer;
 
