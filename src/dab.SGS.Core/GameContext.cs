@@ -151,7 +151,7 @@ namespace dab.SGS.Core
         {
             if (this.CurrentPlayStage.Stage != TurnStages.End && this.CurrentPlayStage.Stage != TurnStages.AttackEnd &&
                 this.CurrentPlayStage.Stage != TurnStages.PlayScrollEnd && 
-                (this.CurrentPlayStage.ExpectingIputFrom == null || this.CurrentPlayStage.ExpectingIputFrom == this.AnyPlayer))
+                (this.CurrentPlayStage.ExpectingIputFrom.Player == null || this.CurrentPlayStage.ExpectingIputFrom.Player == this.AnyPlayer))
             {
                 this.CurrentPlayStage.Stage++;
             }

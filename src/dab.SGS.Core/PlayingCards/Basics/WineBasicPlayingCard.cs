@@ -26,21 +26,23 @@ namespace dab.SGS.Core.PlayingCards.Basics
         /// <returns></returns>
         public override bool Play(SelectedCardsSender sender)
         {
-            if (this.Owner.CurrentHealth < 1)
+            if (this.Context.CurrentPlayStage.Stage == TurnStages.Play && sender.Count(p => p.IsPlayedAsAttack()) == 0)
             {
-                this.Context.CurrentPlayStage.Targets.Add(new TargetPlayer(this.Owner));
-
-                return base.Play(sender);
+                throw new Exceptions.InvalidCardSelectionException(sender, this.Context.CurrentTurnStage);
             }
+            
+            this.Context.CurrentPlayStage.Targets.Add(new TargetPlayer(this.Owner));
 
-            return false;
+            return base.Play(sender);
         }
 
         public override bool IsPlayable()
         {
-            return (this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied && this.Context.CurrentPlayStage.Source.Target == this.Owner
+            return ((this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied && this.Context.CurrentPlayStage.Source.Target == this.Owner
+                && this.Owner.CurrentHealth < 1)
                 || this.Context.CurrentPlayStage.Stage == TurnStages.Play);
         }
+
         public new static PlayingCard GetCardFromJson(dynamic obj,
             SelectCard selectCard, IsValidCard validCard)
         {

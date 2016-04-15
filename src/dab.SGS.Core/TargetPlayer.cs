@@ -15,6 +15,11 @@ namespace dab.SGS.Core
         Warded
     }
 
+    public class TargetPlayerResponse
+    {
+        public TargetPlayer Player { get; set; }
+        public Prompts.UserPrompt Prompt { get; set; }
+    }
 
     public class TargetPlayer
     {

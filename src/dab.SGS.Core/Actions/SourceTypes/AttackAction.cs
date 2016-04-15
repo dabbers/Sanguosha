@@ -38,8 +38,10 @@ namespace dab.SGS.Core.Actions
                         Stage = TurnStages.AttackChooseTargets
                     };
 
-                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
-                    
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
+                    context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
+                        { MinRange = 1, MaxRange = player.GetAttackRange() };
+
                     return false;
                 case TurnStages.AttackChooseTargets:
 
@@ -48,7 +50,7 @@ namespace dab.SGS.Core.Actions
                         tp.Damage = this.damage;
                     }
 
-                    context.CurrentPlayStage.ExpectingIputFrom = null;
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = null;
 
                     return false;
                 case TurnStages.AttackDamage:
@@ -77,7 +79,7 @@ namespace dab.SGS.Core.Actions
                         context.CurrentTurnStage = TurnStages.PlayScrollPlaceResponse;
 
                         // Reset the next player so they can play their card.
-                        context.CurrentPlayStage.ExpectingIputFrom.Result = TargetResult.Failed;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player.Result = TargetResult.Failed;
                         context.CurrentPlayStage.PeristedTargetEnumerator.PeekRotate.Result = TargetResult.None;
                         break;
                     }

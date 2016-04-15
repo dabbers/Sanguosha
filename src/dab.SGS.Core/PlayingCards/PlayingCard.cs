@@ -59,6 +59,8 @@ namespace dab.SGS.Core.PlayingCards
 
         public virtual bool Play(SelectedCardsSender sender)
         {
+            if (!this.IsPlayable()) throw new Exceptions.InvalidCardSelectionException(sender, this.Context.CurrentTurnStage);
+
             var res = this.playAction(sender, this.Actions);
 
             //if (res)

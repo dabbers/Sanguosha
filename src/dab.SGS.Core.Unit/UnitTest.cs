@@ -554,11 +554,11 @@ namespace dab.SGS.Core.Unit
             //action = ctx.RoateTurnStage();
             //action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom != null)
+            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom.Player != null)
             {
 
                 // Our target must play a dodge or take damage. Poor soul
-                var attack = ctx.CurrentPlayStage.ExpectingIputFrom.Target.Hand.Find(p => p.IsPlayable() && p.GetType() == typeof(AttackBasicPlayingCard));
+                var attack = ctx.CurrentPlayStage.ExpectingIputFrom.Player.Target.Hand.Find(p => p.IsPlayable() && p.GetType() == typeof(AttackBasicPlayingCard));
 
                 if (attack != null)
                 {
@@ -666,7 +666,7 @@ namespace dab.SGS.Core.Unit
 
             Assert.AreEqual(TurnStages.PlayScrollPlaceResponse, ctx.CurrentTurnStage);
 
-            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom != null)
+            while (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom.Player != null)
             {
                 action = ctx.RoateTurnStage();
                 action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
@@ -759,11 +759,11 @@ namespace dab.SGS.Core.Unit
             //action = ctx.RoateTurnStage();
             //action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
 
-            if (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom != null)
+            if (ctx.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse && ctx.CurrentPlayStage.ExpectingIputFrom.Player != null)
             {
 
                 // Our target must play a dodge or take damage. Poor soul
-                var attack = ctx.CurrentPlayStage.ExpectingIputFrom.Target.Hand.Find(p => p.IsPlayable() && p.GetType() == typeof(AttackBasicPlayingCard));
+                var attack = ctx.CurrentPlayStage.ExpectingIputFrom.Player.Target.Hand.Find(p => p.IsPlayable() && p.GetType() == typeof(AttackBasicPlayingCard));
 
                 if (attack != null)
                 {

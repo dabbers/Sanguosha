@@ -40,7 +40,10 @@ namespace dab.SGS.Core.Actions
                         Stage = TurnStages.PlayScrollTargets
                     };
 
-                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
+                    context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
+                        { MinRange = 1, MaxRange = 999 };
+
                     return false;
                 case TurnStages.PlayScrollTargets:
 
@@ -51,7 +54,7 @@ namespace dab.SGS.Core.Actions
                         tp.Damage = 1;
                     }
 
-                    context.CurrentPlayStage.ExpectingIputFrom = null;
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = null;
 
                     // Add the ability for the activator card to be applied automatically. This way, when we move to the next stage, we can automatically get the player input.
                     context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaced, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
@@ -80,13 +83,14 @@ namespace dab.SGS.Core.Actions
                         context.CurrentPlayStage.PeristedTargetEnumerator = new PeekEnumerator<TargetPlayer>(context.CurrentPlayStage.Targets.GetEnumerator());
                         context.CurrentPlayStage.PeristedTargetEnumerator.MoveNext();
 
-                        context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+                        context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
 
                         context.CurrentPlayStage.Stage = TurnStages.PlayScrollPlaceResponse;
                     }
                     else
                     {
-                        context.CurrentPlayStage.ExpectingIputFrom = null;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player = null;
                     }
                     context.CurrentPlayStage.Stage = TurnStages.PlayScrollPlaceResponse;
 
@@ -98,26 +102,27 @@ namespace dab.SGS.Core.Actions
 
                     context.CurrentPlayStage.PeristedTargetEnumerator.MoveNextReset();
                     
-                    context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.PeristedTargetEnumerator.Current;
+                    context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
 
                     // If the targetresult is not none, it wasn't reset because the previous player didn't play an attack.
                     // If this is the case, the previous player should recieve damage.
-                    if (context.CurrentPlayStage.ExpectingIputFrom.Result != TargetResult.None || (previous?.Result ?? TargetResult.Failed) == TargetResult.None)
+                    if (context.CurrentPlayStage.ExpectingIputFrom.Player.Result != TargetResult.None || (previous?.Player.Result ?? TargetResult.Failed) == TargetResult.None)
                     {
-                        if (previous != null && previous.Result != TargetResult.Warded)
+                        if (previous != null && previous.Player.Result != TargetResult.Warded)
                         {
-                            previous.Result = TargetResult.Success;
+                            previous.Player.Result = TargetResult.Success;
 
                         }
 
                         foreach (var target in context.CurrentPlayStage.Targets)
                         {
-                            if (target != previous) target.Result = TargetResult.Failed;
+                            if (target != previous.Player) target.Result = TargetResult.Failed;
                         }
 
                         // this lets the turnstage progress, and tells the game engine
                         // we aren't expecting any new player input.
-                        context.CurrentPlayStage.ExpectingIputFrom = null;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player = null;
                     }
 
                     return false;

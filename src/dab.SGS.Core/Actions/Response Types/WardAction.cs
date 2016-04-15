@@ -26,14 +26,16 @@ namespace dab.SGS.Core.Actions
 
                         context.CurrentPlayStage.Targets.Find(p => p.Target == player).Result = TargetResult.Warded;
 
-                        context.CurrentPlayStage.ExpectingIputFrom = context.AnyPlayer;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player = context.AnyPlayer;
+                        context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
 
                         return true;
                     }
                 case TurnStages.PreJudgement:
                     {
-                        context.CurrentPlayStage.ExpectingIputFrom.Result = TargetResult.Warded;
-                        context.CurrentPlayStage.ExpectingIputFrom = context.AnyPlayer;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player.Result = TargetResult.Warded;
+                        context.CurrentPlayStage.ExpectingIputFrom.Player = context.AnyPlayer;
+                        context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
                         var results = sender;
 
                         //((DelayedScrollPlayingCard)context.CurrentPlayStage.Cards.Activator).Warded(player, results);

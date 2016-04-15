@@ -17,11 +17,12 @@ namespace dab.SGS.Core.Actions
         {
             // Player hasn't had a chance to select a card yet. We will tell the game context 
             // that we are now expecting input from a player.
-            if (context.CurrentPlayStage.ExpectingIputFrom == null)
+            if (context.CurrentPlayStage.ExpectingIputFrom.Player == null)
             {
                 var t = (new object[this.NumberOfCards]).ToList().GetEnumerator();
 
-                context.CurrentPlayStage.ExpectingIputFrom = context.CurrentPlayStage.Source;
+                context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
+                context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
                 context.CurrentPlayStage.PeristedEnumerator = new PeekEnumerator<object>(t);
                 return false;
             }
@@ -41,7 +42,7 @@ namespace dab.SGS.Core.Actions
 
                 if (context.CurrentPlayStage.PeristedEnumerator.MoveNext()) return false;
 
-                context.CurrentPlayStage.ExpectingIputFrom = null;
+                context.CurrentPlayStage.ExpectingIputFrom.Player = null;
             }
 
             return true;

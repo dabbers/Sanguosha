@@ -19,6 +19,11 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         {
         }
 
+        public override bool Play(SelectedCardsSender sender)
+        {
+            return base.Play(sender);
+        }
+
         public override bool IsPlayable()
         {
             // can't use ward on delayed scrolls immediately. Only on prejudgement
