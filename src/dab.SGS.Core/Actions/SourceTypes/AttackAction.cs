@@ -44,10 +44,11 @@ namespace dab.SGS.Core.Actions
 
                     return false;
                 case TurnStages.AttackChooseTargets:
+                    int extra = (sender.Count(p => p.IsPlayedAsWine()) > 0 ? 1 : 0);
 
                     foreach (var tp in context.CurrentPlayStage.Targets)
                     {
-                        tp.Damage = this.damage;
+                        tp.Damage = this.damage + extra;
                     }
 
                     context.CurrentPlayStage.ExpectingIputFrom.Player = null;
