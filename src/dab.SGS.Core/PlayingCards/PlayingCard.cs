@@ -155,7 +155,7 @@ namespace dab.SGS.Core.PlayingCards
         }
         #endregion
 
-        protected bool playAction(SelectedCardsSender sender, List<Actions.Action> actions)
+        internal bool playAction(SelectedCardsSender sender, List<Actions.Action> actions)
         {
 
             if (actions == null) return false;
@@ -175,7 +175,7 @@ namespace dab.SGS.Core.PlayingCards
             var color = this.color != PlayingCardColor.None ? this.color.ToString() : "No colored ";
             var suite = this.Suite.ToString();
 
-            return color + " " + suite + this.display;
+            return color + " " + suite + " " + this.display;
         }
 
         public static PlayingCard GetCardFromJson(dynamic obj,

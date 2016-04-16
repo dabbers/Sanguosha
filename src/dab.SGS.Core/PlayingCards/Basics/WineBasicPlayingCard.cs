@@ -28,7 +28,8 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
             if (this.Context.CurrentPlayStage.Stage == TurnStages.Play && sender.Count(p => p.IsPlayedAsAttack()) == 0)
             {
-                throw new Exceptions.InvalidCardSelectionException(sender, this.Context.CurrentTurnStage);
+                this.Discard();
+                return true;
             }
             
             this.Context.CurrentPlayStage.Targets.Add(new TargetPlayer(this.Owner));

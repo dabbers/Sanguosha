@@ -55,8 +55,6 @@ namespace dab.SGS.Core
             this.Roles = new List<Core.Roles>();
             this.CurrentPlayStage = new PlayingCardStageTracker()
             {
-                Cards = new SelectedCardsSender(),
-                Targets = new List<TargetPlayer>(),
                 Stage = TurnStages.End
             };
             this.PreviousStages = new Stack<PlayingCardStageTracker>();

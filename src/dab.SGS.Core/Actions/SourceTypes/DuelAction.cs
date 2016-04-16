@@ -98,7 +98,7 @@ namespace dab.SGS.Core.Actions
                 case TurnStages.PlayScrollPlaceResponse:
 
                     // Loop through our target list (intentionally doing this)
-                    var previous = context.CurrentPlayStage.ExpectingIputFrom;
+                    var previous = context.CurrentPlayStage.ExpectingIputFrom.Player;
 
                     context.CurrentPlayStage.PeristedTargetEnumerator.MoveNextReset();
                     
@@ -107,17 +107,17 @@ namespace dab.SGS.Core.Actions
 
                     // If the targetresult is not none, it wasn't reset because the previous player didn't play an attack.
                     // If this is the case, the previous player should recieve damage.
-                    if (context.CurrentPlayStage.ExpectingIputFrom.Player.Result != TargetResult.None || (previous?.Player.Result ?? TargetResult.Failed) == TargetResult.None)
+                    if (context.CurrentPlayStage.ExpectingIputFrom.Player.Result != TargetResult.None || (previous?.Result ?? TargetResult.Failed) == TargetResult.None)
                     {
-                        if (previous != null && previous.Player.Result != TargetResult.Warded)
+                        if (previous != null && previous.Result != TargetResult.Warded)
                         {
-                            previous.Player.Result = TargetResult.Success;
+                            previous.Result = TargetResult.Success;
 
                         }
 
                         foreach (var target in context.CurrentPlayStage.Targets)
                         {
-                            if (target != previous.Player) target.Result = TargetResult.Failed;
+                            if (target != previous) target.Result = TargetResult.Failed;
                         }
 
                         // this lets the turnstage progress, and tells the game engine

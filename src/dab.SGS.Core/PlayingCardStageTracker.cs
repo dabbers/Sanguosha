@@ -17,6 +17,13 @@ namespace dab.SGS.Core
 
         public TargetPlayer Source { get; set; }
 
+        public PlayingCardStageTracker()
+        {
+            this.ExpectingIputFrom = new TargetPlayerResponse();
+            this.Cards = new SelectedCardsSender();
+            this.Targets = new List<TargetPlayer>();
+        }
+
         /// <summary>
         /// Can be used for whatever purposes an action needs.
         /// </summary>

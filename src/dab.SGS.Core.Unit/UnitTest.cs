@@ -435,7 +435,7 @@ namespace dab.SGS.Core.Unit
             var p = new Player("dab", 3, Roles.Minister);
 
             ctx.CurrentTurnStage = TurnStages.PlayScrollPlaceResponse;
-            var duel = new DuelScrollPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "Duel", "Play duel bro");
+            var duel = new DuelScrollPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "Play duel bro");
 
             Assert.IsTrue(duel.IsPlayedAsDuel());
 
@@ -445,7 +445,7 @@ namespace dab.SGS.Core.Unit
             {
                 pcpt.Card.Context = ctx;
                 pcpt.Card.Owner = p;
-                Assert.AreEqual(pcpt.Expected, pcpt.Card.IsPlayable(), String.Format("{0} failed the IsPlayable test here", pcpt.Card.ToString()));
+                Assert.AreEqual(pcpt.Expected, pcpt.Card.IsPlayable(), String.Format("{0} (Type: {1}) failed the IsPlayable test here", pcpt.Card.ToString(), pcpt.Card.GetType().ToString()));
             }
 
 
@@ -479,20 +479,19 @@ namespace dab.SGS.Core.Unit
             var p = new Player("dab", 3, Roles.Minister);
 
             ctx.CurrentTurnStage = TurnStages.PlayScrollTargets;
-            var duel = new DuelScrollPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "Duel", "Play duel bro");
+            var duel = new DuelScrollPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "Play duel bro");
 
             Assert.IsTrue(duel.IsPlayedAsDuel());
 
             ctx.CurrentPlayStage.Cards = new SelectedCardsSender(new List<PlayingCard>() { duel }, duel);
+            ctx.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
 
             foreach (var pcpt in cards)
             {
                 pcpt.Card.Context = ctx;
                 pcpt.Card.Owner = p;
-                Assert.AreEqual(pcpt.Expected, pcpt.Card.IsPlayable(), String.Format("{0} failed the IsPlayable test here", pcpt.Card.ToString()));
+                Assert.AreEqual(pcpt.Expected, pcpt.Card.IsPlayable(), String.Format("{0} (Type: {1}) failed the IsPlayable test here", pcpt.Card.ToString(), pcpt.Card.GetType().ToString()));
             }
-
-
         }
 
         [TestMethod]

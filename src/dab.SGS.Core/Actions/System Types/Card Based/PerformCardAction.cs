@@ -14,14 +14,12 @@ namespace dab.SGS.Core.Actions
         {
             this.CardChoice = card;
         }
-
-
+        
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             // Pass the sender
-            return this.CardChoice().Play(sender);
+            var card = this.CardChoice();
+            return card.playAction(sender, card.Actions);
         }
-
-
     }
 }
