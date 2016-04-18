@@ -99,6 +99,7 @@
     <Compile Include="FileHelper.cs" />
     <Compile Include="Gameplay\AttackUnitTests.cs" />
     <Compile Include="Gameplay\DuelUnitTests.cs" />
+    <Compile Include="Gameplay\PeachUnitTest.cs" />
     <Compile Include="Gameplay\ValidCards.cs" />
     <Compile Include="Gameplay\WineUnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

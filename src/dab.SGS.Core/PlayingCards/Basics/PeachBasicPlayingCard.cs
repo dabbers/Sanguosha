@@ -10,7 +10,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
     public class PeachBasicPlayingCard : BasicPlayingCard
     {
         public PeachBasicPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details) 
-            : base(color, suite, "Peach", details, new List<Core.Actions.Action>() { new IncreaseHealthToTargetAction(1, 1) })
+            : base(color, suite, "Peach", details, new List<Core.Actions.Action>() { new PeachAction(), new IncreaseHealthToTargetAction(1, 1) })
         {
         }
 
