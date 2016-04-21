@@ -123,6 +123,7 @@
     <Compile Include="Actions\System Types\IncreaseHealthToTargetAction.cs" />
     <Compile Include="Actions\System Types\Card Based\PerformCardAction.cs" />
     <Compile Include="Actions\System Types\Card Based\ReduceHandsizeDiscardAction.cs" />
+    <Compile Include="Actions\System Types\ReduceHealthToTargetAction.cs" />
     <Compile Include="Actions\System Types\TargetPromptSelectAction.cs" />
     <Compile Include="Actions\System Types\ResetAttackCounterAction.cs" />
     <Compile Include="Actions\Response Types\WardAction.cs" />

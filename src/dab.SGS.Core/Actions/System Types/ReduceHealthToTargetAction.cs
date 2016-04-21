@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dab.SGS.Core.Actions
+namespace dab.SGS.Core.Actions.System_Types
 {
-    public class IncreaseHealthToTargetAction : Action
+    public class ReduceHealthToTargetAction : Action
     {
-        public IncreaseHealthToTargetAction(int maxTargets = 1, int incHealthBy = 1) : base("Peach")
+        public ReduceHealthToTargetAction(int maxTargets = 1, int decHealthBy = 1) : base("Peach")
         {
             this.maxTargets = maxTargets;
-            this.incHealthBy = incHealthBy;
+            this.decHealthBy = decHealthBy;
         }
 
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
@@ -21,13 +21,13 @@ namespace dab.SGS.Core.Actions
 
             for (var i = 0; i < maxTargets; i++)
             {
-                targets[i].Target.CurrentHealth = Math.Min(targets[i].Target.CurrentHealth + this.incHealthBy, targets[i].Target.MaxHealth);
+                targets[i].Target.CurrentHealth = Math.Min(targets[i].Target.CurrentHealth - this.decHealthBy, targets[i].Target.MaxHealth);
             }
 
             return true;
         }
 
         private int maxTargets = 1;
-        private int incHealthBy = 1;
+        private int decHealthBy = 1;
     }
 }

@@ -26,8 +26,11 @@ namespace dab.SGS.Core.PlayingCards.Basics
         /// <returns></returns>
         public override bool Play(SelectedCardsSender sender)
         {
-            if (this.Context.CurrentPlayStage.Stage == TurnStages.Play && sender.Count(p => p.IsPlayedAsAttack()) == 0)
+            if (this.Context.CurrentPlayStage.Stage == TurnStages.Play && sender.Count(p => p.IsPlayedAsAttack()) == 0 && 
+                !this.Owner.WineInEffect && this.Owner.WinesLeft > 0)
             {
+                this.Owner.WinesLeft--;
+                this.Owner.WineInEffect = true;
                 this.Discard();
                 return true;
             }
@@ -41,7 +44,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         {
             return ((this.Context.CurrentPlayStage.Stage == TurnStages.PlayerDied && this.Context.CurrentPlayStage.Source.Target == this.Owner
                 && this.Owner.CurrentHealth < 1)
-                || this.Context.CurrentPlayStage.Stage == TurnStages.Play);
+                || this.Context.CurrentPlayStage.Stage == TurnStages.Play && !this.Owner.WineInEffect && this.Owner.WinesLeft > 0);
         }
 
         public new static PlayingCard GetCardFromJson(dynamic obj,

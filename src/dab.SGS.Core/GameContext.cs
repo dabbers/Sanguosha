@@ -11,6 +11,7 @@ namespace dab.SGS.Core
     public class GameContext
     {
         public static int DEFAULT_MAX_ATTACKS = 1;
+        public static int DEFAULT_MAX_NONDEATHWINES = 1;
 
         public Player[] Players { get { return this.players.ToArray(); } }
 
@@ -183,7 +184,7 @@ namespace dab.SGS.Core
 
             p.TurnStageActions.Add(TurnStages.Draw, this.DefaultDraw);
             p.TurnStageActions.Add(TurnStages.Discard, this.DefaultDiscard);
-            p.TurnStageActions.Add(TurnStages.End, new Actions.ResetAttackCounterAction());
+            p.TurnStageActions.Add(TurnStages.End, new Actions.ResetPlayerCountersAction());
             // Perform the card so we can finish up its special damage stuff
             p.TurnStageActions.Add(TurnStages.AttackDamage, new Actions.PerformCardAction(() => this.CurrentPlayStage.Cards.Activator));
             

@@ -6,25 +6,30 @@ using System.Threading.Tasks;
 
 namespace dab.SGS.Core.Actions
 {
-    public class ResetAttackCounterAction : Action
+    public class ResetPlayerCountersAction : Action
     {
-        public ResetAttackCounterAction() : 
-            this(GameContext.DEFAULT_MAX_ATTACKS)
+        public ResetPlayerCountersAction() : 
+            this(GameContext.DEFAULT_MAX_ATTACKS, GameContext.DEFAULT_MAX_NONDEATHWINES)
         {
         }
 
-        public ResetAttackCounterAction(int max) : base("Reset Attack Counter")
+        public ResetPlayerCountersAction(int maxAttack, int maxWines) : base("Reset Attack Counter")
         {
-            this.maxAttacks = max;
+            this.maxAttacks = maxAttack;
+            this.maxWines = maxWines;
         }
 
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             player.AttacksLeft = this.maxAttacks;
+            player.WinesLeft = this.maxWines;
+            player.WineInEffect = false;
+
 
             return true;
         }
 
         private int maxAttacks = 0;
+        private int maxWines = 0;
     }
 }

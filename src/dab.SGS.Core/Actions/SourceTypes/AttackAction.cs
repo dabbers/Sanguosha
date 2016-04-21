@@ -40,11 +40,14 @@ namespace dab.SGS.Core.Actions
 
                     context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
                     context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
-                        { MinRange = 1, MaxRange = player.GetAttackRange() };
+                        { MinRange = 1, MaxRange = player.GetAttackRange(), MaxCards = 1, MinTargets = 1 };
+
+                    player.AttacksLeft--;
 
                     return false;
                 case TurnStages.AttackChooseTargets:
-                    int extra = (sender.Count(p => p.IsPlayedAsWine()) > 0 ? 1 : 0);
+                    int extra = (sender.Count(p => p.IsPlayedAsWine()) > 0 || player.WineInEffect ? 1 : 0);
+                    player.WineInEffect = false;
 
                     foreach (var tp in context.CurrentPlayStage.Targets)
                     {

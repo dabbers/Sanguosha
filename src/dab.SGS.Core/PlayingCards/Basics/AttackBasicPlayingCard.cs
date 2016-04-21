@@ -53,7 +53,7 @@ namespace dab.SGS.Core.PlayingCards.Basics
         public override bool IsPlayable()
         {
             return ( (this.Context.CurrentTurnStage == TurnStages.Play && this.Owner.AttacksLeft > 0) ||
-                (this.Context.CurrentTurnStage >= TurnStages.AttackChooseTargets && this.Context.CurrentTurnStage <= TurnStages.AttackEnd && this.Owner.AttacksLeft > 0 &&
+                (this.Context.CurrentTurnStage >= TurnStages.AttackChooseTargets && this.Context.CurrentTurnStage <= TurnStages.AttackEnd &&
                     this.Context.CurrentTurnStage != TurnStages.AttackCardResponse) ||
                 (
                     this.Context.CurrentTurnStage == TurnStages.PlayScrollPlaceResponse &&

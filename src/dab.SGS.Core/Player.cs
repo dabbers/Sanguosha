@@ -36,6 +36,9 @@ namespace dab.SGS.Core
         public Roles Role { get; set; }
         public int AttacksLeft { get; set; }
 
+        public int WinesLeft { get; set; }
+        public bool WineInEffect { get; set; }
+
         public List<Heroes.HeroCard> Heros { get; set; }
 
         public Heroes.HeroCard ActiveHero
@@ -63,7 +66,9 @@ namespace dab.SGS.Core
             this.Hand = new List<PlayingCard>();
             this.Heros = new List<Heroes.HeroCard>();
             this.TurnStageActions = new TurnStageDictionary();
-            this.AttacksLeft = 1;
+            this.AttacksLeft = GameContext.DEFAULT_MAX_ATTACKS;
+            this.WinesLeft = GameContext.DEFAULT_MAX_NONDEATHWINES;
+            this.WineInEffect = false;
             this.Role = role;
             this.CurrentHealth = this.MaxHealth = maxhealth + (this.Role == Roles.King ? 1 : 0);
 
