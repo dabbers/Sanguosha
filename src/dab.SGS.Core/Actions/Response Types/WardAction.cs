@@ -29,6 +29,7 @@ namespace dab.SGS.Core.Actions
                         context.CurrentPlayStage.ExpectingIputFrom.Player = context.AnyPlayer;
                         context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
 
+                        sender?.DiscardAll();
                         return true;
                     }
                 case TurnStages.PreJudgement:
@@ -39,6 +40,8 @@ namespace dab.SGS.Core.Actions
                         var results = sender;
 
                         //((DelayedScrollPlayingCard)context.CurrentPlayStage.Cards.Activator).Warded(player, results);
+
+                        sender?.DiscardAll();
                         return true;
                     }
             }

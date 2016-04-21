@@ -50,7 +50,7 @@ namespace dab.SGS.Core.Unit.Gameplay
 
             // Play an attack.
             sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsWine()) },
-                ctx.CurrentPlayerTurn.Hand[0]);
+                ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsWine()));
 
             // Play first playable card in the select cards (only 1 of the any should be playable).
             foreach (var card in sender) if (card.IsPlayable()) card.Play(sender);

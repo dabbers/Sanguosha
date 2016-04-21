@@ -17,6 +17,8 @@ namespace dab.SGS.Core.Actions
             if (context.CurrentTurnStage == TurnStages.Play || context.CurrentTurnStage == TurnStages.PlayerDied)
             {
                 context.CurrentPlayStage.Targets.Add(context.CurrentPlayStage.Source);
+
+                sender?.DiscardAll();
                 return true;
             }
 
