@@ -68,6 +68,14 @@ namespace dab.SGS.Core
                 return _peek;
             }
         }
+
+        public bool CanMoveNext()
+        {
+            TryFetchPeek();
+
+            return _didPeek;
+        }
+
         public T PeekRotate
         {
             get

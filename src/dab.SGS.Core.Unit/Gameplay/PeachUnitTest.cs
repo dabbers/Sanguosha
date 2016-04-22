@@ -121,10 +121,7 @@ namespace dab.SGS.Core.Unit.Gameplay
 
             Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
             Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
-
-            // Pretend our current user has 1 less health
-            ctx.CurrentPlayerTurn.CurrentHealth--;
-
+            
             // Insert a wine into the hand
             ctx.CurrentPlayerTurn.Hand.Add(new PeachBasicPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "") { Context = ctx, Owner = ctx.CurrentPlayerTurn });
 

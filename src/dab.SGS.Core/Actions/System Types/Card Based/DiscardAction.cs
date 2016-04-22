@@ -40,7 +40,7 @@ namespace dab.SGS.Core.Actions
                     enumer.Current.Discard();
                 }
 
-                if (context.CurrentPlayStage.PeristedEnumerator.MoveNext()) return false;
+                if (context.CurrentPlayStage.PeristedEnumerator.CanMoveNext()) return false;
 
                 context.CurrentPlayStage.ExpectingIputFrom.Player = null;
             }
