@@ -24,7 +24,7 @@ namespace dab.SGS.Core.Actions
             // Do we need to begin a player died event?
             if (player.CurrentHealth < 1)
             {
-                new PlayerDiedAction(player.Display + " died").Perform(sender, player, context);
+                new PlayerDiedAction().Perform(sender, player, context);
             }
 
             return true;

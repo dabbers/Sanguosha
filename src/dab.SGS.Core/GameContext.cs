@@ -173,6 +173,14 @@ namespace dab.SGS.Core
                 res = this.EmptyAction;
             }
 
+            // Validate we haven't lost any cards in the deck (DEBUG THING)
+#if DEBUG
+            if (this.Deck.AllCards.Count != this.Deck.DiscardPile.Count + (this.Players.Sum(p => p.GetTotalCardsToPlayer())))
+            {
+                throw new Exception("Total cards != discard + cards in use by players. Are we missing cards??");
+            }
+#endif
+
             return res;
         }
 
@@ -188,6 +196,7 @@ namespace dab.SGS.Core
             p.TurnStageActions.Add(TurnStages.End, new Actions.ResetPlayerCountersAction());
             // Perform the card so we can finish up its special damage stuff
             p.TurnStageActions.Add(TurnStages.AttackDamage, new Actions.PerformCardAction(() => this.CurrentPlayStage.Cards.Activator));
+            p.TurnStageActions.Add(TurnStages.PlayerDied, new Actions.PlayerDiedAction());
             
             // TODO: Load Hero modifications. Do it AFTER assigning defaults, so our skills 
             //      can chain our draws if they want.
@@ -205,6 +214,20 @@ namespace dab.SGS.Core
             }
 
             this.players.Add(p);
+        }
+
+        public void EliminatePlayer(Player player)
+        {
+            this.players.Remove(player);
+            player.Left.Right = player.Right;
+            player.Right.Left = player.Left;
+
+            foreach(var card in player.Hand)
+            {
+                card.Discard();
+            }
+
+
         }
 
         public void AddPlayer(string display, Heroes.HeroCard hero)

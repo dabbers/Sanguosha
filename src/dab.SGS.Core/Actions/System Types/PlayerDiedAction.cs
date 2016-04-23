@@ -8,36 +8,41 @@ namespace dab.SGS.Core.Actions
 {
     public class PlayerDiedAction : Action
     {
-        public PlayerDiedAction(string display) : base(display)
+        public PlayerDiedAction() : base("Player Died")
         {
         }
 
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
-            if (context.CurrentTurnStage != TurnStages.PlayerDied)
+
+            switch (context.CurrentTurnStage)
             {
-                // We need to setup the stage for player died.
+                case TurnStages.PlayerDied:
 
-                context.PreviousStages.Push(context.CurrentPlayStage);
+                    return false;
 
-                context.CurrentPlayStage = new PlayingCardStageTracker()
-                {
-                    Cards = sender,
-                    Source = new TargetPlayer(player),
-                    Targets = new List<TargetPlayer>(),
-                    Stage = TurnStages.PlayerDied
-                };
+                case TurnStages.PlayerDiedPreStage:
 
-                context.CurrentPlayStage.ExpectingIputFrom.Player = context.AnyPlayer;
-                context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
+                    return false;
 
-                return false;
+                default:
+
+                    context.PreviousStages.Push(context.CurrentPlayStage);
+
+                    context.CurrentPlayStage = new PlayingCardStageTracker()
+                    {
+                        Cards = sender,
+                        Source = new TargetPlayer(player),
+                        Targets = new List<TargetPlayer>(),
+                        Stage = TurnStages.PlayerDied
+                    };
+
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = context.AnyPlayer;
+                    context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.CardsPlayerHand);
+                    return false;
+
             }
-            else
-            {
 
-                return false;
-            }
         }
     }
 }

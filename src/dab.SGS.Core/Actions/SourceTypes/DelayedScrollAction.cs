@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dab.SGS.Core.PlayingCards;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,15 +38,32 @@ namespace dab.SGS.Core.Actions
                     context.CurrentPlayStage.ExpectingIputFrom.Player = null;
 
                     context.CurrentPlayStage.Targets.First().Target.PlayerArea.DelayedScrolls.Add(sender.Activator);
-                    foreach(var card in sender)
+
+
                     {
-                        if (card != sender.Activator) card.Discard();
+                        foreach (var card in sender)
+                        {
+                            if (card != sender.Activator) card.Discard();
+                        }
                     }
 
                     sender.Activator.Owner.Hand.Remove(sender.Activator);
 
                     context.CurrentPlayStage = context.PreviousStages.Pop();
                     return false;
+                case TurnStages.Judgement:
+
+
+                    {
+                        var card = context.Deck.Draw();
+
+                        this.scrollAction.Perform(new SelectedCardsSender() { card }, player, context);
+
+                        card.Discard();
+                        sender.Activator.Discard();
+                    }
+
+                    return true;
             }
 
             return true;
