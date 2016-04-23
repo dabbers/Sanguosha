@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace dab.SGS.Core.Actions.System_Types
+namespace dab.SGS.Core.Actions
 {
     public class TargetPromptSelectAction : Action
     {

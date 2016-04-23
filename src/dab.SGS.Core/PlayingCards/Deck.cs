@@ -41,6 +41,12 @@ namespace dab.SGS.Core.PlayingCards
 
             this.DiscardPile = new List<PlayingCard>();
         }
+
+        /// <summary>
+        /// Draw a new card from the draw pile. The discard deck will get auto shuffled and placed in the draw pile
+        /// if no cards are in the pile to draw from.
+        /// </summary>
+        /// <returns>The playing card drawn from the deck</returns>
         public PlayingCard Draw()
         {
             if (this.DrawPile.Count() == 0)

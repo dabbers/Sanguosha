@@ -138,7 +138,8 @@ namespace dab.SGS.Core.Actions
                             // adjust for shield damage
                             //tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.PlayStageTracker, context.PlayStageTracker.Source.Target.PlayerArea.Weapon);
 
-                            tp.Target.CurrentHealth -= tp.Damage;
+                            //tp.Target.CurrentHealth -= tp.Damage;
+                            new ReduceHealthToTargetAction(tp.Damage).Perform(sender, tp.Target, context);
                         }
                     }
 

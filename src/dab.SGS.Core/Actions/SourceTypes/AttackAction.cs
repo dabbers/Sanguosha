@@ -27,12 +27,11 @@ namespace dab.SGS.Core.Actions
                     }
 
                     context.PreviousStages.Push(context.CurrentPlayStage);
-                    var results = sender;
 
 
                     context.CurrentPlayStage = new PlayingCardStageTracker()
                     {
-                        Cards = results,
+                        Cards = sender,
                         Source = new TargetPlayer(player),
                         Targets = new List<TargetPlayer>(),
                         Stage = TurnStages.AttackChooseTargets
@@ -58,21 +57,31 @@ namespace dab.SGS.Core.Actions
 
                     return false;
                 case TurnStages.AttackDamage:
-                    var tmpStage = context.PreviousStages.Pop();
 
-                    foreach(var tp in context.CurrentPlayStage.Targets)
+                    for (var i = context.CurrentPlayStage.Targets.Count - 1; i > 0; i--)
                     {
+                        var tp = context.CurrentPlayStage.Targets[i];
+
+                        context.CurrentPlayStage.Targets.Remove(tp);
+
                         if (tp.Result == TargetResult.Success || tp.Result == TargetResult.None)
                         {
                             // adjust for shield damage
-                            tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield?.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon) ?? 0;
+                            var total = tp.Target.PlayerArea.Shield?.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon) ?? 0;
+                            total += tp.Damage;
 
-                            tp.Target.CurrentHealth -= tp.Damage;
+                            
+                            if (!new ReduceHealthToTargetAction(total).Perform(sender, tp.Target, context))
+                            {
+                                // a player has died, we will come back to this later.
+                                return false;
+                            }
                         }
 
                     }
 
                     // Clear up the stage tracker for the next turn.
+                    var tmpStage = context.PreviousStages.Pop();
                     context.CurrentPlayStage = tmpStage;
                     break;
                 case TurnStages.PlayScrollPlaceResponse:

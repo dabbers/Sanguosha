@@ -28,7 +28,6 @@ namespace dab.SGS.Core.Actions
             }
             else
             {
-                // How attacking a player works:
                 var results = sender;
 
                 var enumer = results.GetEnumerator();
