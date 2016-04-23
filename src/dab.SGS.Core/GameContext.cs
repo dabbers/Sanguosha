@@ -178,7 +178,8 @@ namespace dab.SGS.Core
 
         public void AddPlayer(string display, Heroes.HeroCard hero, Roles role)
         {
-            var p = new Player(display, 4, role);
+            // TODO: Remove null terminator
+            var p = new Player(display, hero?.MaxHealth ?? 4, role);
             p.DistanceModifiers = 0;
             p.HandSizeModifies = 0;
 

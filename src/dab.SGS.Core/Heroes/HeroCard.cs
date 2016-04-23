@@ -29,6 +29,8 @@ namespace dab.SGS.Core.Heroes
         public string Display { get; private set; }
         public string Details { get; private set; }
 
+        public int MaxHealth { get; private set; }
+
 
         public abstract PlayableVerdict IsCardPlayable(GameContext ctx, PlayingCards.PlayingCard card);
     }

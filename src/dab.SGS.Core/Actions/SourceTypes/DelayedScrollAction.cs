@@ -18,17 +18,40 @@ namespace dab.SGS.Core.Actions
             {
                 case TurnStages.Play:
 
+                    context.PreviousStages.Push(context.CurrentPlayStage);
+
+
+                    context.CurrentPlayStage = new PlayingCardStageTracker()
+                    {
+                        Cards = sender,
+                        Source = new TargetPlayer(player),
+                        Targets = new List<TargetPlayer>(),
+                        Stage = TurnStages.AttackChooseTargets
+                    };
+
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
+                    context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
+                        { MinRange = 1, MaxRange = player.GetAttackRange(), MaxCards = 1, MinTargets = 1 };
                     return false;
                 case TurnStages.PlayScrollTargets:
+                    context.CurrentPlayStage.ExpectingIputFrom.Player = null;
 
-                    return false;
-                case TurnStages.PlayScrollPlaced:
+                    context.CurrentPlayStage.Targets.First().Target.PlayerArea.DelayedScrolls.Add(sender.Activator);
+                    foreach(var card in sender)
+                    {
+                        if (card != sender.Activator) card.Discard();
+                    }
 
+                    sender.Activator.Owner.Hand.Remove(sender.Activator);
+
+                    context.CurrentPlayStage = context.PreviousStages.Pop();
                     return false;
             }
 
             return true;
 
         }
+
+        private Action scrollAction = null;
     }
 }

@@ -39,7 +39,7 @@ namespace dab.SGS.Core.Actions
 
                     context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
                     context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
-                        { MinRange = 1, MaxRange = player.GetAttackRange(), MaxCards = 1, MinTargets = 1 };
+                        { MinRange = 1, MaxRange = player.GetAttackRange(), MaxTargets = 1, MinTargets = 1 };
 
                     player.AttacksLeft--;
 

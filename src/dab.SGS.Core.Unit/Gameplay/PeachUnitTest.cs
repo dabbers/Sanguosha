@@ -52,7 +52,7 @@ namespace dab.SGS.Core.Unit.Gameplay
             ctx.CurrentPlayerTurn.Hand.Add(new PeachBasicPlayingCard(PlayingCardColor.Black, PlayingCardSuite.Club, "") { Context = ctx, Owner = ctx.CurrentPlayerTurn });
 
             // Play an attack.
-            sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsPeach()) },
+            sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsPeach() && p.IsPlayable()) },
                 ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsPeach()));
 
             // Play first playable card in the select cards (only 1 of the any should be playable).
@@ -114,8 +114,7 @@ namespace dab.SGS.Core.Unit.Gameplay
             while (ctx.CurrentTurnStage != TurnStages.Play)
             {
                 action = ctx.RoateTurnStage();
-                if (action != null)
-                    action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
+                action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
 
 
@@ -145,6 +144,9 @@ namespace dab.SGS.Core.Unit.Gameplay
                 action = ctx.RoateTurnStage();
                 action.Perform(sender, ctx.CurrentPlayerTurn, ctx);
             }
+
+            // No card should not have been played.
+            Assert.AreEqual(7, ctx.CurrentPlayerTurn.Hand.Count);
 
             while (!action.Perform(new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, null), ctx.CurrentPlayStage.Source.Target, ctx)) ;
 
