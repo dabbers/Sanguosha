@@ -173,12 +173,26 @@ namespace dab.SGS.Core
                 res = this.EmptyAction;
             }
 
-            // Validate we haven't lost any cards in the deck (DEBUG THING)
+            // Validate we haven't lost any cards in the deck (DEBUG THING). Don't check if count < current cards, since unit tests
+            // inject cards to make player hands match what we need.
 #if DEBUG
-            if (this.Deck.AllCards.Count != this.Deck.DiscardPile.Count + (this.Players.Sum(p => p.GetTotalCardsToPlayer())))
+            var inPlay = this.Deck.DiscardPile.Count + (this.Players.Sum(p => p.GetTotalCardsToPlayer())) + this.Deck.DrawPile.Count;
+
+            if (this.Deck.AllCards.Count > inPlay)
             {
-                throw new Exception("Total cards != discard + cards in use by players. Are we missing cards??");
+                var missing = new List<PlayingCard>();
+                foreach(var card in this.Deck.AllCards)
+                {
+                    if (!this.Deck.DrawPile.Contains(card) && !this.Deck.DiscardPile.Contains(card) && !this.players.Any(p => p.Hand.Contains(card)))
+                    {
+                        missing.Add(card);
+                    }
+                }
+
+                throw new Exception(String.Format("Total cards {0} > discard + cards {1} in use by players. Unacounted for cards: {2}", this.Deck.AllCards.Count, inPlay, String.Join(", ", missing)));
             }
+#else
+#warning Remove this stuff
 #endif
 
             return res;
@@ -186,7 +200,7 @@ namespace dab.SGS.Core
 
         public void AddPlayer(string display, Heroes.HeroCard hero, Roles role)
         {
-            // TODO: Remove null terminator
+            // TODO: Remove null terminator when roles are completed.
             var p = new Player(display, hero?.MaxHealth ?? 4, role);
             p.DistanceModifiers = 0;
             p.HandSizeModifies = 0;
@@ -196,8 +210,13 @@ namespace dab.SGS.Core
             p.TurnStageActions.Add(TurnStages.End, new Actions.ResetPlayerCountersAction());
             // Perform the card so we can finish up its special damage stuff
             p.TurnStageActions.Add(TurnStages.AttackDamage, new Actions.PerformCardAction(() => this.CurrentPlayStage.Cards.Activator));
-            p.TurnStageActions.Add(TurnStages.PlayerDied, new Actions.PlayerDiedAction());
-            
+
+            var da = new Actions.PlayerDiedAction();
+            p.TurnStageActions.Add(TurnStages.PlayerRevived, da);
+            p.TurnStageActions.Add(TurnStages.PlayerEliminated, da);
+            p.TurnStageActions.Add(TurnStages.PlayerRevivedEnd, da);
+            p.TurnStageActions.Add(TurnStages.PlayerEliminatedEnd, da);
+
             // TODO: Load Hero modifications. Do it AFTER assigning defaults, so our skills 
             //      can chain our draws if they want.
 
@@ -222,11 +241,13 @@ namespace dab.SGS.Core
             player.Left.Right = player.Right;
             player.Right.Left = player.Left;
 
-            foreach(var card in player.Hand)
+            //foreach(var card in player.Hand)
+            for(var i = player.Hand.Count - 1; i >= 0; i--)
             {
-                card.Discard();
+                player.Hand[i].Discard();
             }
 
+            player.PlayerArea.DiscardArea();
 
         }
 
