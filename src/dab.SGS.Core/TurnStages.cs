@@ -90,13 +90,24 @@ namespace dab.SGS.Core
         /// </summary>
         PlayerDied,
         /// <summary>
-        /// Player was revived
-        /// </summary>
-        PlayerRevived,
-        /// <summary>
         /// Player did not get enough peaches.
         /// </summary>
         PlayerEliminated,
+
+        /// <summary>
+        /// We play at the end.
+        /// </summary>
+        PlayerEliminatedEnd,
+
+        /// <summary>
+        /// Player was revived
+        /// </summary>
+        PlayerRevived,
+
+        /// <summary>
+        /// We step after revived to be end.
+        /// </summary>
+        PlayerRevivedEnd,
 
         // DO NOT ADD ANY ACTIONS TO PromptPreStage. IT WON'T EXECUTE. This is to keep logic consistent between stage jumps
         PromptPreStage,

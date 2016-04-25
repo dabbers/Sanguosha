@@ -31,5 +31,10 @@ namespace dab.SGS.Core
         {
             this.Target = player;
         }
+
+        public override string ToString()
+        {
+            return "Target " + this.Target.ToString() + " taking " + this.Damage + " damage, results in " + this.Result.ToString();
+        }
     }
 }

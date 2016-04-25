@@ -24,12 +24,24 @@ namespace dab.SGS.Core.PlayingCards
 
     public abstract class PlayingCard
     {
+        private static int current = 0;
+        private static object locker = new object();
+
+        private static int getNextId()
+        {
+            lock(locker)
+            {
+                current++;
+                return current;
+            }
+        }
+
+        public int Id { get; private set; }
         public PlayingCardSuite Suite { get { return this.suite; } }
         public PlayingCardColor Color { get { return this.color; } }
 
         public string Display { get { return this.display; } }
         public string Details { get { return this.details; } }
-        
         /// <summary>
         /// If this card isn't being used as what it is, what IS it being used as?
         /// </summary>
@@ -55,6 +67,7 @@ namespace dab.SGS.Core.PlayingCards
             this.details = details;
             this.Actions = actions;
             this.color = color;
+            this.Id = PlayingCard.getNextId();
         }
 
         public virtual bool Play(SelectedCardsSender sender)
@@ -176,6 +189,10 @@ namespace dab.SGS.Core.PlayingCards
             var suite = this.Suite.ToString();
 
             return color + " " + suite + " " + this.display;
+        }
+        public override bool Equals(object obj)
+        {
+            return (obj is PlayingCard ? ((PlayingCard)obj).Id == this.Id : false);
         }
 
         public static PlayingCard GetCardFromJson(dynamic obj,

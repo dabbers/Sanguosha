@@ -18,13 +18,25 @@ namespace dab.SGS.Core.Actions
             switch (context.CurrentTurnStage)
             {
                 case TurnStages.PlayerDied:
-
-                    return false;
+                    throw new Exception("PlayerDied in PlayerDiedAction should not be called here.");
 
                 case TurnStages.PlayerDiedPreStage:
 
-                    return false;
 
+                    throw new Exception("PlayerDied pre stage shouldn't ever be used");
+                case TurnStages.PlayerRevived:
+                case TurnStages.PlayerRevivedEnd:
+
+                    context.CurrentPlayStage = context.PreviousStages.Pop();
+                    return true;
+                case TurnStages.PlayerEliminated:
+                case TurnStages.PlayerEliminatedEnd:
+
+                    context.EliminatePlayer(context.CurrentPlayStage.Source.Target);
+
+                    context.CurrentPlayStage = context.PreviousStages.Pop();
+
+                    return true;
                 default:
 
                     context.PreviousStages.Push(context.CurrentPlayStage);

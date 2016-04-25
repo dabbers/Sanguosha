@@ -8,7 +8,7 @@ namespace dab.SGS.Core.Actions
 {
     public class ReduceHealthToTargetAction : Action
     {
-        public ReduceHealthToTargetAction(int decHealthBy = 1) : base("Peach")
+        public ReduceHealthToTargetAction(int decHealthBy = 1) : base("Reduce Health to Target")
         {
             if (decHealthBy < 0) throw new ArgumentException("decHealthBy cannot be negative");
 
@@ -24,7 +24,7 @@ namespace dab.SGS.Core.Actions
             // Do we need to begin a player died event?
             if (player.CurrentHealth < 1)
             {
-                new PlayerDiedAction().Perform(sender, player, context);
+                return new PlayerDiedAction().Perform(sender, player, context);
             }
 
             return true;

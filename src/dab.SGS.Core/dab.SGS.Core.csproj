@@ -128,7 +128,7 @@
     <Compile Include="Actions\System Types\TargetPromptSelectAction.cs" />
     <Compile Include="Actions\System Types\ResetAttackCounterAction.cs" />
     <Compile Include="Actions\Response Types\WardAction.cs" />
-    <Compile Include="AttackResultAggregation.cs" />
+    <Compile Include="SelectedCardsSender.cs" />
     <Compile Include="Exceptions\InvalidCardSelectionException.cs" />
     <Compile Include="Exceptions\SgsException.cs" />
     <Compile Include="PeekAbleEnumerator.cs" />

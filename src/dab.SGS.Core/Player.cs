@@ -55,7 +55,11 @@ namespace dab.SGS.Core
             }
         }
 
-        public List<PlayingCard> Hand { get; set; }
+        public List<PlayingCard> Hand
+        {
+            get;
+            set;
+        }
 
         public TurnStageDictionary TurnStageActions { get; set; }
 
@@ -91,9 +95,12 @@ namespace dab.SGS.Core
 
             public void DiscardArea()
             {
-                foreach (var card in this.DelayedScrolls) card.Discard();
-                foreach (var card in this.FaceDownPlayingCards) card.Discard();
-                foreach (var card in this.FaceUpPlayingCards) card.Discard();
+                if (this.DelayedScrolls != null)
+                    foreach (var card in this.DelayedScrolls) card.Discard();
+                if (this.FaceDownPlayingCards != null)
+                    foreach (var card in this.FaceDownPlayingCards) card.Discard();
+                if (this.FaceUpPlayingCards != null)
+                    foreach (var card in this.FaceUpPlayingCards) card.Discard();
 
                 this.Shield?.Discard();
                 this.Weapon?.Discard();

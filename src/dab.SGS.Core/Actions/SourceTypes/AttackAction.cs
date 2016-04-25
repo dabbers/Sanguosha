@@ -58,7 +58,7 @@ namespace dab.SGS.Core.Actions
                     return false;
                 case TurnStages.AttackDamage:
 
-                    for (var i = context.CurrentPlayStage.Targets.Count - 1; i > 0; i--)
+                    for (var i = context.CurrentPlayStage.Targets.Count - 1; i >= 0; i--)
                     {
                         var tp = context.CurrentPlayStage.Targets[i];
 
@@ -70,10 +70,9 @@ namespace dab.SGS.Core.Actions
                             var total = tp.Target.PlayerArea.Shield?.GetExtraDamage(context.CurrentPlayStage, context.CurrentPlayStage.Source.Target.PlayerArea.Weapon) ?? 0;
                             total += tp.Damage;
 
-                            
                             if (!new ReduceHealthToTargetAction(total).Perform(sender, tp.Target, context))
                             {
-                                // a player has died, we will come back to this later.
+                                // a player has died, we will come back to this later when the currentstage gets popped off.
                                 return false;
                             }
                         }

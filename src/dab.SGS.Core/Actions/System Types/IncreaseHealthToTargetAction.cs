@@ -8,7 +8,7 @@ namespace dab.SGS.Core.Actions
 {
     public class IncreaseHealthToTargetAction : Action
     {
-        public IncreaseHealthToTargetAction(int maxTargets = 1, int incHealthBy = 1) : base("Peach")
+        public IncreaseHealthToTargetAction(int maxTargets = 1, int incHealthBy = 1) : base("Increase Health to Target")
         {
             this.maxTargets = maxTargets;
             this.incHealthBy = incHealthBy;
@@ -22,6 +22,11 @@ namespace dab.SGS.Core.Actions
             for (var i = 0; i < maxTargets; i++)
             {
                 targets[i].Target.CurrentHealth = Math.Min(targets[i].Target.CurrentHealth + this.incHealthBy, targets[i].Target.MaxHealth);
+            }
+
+            if (context.CurrentTurnStage == TurnStages.PlayerDied && targets.First().Target.CurrentHealth > 0)
+            {
+                context.CurrentTurnStage = TurnStages.PlayerRevived; 
             }
 
             return true;

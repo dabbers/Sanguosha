@@ -112,7 +112,6 @@ namespace dab.SGS.Core.Actions
                         if (previous != null && previous.Result != TargetResult.Warded)
                         {
                             previous.Result = TargetResult.Success;
-
                         }
 
                         foreach (var target in context.CurrentPlayStage.Targets)

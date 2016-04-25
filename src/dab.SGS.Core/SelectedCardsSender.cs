@@ -12,7 +12,18 @@ namespace dab.SGS.Core
     public class SelectedCardsSender : List<PlayingCard>
     {
         //public List<PlayingCards.PlayingCard> Cards { get; private set; }
-        public PlayingCards.PlayingCard Activator { get; set; }
+        public PlayingCards.PlayingCard Activator
+        {
+            get
+            {
+                if (this.activator == null) return this.First();
+                return this.activator;
+            }
+            set
+            {
+                this.activator = value;
+            }
+        }
 
         public PeekEnumerator<PlayingCard> PersistentEnumerator { get; set; }
         
@@ -61,6 +72,7 @@ namespace dab.SGS.Core
             }
         }
 
-        private IEnumerator enumerator;
+        //private IEnumerator enumerator;
+        private PlayingCard activator = null;
     }
 }
