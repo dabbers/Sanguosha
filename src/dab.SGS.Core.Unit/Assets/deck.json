@@ -59,7 +59,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy":  1
       }
     ]
   },
@@ -123,7 +125,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   },
@@ -187,7 +191,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   },
@@ -251,7 +257,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   },
@@ -315,7 +323,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   },
@@ -379,7 +389,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   },
@@ -443,7 +455,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   },
@@ -507,7 +521,9 @@
     "Details": "Adds 1 health to a dying player, or adds 1 in combination to an attack",
     "Actions": [
       {
-        "Type": "WardAction"
+        "Type": "IncreaseHealthToTargetAction",
+        "MaxTargets": 1,
+        "IncHealthBy": 1
       }
     ]
   }

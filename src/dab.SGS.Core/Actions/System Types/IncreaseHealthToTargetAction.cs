@@ -17,6 +17,8 @@ namespace dab.SGS.Core.Actions
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             var targets = context.CurrentPlayStage.Targets;
+            if (targets.Count == 0) targets.Add(context.CurrentPlayStage.Source);
+
             var maxTargets = Math.Min(targets.Count, this.maxTargets);
 
             for (var i = 0; i < maxTargets; i++)
@@ -30,6 +32,15 @@ namespace dab.SGS.Core.Actions
             }
 
             return true;
+        }
+
+        public static new Action ActionFromJson(dynamic obj,
+    SelectCard selectCard, IsValidCard validCard)
+        {
+            int maxTargets = obj.MaxTargets;
+            int incHealthBy = obj.IncHealthBy;
+
+            return new IncreaseHealthToTargetAction(maxTargets, incHealthBy);
         }
 
         private int maxTargets = 1;

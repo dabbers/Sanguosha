@@ -34,8 +34,6 @@ namespace dab.SGS.Core.PlayingCards.Basics
                 this.Discard();
                 return true;
             }
-            
-            this.Context.CurrentPlayStage.Targets.Add(new TargetPlayer(this.Owner));
 
             return base.Play(sender);
         }
