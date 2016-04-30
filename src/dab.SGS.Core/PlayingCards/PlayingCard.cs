@@ -15,6 +15,7 @@ namespace dab.SGS.Core.PlayingCards
         Heart,
         Diamonds
     }
+
     public enum PlayingCardColor
     {
         Red,
@@ -45,7 +46,19 @@ namespace dab.SGS.Core.PlayingCards
         /// <summary>
         /// If this card isn't being used as what it is, what IS it being used as?
         /// </summary>
-        public PlayingCard BeingUsedAs { get; set; }
+        public PlayingCard BeingUsedAs
+        {
+            get
+            {
+                return this.beingUsedAs;
+            }
+            set
+            {
+                if (value.Id > 0) throw new Exceptions.InvalidCardException(value);
+
+                this.beingUsedAs = value;
+            }
+        }
 
         /// <summary>
         /// The current player who holds this card (either in their hand or on their playarea)
@@ -61,26 +74,40 @@ namespace dab.SGS.Core.PlayingCards
         
         public PlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display,
             string details, List<Actions.Action> actions)
+            : this(color, suite, display, details, actions, PlayingCard.getNextId())
         {
+        }
+
+        protected PlayingCard(PlayingCardColor color, PlayingCardSuite suite, string display,
+            string details, List<Actions.Action> actions, int id)
+        {
+            this.Id = id;
             this.suite = suite;
             this.display = display;
             this.details = details;
             this.Actions = actions;
             this.color = color;
-            this.Id = PlayingCard.getNextId();
         }
 
         public virtual bool Play(SelectedCardsSender sender)
         {
-            if (!this.IsPlayable()) throw new Exceptions.InvalidCardSelectionException(sender, this.Context.CurrentTurnStage);
-            
-            return this.playAction(sender, this.Actions);
+            if (!this.IsPlayable() && !this.BeingUsedAsIsPlayable()) throw new Exceptions.InvalidCardSelectionException(sender, this.Context.CurrentTurnStage);
+
+            if (this.IsPlayable())
+                return this.playAction(sender, this.Actions);
+            else
+                return this.BeingUsedAs.Play(sender);
         }
 
         public virtual bool IsPlayable()
         {
             // By default, only allow cards to be played during the play phase
             return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
+
+        public bool BeingUsedAsIsPlayable()
+        {
+            return (this.BeingUsedAs?.IsPlayable() ?? false);
         }
 
         public virtual bool PlayJudgement(PlayingCard card)
@@ -218,6 +245,7 @@ namespace dab.SGS.Core.PlayingCards
         private string details = String.Empty;
         private PlayingCardSuite suite;
         private PlayingCardColor color;
+        private PlayingCard beingUsedAs = null;
 
     }
 }

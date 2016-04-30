@@ -10,7 +10,7 @@ namespace dab.SGS.Core.Actions
     {
         public DiscardAction(int numberCards) : base("Discard", numberCards)
         {
-            if (numberCards < 0) throw new Exception("Invalid number of cards, must be positive!");
+            if (numberCards < 0) throw new Exceptions.InvalidScenarioException("Invalid number of cards, must be positive!");
         }
 
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)

@@ -110,6 +110,7 @@
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\SourceTypes\AttackAction.cs" />
     <Compile Include="Actions\SourceTypes\PeachAction.cs" />
+    <Compile Include="Actions\SourceTypes\ScrollAction.cs" />
     <Compile Include="Actions\System Types\Card Based\CardChangeAction.cs" />
     <Compile Include="Actions\System Types\Card Based\DiscardAction.cs" />
     <Compile Include="Actions\System Types\ChainedActions.cs" />
@@ -128,6 +129,8 @@
     <Compile Include="Actions\System Types\TargetPromptSelectAction.cs" />
     <Compile Include="Actions\System Types\ResetAttackCounterAction.cs" />
     <Compile Include="Actions\Response Types\WardAction.cs" />
+    <Compile Include="Exceptions\InvalidCardException.cs" />
+    <Compile Include="Exceptions\InvalidScenarioException.cs" />
     <Compile Include="Exceptions\NoJudgementException.cs" />
     <Compile Include="SelectedCardsSender.cs" />
     <Compile Include="Exceptions\InvalidCardSelectionException.cs" />

@@ -23,7 +23,7 @@ namespace dab.SGS.Core.Actions
                     // An attack cannot be happening already
                     if (context.PreviousStages.Count != 0)
                     {
-                        throw new Exception("There are other turnstages in the stack. Are we expecting this? (Previous turnstage:" + context.PreviousStages.Peek().ToString());
+                        throw new Exceptions.InvalidScenarioException("There are other turnstages in the stack. Are we expecting this? (Previous turnstage:" + context.PreviousStages.Peek().ToString());
                     }
 
                     context.PreviousStages.Push(context.CurrentPlayStage);
@@ -96,9 +96,9 @@ namespace dab.SGS.Core.Actions
                         break;
                     }
 
-                    throw new Exception("Attack was somehow activated for PlayScrollPlace(Response). But activator wasn't played as duel." + context.CurrentPlayStage.Cards.Activator.ToString());
+                    throw new Exceptions.InvalidScenarioException("Attack was somehow activated for PlayScrollPlace(Response). But activator wasn't played as duel." + context.CurrentPlayStage.Cards.Activator.ToString());
                 default:
-                    throw new Exception("Unknown stage reached for attack action: " + context.CurrentPlayStage.Stage.ToString());
+                    throw new Exceptions.InvalidScenarioException("Unknown stage reached for attack action: " + context.CurrentPlayStage.Stage.ToString());
             }
 
             sender?.DiscardAll();

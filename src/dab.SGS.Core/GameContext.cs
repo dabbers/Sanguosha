@@ -73,7 +73,7 @@ namespace dab.SGS.Core
 
         public Actions.Action SetupGame(bool dealCards = true)
         {
-            if (this.Players.Count() < 3) throw new Exception("Not enough players");
+            if (this.Players.Count() < 3) throw new Exceptions.InvalidScenarioException("Not enough players");
 
             this.dealCardsToPlayers();
             this.CurrentPlayStage.Source = new TargetPlayer(this.Players.First().Left);
@@ -90,7 +90,7 @@ namespace dab.SGS.Core
             {
                 if (computedRoles[i] != Core.Roles.Random && computedRoles[i] != roles[i])
                 {
-                    throw new Exception("Invalid roles assigned!");
+                    throw new Exceptions.InvalidScenarioException("Invalid roles assigned!");
                 }
             }
 
@@ -189,7 +189,7 @@ namespace dab.SGS.Core
                     }
                 }
 
-                throw new Exception(String.Format("Total cards {0} > discard + cards {1} in use by players. Unacounted for cards: {2}", this.Deck.AllCards.Count, inPlay, String.Join(", ", missing)));
+                throw new Exceptions.InvalidScenarioException(String.Format("Total cards {0} > discard + cards {1} in use by players. Unacounted for cards: {2}", this.Deck.AllCards.Count, inPlay, String.Join(", ", missing)));
             }
 #else
 #warning Remove this stuff

@@ -18,12 +18,12 @@ namespace dab.SGS.Core.Actions
             switch (context.CurrentTurnStage)
             {
                 case TurnStages.PlayerDied:
-                    throw new Exception("PlayerDied in PlayerDiedAction should not be called here.");
+                    throw new Exceptions.InvalidScenarioException("PlayerDied in PlayerDiedAction should not be called here.");
 
                 case TurnStages.PlayerDiedPreStage:
 
 
-                    throw new Exception("PlayerDied pre stage shouldn't ever be used");
+                    throw new Exceptions.InvalidScenarioException("PlayerDied pre stage shouldn't ever be used");
                 case TurnStages.PlayerRevived:
                 case TurnStages.PlayerRevivedEnd:
 

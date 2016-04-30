@@ -49,7 +49,7 @@ namespace dab.SGS.Core
             }
             set
             {
-                if (!this.Heros.Contains(value)) throw new Exception("Hero must be in the list of heroes");
+                if (!this.Heros.Contains(value)) throw new Exceptions.InvalidScenarioException("Hero must be in the list of heroes");
 
                 this.activeHero = value;
             }
@@ -190,7 +190,7 @@ namespace dab.SGS.Core
                 case 10:
                     return new Roles[] { Roles.King, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Rebel, Roles.Minister, Roles.Minister, Roles.Minister, Roles.TurnCoat };
                 default:
-                    throw new Exception("Invalid player number for roles");
+                    throw new Exceptions.InvalidScenarioException("Invalid player number for roles");
 
             }
         }
