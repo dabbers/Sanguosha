@@ -54,7 +54,7 @@ namespace dab.SGS.Core.PlayingCards
             }
             set
             {
-                if (value.Id > 0) throw new Exceptions.InvalidCardException(value);
+                if ((value?.Id ?? 0) > 0) throw new Exceptions.InvalidCardException(value);
 
                 this.beingUsedAs = value;
             }
@@ -153,7 +153,7 @@ namespace dab.SGS.Core.PlayingCards
         #region IsPlayedAsType methods
         public bool IsPlayedAsType(Type type)
         {
-            return this.GetType() == type || this.BeingUsedAs.GetType() == type;
+            return this.GetType() == type || (this.BeingUsedAs?.GetType() ?? null) == type;
         }
 
         public bool IsPlayedAsAttack()

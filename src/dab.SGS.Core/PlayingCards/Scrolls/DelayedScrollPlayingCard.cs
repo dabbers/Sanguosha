@@ -15,7 +15,7 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
 
         public override bool PlayJudgement(PlayingCard card)
         {
-
+            return true;
         }
     }
 }

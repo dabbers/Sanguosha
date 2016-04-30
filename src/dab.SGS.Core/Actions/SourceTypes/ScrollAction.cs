@@ -8,8 +8,12 @@ namespace dab.SGS.Core.Actions
 {
     public class ScrollAction : Action
     {
-        public ScrollAction(string display) : base(display)
+        public ScrollAction(int minTarget, int maxTarget, int minRange, int maxRange) : base("Scroll Action")
         {
+            this.minRange = minRange;
+            this.maxRange = maxRange;
+            this.minTargets = minTarget;
+            this.maxTargets = maxTarget;
         }
 
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
@@ -36,7 +40,7 @@ namespace dab.SGS.Core.Actions
 
                     context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
                     context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
-                    { MinRange = 1, MaxRange = 999 };
+                        { MinRange = this.minRange, MaxRange = this.maxRange, MinTargets = this.minTargets, MaxTargets = this.maxTargets };
 
                     return false;
                 case TurnStages.PlayScrollTargets:
@@ -149,6 +153,17 @@ namespace dab.SGS.Core.Actions
                 default:
                     throw new Exceptions.InvalidScenarioException("Invalid turn stage for ScrollAction: " + context.CurrentPlayStage.Stage.ToString());
             }
+        } // end Perform
+
+        public static new Action ActionFromJson(dynamic obj,
+            SelectCard selectCard, IsValidCard validCard)
+        {
+            return new ScrollAction((int)obj.MinTargets, (int)obj.MaxTargets, (int)obj.MinRange, (int)obj.MaxRange);
         }
+
+        private int minTargets = 1;
+        private int maxTargets = 1;
+        private int minRange = 1;
+        private int maxRange = 1;
     }
 }

@@ -14,8 +14,8 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
         {
         }
 
-        public DuelScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite,string details)
-            : base(color, suite, "Duel", details, new List<Core.Actions.Action>() { new DuelAction("Duel Action") })
+        public DuelScrollPlayingCard(PlayingCardColor color, PlayingCardSuite suite, string details)
+            : base(color, suite, "Duel", details, new List<Core.Actions.Action>() { new ScrollAction(1, 1, 1, 999), new DuelAction("Duel Action") })
         {
         }
 
