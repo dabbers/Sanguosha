@@ -45,7 +45,7 @@ namespace dab.SGS.Core.PlayingCards
         /// <summary>
         /// If this card isn't being used as what it is, what IS it being used as?
         /// </summary>
-        public Type BeingUsedAs { get; set; }
+        public PlayingCard BeingUsedAs { get; set; }
 
         /// <summary>
         /// The current player who holds this card (either in their hand or on their playarea)
@@ -73,21 +73,24 @@ namespace dab.SGS.Core.PlayingCards
         public virtual bool Play(SelectedCardsSender sender)
         {
             if (!this.IsPlayable()) throw new Exceptions.InvalidCardSelectionException(sender, this.Context.CurrentTurnStage);
-
-            var res = this.playAction(sender, this.Actions);
-
-            //if (res)
-            //{
-            //    this.Discard();
-            //}
             
-            return res;
+            return this.playAction(sender, this.Actions);
         }
 
         public virtual bool IsPlayable()
         {
             // By default, only allow cards to be played during the play phase
             return this.Context.CurrentTurnStage == TurnStages.Play;
+        }
+
+        public virtual bool PlayJudgement(PlayingCard card)
+        {
+            if (this.BeingUsedAs != null)
+            {
+                return this.BeingUsedAs.PlayJudgement(card);
+            }
+
+            throw new Exceptions.NoJudgementException(this);
         }
 
         /// <summary>
@@ -123,7 +126,7 @@ namespace dab.SGS.Core.PlayingCards
         #region IsPlayedAsType methods
         public bool IsPlayedAsType(Type type)
         {
-            return this.GetType() == type || this.BeingUsedAs == type;
+            return this.GetType() == type || this.BeingUsedAs.GetType() == type;
         }
 
         public bool IsPlayedAsAttack()
@@ -193,6 +196,11 @@ namespace dab.SGS.Core.PlayingCards
         public override bool Equals(object obj)
         {
             return (obj is PlayingCard ? ((PlayingCard)obj).Id == this.Id : false);
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Id;
         }
 
         public static PlayingCard GetCardFromJson(dynamic obj,

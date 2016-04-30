@@ -12,7 +12,5 @@ namespace dab.SGS.Core.PlayingCards.Scrolls
             string details, List<Actions.Action> actions) : base(color, suite, display, details, actions)
         {
         }
-
-        //public abstract bool Warded(Player source, SelectedCardsSender sender);
     }
 }

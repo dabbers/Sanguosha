@@ -17,6 +17,7 @@ namespace dab.SGS.Core.Actions
         public override bool Perform(SelectedCardsSender sender, Player player, GameContext context)
         {
             var targets = context.CurrentPlayStage.Targets;
+
             if (targets.Count == 0) targets.Add(context.CurrentPlayStage.Source);
 
             var maxTargets = Math.Min(targets.Count, this.maxTargets);

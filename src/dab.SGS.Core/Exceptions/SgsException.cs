@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dab.SGS.Core.Exceptions
 {
-    public class SgsException : Exception
+    public abstract class SgsException : Exception
     {
         public SgsException()
         {
