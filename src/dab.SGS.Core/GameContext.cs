@@ -156,11 +156,23 @@ namespace dab.SGS.Core
             }
             else if (this.CurrentPlayStage.Stage == TurnStages.End)
             {
+                foreach (var stage in this.CurrentPlayStage.Source.Target.TurnStageActions.Keys)
+                {
+                    this.clearTurnScopeActions(stage);
+                }
+
                 this.CurrentPlayStage.Stage = TurnStages.Start;
                 this.CurrentPlayStage.Source = new TargetPlayer(this.CurrentPlayStage.Source.Target.Right);
             }
             else if (this.CurrentPlayStage.Stage == TurnStages.AttackEnd || this.CurrentPlayStage.Stage == TurnStages.PlayScrollEnd)
             {
+                var start = (this.CurrentTurnStage == TurnStages.AttackEnd ? TurnStages.AttackPreStage : TurnStages.PlayScrollPreStage);
+
+                for(var i = start; i < this.CurrentTurnStage; i++)
+                {
+                    this.clearTurnScopeActions(i);
+                }
+
                 // Resume turn
                 this.CurrentPlayStage.Stage = TurnStages.Play;
             }
@@ -198,6 +210,26 @@ namespace dab.SGS.Core
             return res;
         }
 
+        private void clearTurnScopeActions(TurnStages stage)
+        {
+
+            Actions.Action action;
+
+            if (this.CurrentPlayStage.Source.Target.TurnStageActions.TryGetValue(stage, out action))
+            {
+
+                // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
+                if (action.GetType() == typeof(Actions.ChainedActions))
+                {
+                    ((Actions.ChainedActions)action).Actions.RemoveAll(p => p.GetType() == typeof(Actions.TurnScopeAction));
+                }
+                else if (action.GetType() == typeof(Actions.TurnScopeAction))
+                {
+                    this.CurrentPlayStage.Source.Target.TurnStageActions.Remove(stage);
+                }
+            }
+
+        }
         public void AddPlayer(string display, Heroes.HeroCard hero, Roles role)
         {
             // TODO: Remove null terminator when roles are completed.

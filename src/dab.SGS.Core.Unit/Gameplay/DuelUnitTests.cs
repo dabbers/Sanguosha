@@ -46,7 +46,7 @@ namespace dab.SGS.Core.Unit.Gameplay
 
 
             Assert.AreEqual(TurnStages.Play, ctx.CurrentTurnStage);
-            Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count);
+            Assert.AreEqual(6, ctx.CurrentPlayerTurn.Hand.Count, "Hand count for current player are incorrect.");
 
             // Play a duel.
             sender = new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsDuel()) }, ctx.CurrentPlayerTurn.Hand.Find(p => p.IsPlayedAsDuel()));
@@ -104,7 +104,7 @@ namespace dab.SGS.Core.Unit.Gameplay
 
             while (!action.Perform(new SelectedCardsSender(new List<PlayingCard>() { ctx.CurrentPlayerTurn.Hand[0] }, null), ctx.CurrentPlayStage.Source.Target, ctx)) ;
 
-            Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count);
+            Assert.AreEqual(4, ctx.CurrentPlayerTurn.Hand.Count, "Player hand count is not equal");
             ctx.RoateTurnStage();
 
             Assert.AreEqual(TurnStages.PostDiscard, ctx.CurrentTurnStage);
@@ -115,7 +115,7 @@ namespace dab.SGS.Core.Unit.Gameplay
 
 
             Assert.AreEqual("P2", ctx.CurrentPlayerTurn.Display);
-            Assert.AreEqual(3, ctx.CurrentPlayerTurn.CurrentHealth);
+            Assert.AreEqual(3, ctx.CurrentPlayerTurn.CurrentHealth, "Player current health are not equal");
         }
         [TestMethod]
         public void TestTurnDuelWard()

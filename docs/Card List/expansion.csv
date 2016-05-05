@@ -1,0 +1,53 @@
+Card,Color,Suite,Number
+Fire Strike,Red,Diamond,4
+Fire Strike,Red,Diamond,5
+Fire Strike,Red,Heart,4
+Fire Strike,Red,Heart,7
+Fire Strike,Red,Heart,10
+Lightning Strike,Black,Spade,4
+Lightning Strike,Black,Spade,5
+Lightning Strike,Black,Spade,6
+Lightning Strike,Black,Spade,7
+Lightning Strike,Black,Spade,8
+Lightning Strike,Black,Club,5
+Lightning Strike,Black,Club,6
+Lightning Strike,Black,Club,7
+Lightning Strike,Black,Club,8
+Wine,Red,Diamond,9
+Wine,Black,Spade,3
+Wine,Black,Spade,9
+Wine,Black,Club,3
+Wine,Black,Club,9
+Dodge,Red,Diamond,6
+Dodge,Red,Diamond,7
+Dodge,Red,Diamond,8
+Dodge,Red,Diamond,10
+Dodge,Red,Diamond,J
+Dodge,Red,Heart,8
+Dodge,Red,Heart,9
+Dodge,Red,Heart,J
+Dodge,Red,Heart,Q
+Peach,Red,Diamond,2
+Peach,Red,Diamond,3
+Peach,Red,Heart,5
+Peach,Red,Heart,6
+Blaze,Red,Diamond,Q
+Blaze,Red,Heart,2
+Blaze,Red,Heart,3
+Starvation,Black,Spade,10
+Starvation,Black,Club,4
+Chain,Black,Spade,J
+Chain,Black,Spade,Q
+Chain,Black,Club,10
+Chain,Black,Club,J
+Chain,Black,Club,Q
+Chain,Black,Club,K
+Ward,Black,Spade,K
+Ward,Red,Heart,K
+Ward,Red,Heart,A
+Fire Fan,Red,Diamond,A
+Horse (+1),Red,Diamond,K
+Ancient Scimitar,Black,Spade,A
+Wooden Armor,Black,Spade,2
+Wooden Armor,Black,Club,2
+Silver Helmet,Black,Club,A

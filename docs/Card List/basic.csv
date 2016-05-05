@@ -1,0 +1,106 @@
+Card,Color,Suite,Number
+Strike,Red,Diamond,6
+Strike,Red,Diamond,7
+Strike,Red,Diamond,8
+Strike,Red,Diamond,9
+Strike,Red,Diamond,10
+Strike,Red,Diamond,K
+Strike,Black,Spade,7
+Strike,Black,Spade,8
+Strike,Black,Spade,8
+Strike,Black,Spade,9
+Strike,Black,Spade,9
+Strike,Black,Spade,10
+Strike,Black,Spade,10
+Strike,Red,Heart,10
+Strike,Red,Heart,10
+Strike,Red,Heart,J
+Strike,Black,Club,2
+Strike,Black,Club,3
+Strike,Black,Club,4
+Strike,Black,Club,5
+Strike,Black,Club,6
+Strike,Black,Club,7
+Strike,Black,Club,8
+Strike,Black,Club,8
+Strike,Black,Club,9
+Strike,Black,Club,9
+Strike,Black,Club,10
+Strike,Black,Club,10
+Strike,Black,Club,J
+Strike,Black,Club,J
+Dodge,Red,Diamond,2
+Dodge,Red,Diamond,2
+Dodge,Red,Diamond,3
+Dodge,Red,Diamond,4
+Dodge,Red,Diamond,5
+Dodge,Red,Diamond,6
+Dodge,Red,Diamond,7
+Dodge,Red,Diamond,8
+Dodge,Red,Diamond,9
+Dodge,Red,Diamond,10
+Dodge,Red,Diamond,J
+Dodge,Red,Diamond,J
+Dodge,Red,Heart,2
+Dodge,Red,Heart,2
+Dodge,Red,Heart,K
+Peach,Red,Heart,3
+Peach,Red,Heart,4
+Peach,Red,Heart,7
+Peach,Red,Heart,8
+Peach,Red,Heart,9
+Peach,Red,Heart,Q
+Peach,Red,Heart,6
+Peach,Red,Diamond,Q
+Lightning,Black,Diamond,A
+Lightning,Red,Diamond,Q
+Contentment,Black,Club,6
+Contentment,Black,Spade,6
+Contentment,Red,Heart,6
+Ward,Red,Diamond,Q
+Ward,Black,Spade,J
+Ward,Black,Club,Q
+Ward,Black,Club,K
+Borrowed Sword,Black,Club,Q
+Borrowed Sword,Black,Club,K
+Bountiful Harvest,Red,Heart,3
+Bountiful Harvest,Red,Heart,4
+Something for Nothing,Red,Heart,7
+Something for Nothing,Red,Heart,8
+Something for Nothing,Red,Heart,9
+Something for Nothing,Red,Heart,J
+Duel,Red,Diamond,A
+Duel,Black,Spade,A
+Duel,Black,Club,A
+Peach Garden,Red,Heart,A
+Barbarians,Black,Spade,7
+Barbarians,Black,Spade,7
+Barbarians,Black,Spade,K
+Arrow Barrage,Red,Heart,A
+Snatch,Red,Diamond,3
+Snatch,Red,Diamond,4
+Snatch,Black,Spade,3
+Snatch,Black,Spade,4
+Snatch,Black,Spade,J
+Dismantle,Black,Spade,3
+Dismantle,Black,Spade,4
+Dismantle,Black,Spade,Q
+Horse +1,Red,Heart,K
+Horse +1,Black,Club,5
+Horse +1,Black,Spade,5
+Horse -1,Red,Heart,5
+Horse -1,Red,Diamond,K
+Horse -1,Black,Spade,K
+Crossbow,Red,Diamond,A
+Crossbow,Black,Club,A
+Ice Sword,Black,Spade,2
+Black Pommel,Black,Spade,6
+Lady Killers,Black,Spade,2
+Axe,Red,Diamond,5
+Green Dragon Blade,Black,Spade,5
+Serpent Spear,Black,Spade,Q
+Sky Scorcher,Red,Diamond,Q
+Longbow,Red,Heart,5
+Eight Trigrams,Black,Club,2
+Eight Trigrams,Black,Spade,2
+Black Shield,Black,Club,2

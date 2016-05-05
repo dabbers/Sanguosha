@@ -6,8 +6,13 @@ using System.Threading.Tasks;
 
 namespace dab.SGS.Core.Actions
 {
+
     public class ScrollAction : Action
     {
+        public const int AttackRange = -1;
+        public const int TargetRange = 0;
+        public const int AnyTarget = 999;
+
         public ScrollAction(int minTarget, int maxTarget, int minRange, int maxRange) : base("Scroll Action")
         {
             this.minRange = minRange;
@@ -45,21 +50,13 @@ namespace dab.SGS.Core.Actions
                     return false;
                 case TurnStages.PlayScrollTargets:
 
-                    context.CurrentPlayStage.Targets.Add(context.CurrentPlayStage.Source);
-
-                    foreach (var tp in context.CurrentPlayStage.Targets)
-                    {
-                        tp.Damage = 1;
-                    }
+                    // Add the ability for the activator card to be applied automatically. This way, when we move to the next stage, we can automatically get the player input.
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaced, new TurnScopeAction("Perform Attack Card", new PerformCardAction(() => context.CurrentPlayStage.Cards.Activator)), true);
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaceResponse, new TurnScopeAction("Perform Attack Card", new PerformCardAction(() => context.CurrentPlayStage.Cards.Activator)), true);
+                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollEnd, new TurnScopeAction("Perform Attack Card", new PerformCardAction(() => context.CurrentPlayStage.Cards.Activator)), true);
 
                     context.CurrentPlayStage.ExpectingIputFrom.Player = null;
-
-                    // Add the ability for the activator card to be applied automatically. This way, when we move to the next stage, we can automatically get the player input.
-                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaced, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
-                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollPlaceResponse, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
-                    context.CurrentPlayStage.Source.Target.TurnStageActions.Add(TurnStages.PlayScrollEnd, new Actions.PerformCardAction(() => context.CurrentPlayStage.Cards.Activator), true);
-
-                    return false;
+                    return true; // another action must return false otherwise the card/action flow won't continue.
                 case TurnStages.PlayScrollPlaced:
                     for (var i = context.CurrentPlayStage.Targets.Count - 1; i >= 0; i--)
                     {
@@ -124,31 +121,12 @@ namespace dab.SGS.Core.Actions
 
                     return false;
                 case TurnStages.PlayScrollEnd:
-
-                    var action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollPlaced];
-
-                    // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
-                    if (action.GetType() == typeof(ChainedActions))
-                    {
-                        ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
-                    }
-
-                    action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollPlaceResponse];
-
-                    // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
-                    if (action.GetType() == typeof(ChainedActions))
-                    {
-                        ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
-                    }
-
-                    action = context.CurrentPlayStage.Source.Target.TurnStageActions[TurnStages.PlayScrollEnd];
-
-                    // Remove our DuelAction from the chain so we don't get this called again for the next scroll played. (or get called twice if we played another duel)
-                    if (action.GetType() == typeof(ChainedActions))
-                    {
-                        ((ChainedActions)action).Actions.Remove(((ChainedActions)action).Actions.Find(p => p.GetType() == typeof(PerformCardAction)));
-                    }
                     sender.DiscardAll();
+                    return true;
+                case TurnStages.PreJudgement:
+
+                    return true;
+                case TurnStages.Judgement:
                     return true;
                 default:
                     throw new Exceptions.InvalidScenarioException("Invalid turn stage for ScrollAction: " + context.CurrentPlayStage.Stage.ToString());

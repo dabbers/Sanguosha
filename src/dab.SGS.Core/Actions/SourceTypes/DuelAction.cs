@@ -20,6 +20,16 @@ namespace dab.SGS.Core.Actions
         {
             switch (context.CurrentPlayStage.Stage)
             {
+                case TurnStages.PlayScrollTargets:
+
+                    context.CurrentPlayStage.Targets.Add(context.CurrentPlayStage.Source);
+
+                    foreach (var tp in context.CurrentPlayStage.Targets)
+                    {
+                        tp.Damage = 1;
+                    }
+
+                    return false;
                 case TurnStages.PlayScrollEnd:
 
                     var tmpStage = context.PreviousStages.Pop();

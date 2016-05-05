@@ -8,6 +8,10 @@ using dab.SGS.Core.PlayingCards.Equipments;
 
 namespace dab.SGS.Core.Actions
 {
+    /// <summary>
+    /// Played as a shield action. If there is a card played as an attack && the card is black, returns false. 
+    /// True otherwise.
+    /// </summary>
     public class IgnoreBlackAttackAction : Action
     {
         public IgnoreBlackAttackAction(string display) : base(display)
@@ -27,7 +31,6 @@ namespace dab.SGS.Core.Actions
             }
 
             return true;
-
         }
     }
 }

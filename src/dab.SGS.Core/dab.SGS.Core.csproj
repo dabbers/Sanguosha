@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Actions\Action.cs" />
     <Compile Include="Actions\SourceTypes\AttackAction.cs" />
+    <Compile Include="Actions\SourceTypes\ContentmentAction.cs" />
     <Compile Include="Actions\SourceTypes\PeachAction.cs" />
     <Compile Include="Actions\SourceTypes\ScrollAction.cs" />
     <Compile Include="Actions\System Types\Card Based\CardChangeAction.cs" />
@@ -124,6 +125,7 @@
     <Compile Include="Actions\System Types\IncreaseHealthToTargetAction.cs" />
     <Compile Include="Actions\System Types\Card Based\PerformCardAction.cs" />
     <Compile Include="Actions\System Types\Card Based\ReduceHandsizeDiscardAction.cs" />
+    <Compile Include="Actions\System Types\TurnScopeAction.cs" />
     <Compile Include="Actions\System Types\PlayerDiedAction.cs" />
     <Compile Include="Actions\System Types\ReduceHealthToTargetAction.cs" />
     <Compile Include="Actions\System Types\TargetPromptSelectAction.cs" />

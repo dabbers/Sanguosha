@@ -9,7 +9,7 @@ namespace dab.SGS.Core.Actions
 {
     public class DelayedScrollAction : Action
     {
-        public DelayedScrollAction(string display) : base(display)
+        public DelayedScrollAction(string display, Action scrollAction) : base(display)
         {
         }
 
@@ -17,52 +17,42 @@ namespace dab.SGS.Core.Actions
         {
             switch (context.CurrentPlayStage.Stage)
             {
-                case TurnStages.Play:
-
-                    context.PreviousStages.Push(context.CurrentPlayStage);
-
-
-                    context.CurrentPlayStage = new PlayingCardStageTracker()
-                    {
-                        Cards = sender,
-                        Source = new TargetPlayer(player),
-                        Targets = new List<TargetPlayer>(),
-                        Stage = TurnStages.AttackChooseTargets
-                    };
-
-                    context.CurrentPlayStage.ExpectingIputFrom.Player = context.CurrentPlayStage.Source;
-                    context.CurrentPlayStage.ExpectingIputFrom.Prompt = new Prompts.UserPrompt(Prompts.UserPromptType.TargetRangeMN)
-                        { MinRange = 1, MaxRange = player.GetAttackRange(), MaxCards = 1, MinTargets = 1 };
-                    return false;
                 case TurnStages.PlayScrollTargets:
-                    context.CurrentPlayStage.ExpectingIputFrom.Player = null;
 
-                    context.CurrentPlayStage.Targets.First().Target.PlayerArea.DelayedScrolls.Add(sender.Activator);
+                    context.CurrentPlayStage.Targets.Add(context.CurrentPlayStage.Source);
 
-
+                    foreach (var tp in context.CurrentPlayStage.Targets)
                     {
-                        foreach (var card in sender)
+                        tp.Damage = 1;
+                    }
+
+                    return false;
+                case TurnStages.PlayScrollEnd:
+
+                    var tmpStage = context.PreviousStages.Pop();
+
+                    // Todo: Does duel take shield into consideation?
+                    foreach (var tp in context.CurrentPlayStage.Targets)
+                    {
+                        if (tp.Result == TargetResult.None || tp.Result == TargetResult.Success)
                         {
-                            if (card != sender.Activator) card.Discard();
+                            // adjust for shield damage
+                            //tp.Target.CurrentHealth -= tp.Target.PlayerArea.Shield.GetExtraDamage(context.PlayStageTracker, context.PlayStageTracker.Source.Target.PlayerArea.Weapon);
+
+                            //tp.Target.CurrentHealth -= tp.Damage;
+                            new ReduceHealthToTargetAction(tp.Damage).Perform(sender, tp.Target, context);
                         }
                     }
 
-                    sender.Activator.Owner.Hand.Remove(sender.Activator);
+                    // Clear up the stage tracker for the next turn.
+                    context.CurrentPlayStage = tmpStage;
+                    return true;
+                case TurnStages.PreJudgement:
 
-                    context.CurrentPlayStage = context.PreviousStages.Pop();
                     return false;
                 case TurnStages.Judgement:
 
-
-                    {
-                        var card = context.Deck.Draw();
-
-                        this.scrollAction.Perform(new SelectedCardsSender() { card }, player, context);
-
-                        card.Discard();
-                        sender.Activator.Discard();
-                    }
-
+                    this.scrollAction.Perform(new SelectedCardsSender() { context.Deck.Draw() }, player, context);
                     return true;
             }
 
